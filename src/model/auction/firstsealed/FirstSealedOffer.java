@@ -1,8 +1,8 @@
 package model.auction.firstsealed;
 
-import java.util.List;
 
 import model.Offer;
+import model.user.User;
 
 public class FirstSealedOffer implements Offer, Comparable<FirstSealedOffer>{
 	private User bidder;

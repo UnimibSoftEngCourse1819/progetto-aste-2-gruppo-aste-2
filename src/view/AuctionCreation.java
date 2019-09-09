@@ -30,12 +30,12 @@ public class AuctionCreation extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
-		String title = request.getParameter("title");  
-		String description = request.getParameter("description");  
-		String category = request.getParameter("category");
-		String selection = request.getParameter("selection");
+		try (PrintWriter out = response.getWriter();){
+			String title = request.getParameter("title");  
+			String description = request.getParameter("description");  
+			String category = request.getParameter("category");
+			String selection = request.getParameter("selection");
+		}
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package model;
 
+import model.user.User;
+
 public class Transiction extends Operation {
 
 	private User donator;

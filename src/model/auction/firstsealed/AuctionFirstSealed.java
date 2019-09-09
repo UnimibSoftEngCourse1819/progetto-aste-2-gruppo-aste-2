@@ -6,7 +6,9 @@ import java.util.List;
 import exception.IncompatibilityClassException;
 import model.Offer;
 import model.Operation;
+import model.Transiction;
 import model.auction.Auction;
+import model.user.User;
 
 public class AuctionFirstSealed extends Auction {
 	
@@ -14,13 +16,12 @@ public class AuctionFirstSealed extends Auction {
 	private List<FirstSealedOffer> offers;
 	
 	@Override
-	public void addOffer(Offer newOffer) {
+	public void addOffer(Offer newOffer) throws IncompatibilityClassException {
 		if(!newOffer.getClass().equals(FirstSealedOffer.class)) {
 			throw new IncompatibilityClassException();
 		}
 		
 		offers.add((FirstSealedOffer) newOffer);
-s
 	}
 	
 	@Override
@@ -31,7 +32,7 @@ s
 				winner = offerToScan;
 			}
 		}
-		List<model.Operation> operationToDo = new ArrayList<>();
+		List<Operation> operationToDo = new ArrayList<>();
 		operationToDo.add(new Transiction(winner.getBidder(), seller, winner.getPrice()));
 		return operationToDo;
 	}
