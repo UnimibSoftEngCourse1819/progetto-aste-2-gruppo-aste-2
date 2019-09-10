@@ -7,4 +7,9 @@ import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 public class ResultDatabase {
 	private List<Pair<String, SQLValue>> table;
 	
+	
+	private class SQLValue{
+		String type;
+		Object value;
+	}
 }

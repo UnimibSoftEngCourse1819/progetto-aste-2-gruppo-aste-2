@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.AuctionRequestManager;
+
 /**
  * Servlet implementation class AuctionCreation
  */
@@ -31,10 +33,7 @@ public class AuctionCreation extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		try (PrintWriter out = response.getWriter()){
-			String title = request.getParameter("title");  
-			String description = request.getParameter("description");  
-			String category = request.getParameter("category");
-			String selection = request.getParameter("selection");
+			AuctionRequestManager.createAuction(request);
 		}
 	}
 
