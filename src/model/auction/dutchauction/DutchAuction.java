@@ -1,11 +1,14 @@
-package model.auction.DutchAuction;
+package model.auction.dutchauction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import exception.IncompatibilityClassException;
 import model.Offer;
 import model.Operation;
+import model.Transaction;
 import model.auction.Auction;
+import model.user.User;
 
 public class DutchAuction extends Auction {
 	private long minPrice;
@@ -28,7 +31,7 @@ public class DutchAuction extends Auction {
 	@Override
 	public List<Operation> end() {
 		List<Operation> operationToDo = new ArrayList<>();
-		operationToDo.add(new Transaction(offer.getBidder(), seller, currentPrice()));
+		operationToDo.add(new Transaction(offer.getBidder(), seller, currentPrice));
 		
 		return operationToDo;
 	}

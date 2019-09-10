@@ -1,4 +1,4 @@
-package model.auction.englishAuction;
+package model.auction.englishauction;
 
 import java.util.ArrayList;
 import java.util.List;

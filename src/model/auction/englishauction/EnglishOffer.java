@@ -1,4 +1,4 @@
-package model.auction.englishAuction;
+package model.auction.englishauction;
 
 import model.Offer;
 import model.user.User;

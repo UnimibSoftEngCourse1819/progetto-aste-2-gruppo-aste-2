@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import exception.InexistentTypeParameterException;
 import model.auction.Auction;
 import model.auction.firstsealed.AuctionFirstSealed;
-import model.auction.secondSealed.AuctionSecondSealed;
+import model.auction.secondsealed.AuctionSecondSealed;
 
 /**
  * Simple Factory idiom applied

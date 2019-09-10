@@ -8,7 +8,7 @@ body {
 .item-form {
     background-color: white;
     padding: 25px;
-    width: 350px;
+    width: 360px;
     margin: 75px auto 0px auto;
     border-radius: 10px;
       -moz-border-radius: 10px; /* firefox */
@@ -21,6 +21,7 @@ body {
     flex-direction: row;
     width: 100%;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .col {
@@ -60,7 +61,7 @@ body {
 
 .topnav {
     padding: 4px 0px 0px 10px;
-    background-color: #333;
+    background-color: #428bca;
     width: 100%;
     height: auto;
     display: inline-block;
@@ -71,13 +72,28 @@ body {
 .bar {
     width: 35px;
     height: 4px;
-    background-color: black;
+    background-color: #428bca;
     margin: 5px 0;
+}
+
+.login {
+	display: inline-block;
+	text-align: center;
+	margin-right: 15px;
+	color: #fff;
+	padding: 5px;
+	font-size: 2rem;
+	cursor: pointer;
+	float: right;
+}
+
+.login:hover {
+	background: #0080C0;
 }
 
 .menu-trigger {
     display: inline-block;
-    background: orange;
+    background: #F5F5F5;
     text-align: center;
     font-weight: bold;
     padding: 5px;
@@ -108,6 +124,72 @@ input[type=text] {
 }
 
 input[type=text]:hover {
+	background-color: rgba(0,0,0,0.125);
+    transition: all 0.25s;
+}
+
+input[type=password] {
+	background: #fff;
+	color: #525865;
+	border-radius: 4px;
+	border: 1px solid #d1d1d1;
+	box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
+	font-family: inherit;
+	font-size: 1em;
+	line-height: 1.45;
+	outline: none;
+	padding: 1px 1px 1px;
+	-webkit-transition: .18s ease-out;
+	-moz-transition: .18s ease-out;
+	-o-transition: .18s ease-out;
+	transition: .18s ease-out;
+}
+
+input[type=password]:hover {
+	background-color: rgba(0,0,0,0.125);
+    transition: all 0.25s;
+}
+
+input[type=date] {
+	background: #fff;
+	color: #525865;
+	border-radius: 4px;
+	border: 1px solid #d1d1d1;
+	box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
+	font-family: inherit;
+	font-size: 1em;
+	line-height: 1.45;
+	outline: none;
+	padding: 1px 1px 1px;
+	-webkit-transition: .18s ease-out;
+	-moz-transition: .18s ease-out;
+	-o-transition: .18s ease-out;
+	transition: .18s ease-out;
+}
+
+input[type=date]:hover {
+	background-color: rgba(0,0,0,0.125);
+    transition: all 0.25s;
+}
+
+input[type=email] {
+	background: #fff;
+	color: #525865;
+	border-radius: 4px;
+	border: 1px solid #d1d1d1;
+	box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
+	font-family: inherit;
+	font-size: 1em;
+	line-height: 1.45;
+	outline: none;
+	padding: 1px 1px 1px;
+	-webkit-transition: .18s ease-out;
+	-moz-transition: .18s ease-out;
+	-o-transition: .18s ease-out;
+	transition: .18s ease-out;
+}
+
+input[type=email]:hover {
 	background-color: rgba(0,0,0,0.125);
     transition: all 0.25s;
 }
@@ -154,4 +236,22 @@ select {
 select:hover {
 	background-color: rgba(0,0,0,0.125);
     transition: all 0.25s;
+}
+
+input[type=submit] {
+	color: #fff;
+	padding: 10px 16px; 
+	font-size: 18px;
+    background: #428bca;
+    border: 1px solid;
+    border-color: #357ebd;
+    cursor:pointer;
+    -webkit-border-radius: 6px;
+    border-radius: 6px; 
+    -moz-border-radius: 6px; /* firefox */
+    -webkit-border-radius: 6px; /* safari, chrome */
+}
+
+input[type=submit]:hover {
+	background: #0080C0;
 }
