@@ -1,4 +1,4 @@
-package model.auction.secondSealed;
+package model.auction.secondsealed;
 
 import java.util.ArrayList;
 import java.util.List;

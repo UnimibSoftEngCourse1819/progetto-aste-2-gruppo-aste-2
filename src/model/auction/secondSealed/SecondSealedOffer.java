@@ -1,4 +1,4 @@
-package model.auction.secondSealed;
+package model.auction.secondsealed;
 
 import model.Offer;
 import model.user.User;
