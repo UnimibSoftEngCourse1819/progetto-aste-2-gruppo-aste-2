@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.AuctionRequestManager;
+import exception.InexistentTypeParameterException;
+import exception.SQLiteFailRequestException;
 
 /**
  * Servlet implementation class AuctionCreation
@@ -32,8 +34,20 @@ public class AuctionCreation extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
+		boolean successfulOperation = false;
 		try (PrintWriter out = response.getWriter()){
 			AuctionRequestManager.createAuction(request);
+			successfulOperation = true;
+		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
+			// TODO manda un pop-up di fallimento
+			e.printStackTrace();
+		}
+		if(successfulOperation) {
+			/**
+			 * TODO manda un pop-up di successo che chiede se vuole farne un'altra
+			 * se risponde di si rimane nella pagina e pulisce i campi
+			 * se risponde di no lo reindirizza nella pagina di home
+			 */
 		}
 	}
 

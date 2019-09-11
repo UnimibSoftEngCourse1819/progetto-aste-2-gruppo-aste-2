@@ -3,6 +3,8 @@ package model.auction.firstsealed;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import exception.IncompatibilityClassException;
 import model.Offer;
 import model.Operation;
@@ -13,6 +15,10 @@ public class AuctionFirstSealed extends Auction {
 	
 	private List<FirstSealedOffer> offers;
 	
+	public AuctionFirstSealed(HttpServletRequest request) {
+		super(request);
+	}
+
 	@Override
 	public void addOffer(Offer newOffer) throws IncompatibilityClassException {
 		if(!newOffer.getClass().equals(FirstSealedOffer.class)) {
@@ -34,4 +40,12 @@ public class AuctionFirstSealed extends Auction {
 		operationToDo.add(new Transaction(winner.getBidder(), seller, winner.getPrice()));
 		return operationToDo;
 	}
+
+	@Override
+	protected String getType() {
+		return "FirstSealed";
+	}
+
+	
+
 }

@@ -3,6 +3,8 @@ package model.auction.englishauction;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import exception.IncompatibilityClassException;
 import model.Offer;
 import model.Operation;
@@ -10,6 +12,11 @@ import model.Transaction;
 import model.auction.Auction;
 
 public class EnglishAuction extends Auction {
+	public EnglishAuction(HttpServletRequest request) {
+		super(request);
+		// TODO Auto-generated constructor stub
+	}
+
 	private List<EnglishOffer> offers;
 	private long basePrice;
 	private long minIncrement;
@@ -41,6 +48,11 @@ public class EnglishAuction extends Auction {
 		operationToDo.add(new Transaction(winner.getBidder(), seller, winner.getPrice()));
 		
 		return operationToDo;
+	}
+
+	@Override
+	protected String getType() {
+		return "English";
 	}
 
 }

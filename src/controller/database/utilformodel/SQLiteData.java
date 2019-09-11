@@ -1,15 +1,24 @@
-package controller.database;
+package controller.database.utilformodel;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import controller.database.SQLParameter;
 import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 
 public class SQLiteData {
+	
+	
 	private String table;
 	private List<Pair<String, SQLParameter>> data;
+	
+	public SQLiteData(String tableName) {
+		table = tableName;
+		data = new ArrayList<>();
+	}
 	
 	public String getInsertStatement(){
 		StringBuilder statement = new StringBuilder("INSERT INTO ");
@@ -29,25 +38,14 @@ public class SQLiteData {
 		return statement.toString();
 	}
 	
-	public void configureInsert(PreparedStatement statement) throws SQLException {
+	public void configureStatement(PreparedStatement statement) throws SQLException {
 		for(int indexParameter = 0; indexParameter < data.size(); indexParameter++) {
 			SQLParameter singleParameter = data.get(indexParameter).second;
 			singleParameter.configure(indexParameter + 1, statement);
 		}
 	}
 	
-	private class SQLParameter{
-		private String type;
-		private Object value;
-
-		public void configure(int indexStatement, PreparedStatement statement) throws SQLException {
-			switch(type) {
-			case "INTEGER":
-				statement.setInt(indexStatement, (Integer) value);
-				break;
-				//TODO continua qui
-			}
-		}
+	public void add(String nameColumn, String typeColumn, Object value) {
+		data.add(new Pair<String, SQLParameter>(nameColumn, new SQLParameter(typeColumn, value)));
 	}
-
 }

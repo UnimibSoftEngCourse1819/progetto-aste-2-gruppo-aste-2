@@ -1,18 +1,18 @@
 package model.user;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
- * Note : use java.util.Calendar.getInstance().getTime(); to get the current date
+ * TODO check if there is a way to format a LocalDate 
  * @author Vallero
  *
  */
 public class DateAttribute extends UserAttribute {
-	private Date date;
+	private LocalDate date;
 	public static SimpleDateFormat FORMAT = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
 
-	public DateAttribute(String name, boolean required, Date date) {
+	public DateAttribute(String name, boolean required, LocalDate date) {
 		super(name, required);
 		this.date = date;
 	}

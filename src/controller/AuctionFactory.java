@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import exception.InexistentTypeParameterException;
 import model.auction.Auction;
+import model.auction.dutchauction.DutchAuction;
+import model.auction.englishauction.EnglishAuction;
 import model.auction.firstsealed.AuctionFirstSealed;
 import model.auction.secondsealed.AuctionSecondSealed;
 
@@ -14,7 +16,7 @@ import model.auction.secondsealed.AuctionSecondSealed;
  */
 public class AuctionFactory {
 
-	public static Auction createAuction(String parameter, HttpServletRequest request) {
+	public static Auction createAuction(String parameter, HttpServletRequest request) throws InexistentTypeParameterException {
 		Auction result = null;
 		if(parameter.equalsIgnoreCase("Busta chiusa")) {
 			result =  new AuctionFirstSealed(request);

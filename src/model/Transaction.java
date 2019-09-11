@@ -1,5 +1,11 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import controller.database.SQLOperation;
+import controller.database.SQLParameter;
+import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 import model.user.User;
 
 public class Transaction extends Operation {
@@ -13,10 +19,27 @@ public class Transaction extends Operation {
 		this.receiver = receiver;
 		this.amount = amount;
 	}
-	
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-	}
 
+	@Override
+	public List<SQLOperation> getSQLOperations() {
+		List<SQLOperation> operation = new ArrayList<>();
+		
+		List<Pair<String, SQLParameter>> clauses = new ArrayList<>();
+		clauses.add(new Pair<String, SQLParameter>("ID", new SQLParameter(SQLParameter.INTEGER, donator)));
+		
+		List<Pair<String, SQLParameter>> valuesToChange = new ArrayList<>();
+		valuesToChange.add(new Pair<String, SQLParameter>("Portfolio", new SQLParameter(SQLParameter.INTEGER, donator.addAmount(-amount))));
+		
+		operation.add(new UpdateOperation("user", clauses, valuesToChange));
+		
+		List<Pair<String, SQLParameter>> clausesOfReceiver = new ArrayList<>();
+		clausesOfReceiver.add(new Pair<String, SQLParameter>("ID", new SQLParameter(SQLParameter.INTEGER, receiver.getId())));
+		
+		List<Pair<String, SQLParameter>> valuesToChangeOfReceiver = new ArrayList<>();
+		valuesToChangeOfReceiver.add(new Pair<String, SQLParameter>("Portfolio", new SQLParameter(SQLParameter.INTEGER, receiver.addAmount(amount))));
+		
+		operation.add(new UpdateOperation("user", clausesOfReceiver, valuesToChangeOfReceiver));
+	}
+	
+	
 }

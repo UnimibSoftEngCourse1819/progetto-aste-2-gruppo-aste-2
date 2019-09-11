@@ -3,22 +3,24 @@ package model.auction.dutchauction;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import exception.IncompatibilityClassException;
 import model.Offer;
 import model.Operation;
 import model.Transaction;
 import model.auction.Auction;
-import model.user.User;
 
 public class DutchAuction extends Auction {
+	public DutchAuction(HttpServletRequest request) {
+		super(request);
+		// TODO Auto-generated constructor stub
+	}
+
 	private long minPrice;
 	private long currentPrice;
 	private long amount;
 	private DutchOffer offer;
-	
-	public void adjudicate(User bidder) {
-		offer = new DutchOffer(bidder, currentPrice);
-	}
 	
 	public void decreasePrice() {
 		if(currentPrice > minPrice && (currentPrice - amount) >= currentPrice)
@@ -26,7 +28,9 @@ public class DutchAuction extends Auction {
 	}
 	
 	@Override
-	public void addOffer(Offer newOffer) throws IncompatibilityClassException {	}
+	public void addOffer(Offer newOffer) throws IncompatibilityClassException {
+		//TODO da decidere quando verrà implementato le pagine per le offerte
+	}
 
 	@Override
 	public List<Operation> end() {
@@ -34,6 +38,11 @@ public class DutchAuction extends Auction {
 		operationToDo.add(new Transaction(offer.getBidder(), seller, currentPrice));
 		
 		return operationToDo;
+	}
+
+	@Override
+	protected String getType() {
+		return "Dutch";
 	}
 
 }

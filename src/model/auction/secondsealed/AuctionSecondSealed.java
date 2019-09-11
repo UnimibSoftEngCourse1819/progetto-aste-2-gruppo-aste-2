@@ -3,6 +3,8 @@ package model.auction.secondsealed;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import exception.IncompatibilityClassException;
 import model.Offer;
 import model.Operation;
@@ -10,6 +12,10 @@ import model.Transaction;
 import model.auction.Auction;
 
 public class AuctionSecondSealed extends Auction {
+
+	public AuctionSecondSealed(HttpServletRequest request) {
+		super(request);
+	}
 
 	private List<SecondSealedOffer> offers;
 
@@ -26,17 +32,12 @@ public class AuctionSecondSealed extends Auction {
 	public List<Operation> end() {
 		SecondSealedOffer winner = offers.get(0);
 		SecondSealedOffer second = winner;
-		boolean changed = false;
 		
 		for(SecondSealedOffer offerToScan : offers) {
+			
 			if(offerToScan.compareTo(winner) > 0) {
-				if(!changed) {
-					second = winner;
-					changed = true;
-				}
 				winner = offerToScan;
-			}
-			else if(offerToScan.compareTo(second) > 0) {
+			}else if(offerToScan.compareTo(second) > 0) {
 				second = offerToScan;
 			}
 		}
@@ -45,6 +46,11 @@ public class AuctionSecondSealed extends Auction {
 		operationToDo.add(new Transaction(winner.getBidder(), seller, second.getPrice()));
 		
 		return operationToDo;
+	}
+
+	@Override
+	protected String getType() {
+		return "SecondSealed";
 	}
 	
 	
