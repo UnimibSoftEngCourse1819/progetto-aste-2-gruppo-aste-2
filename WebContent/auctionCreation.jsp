@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,14 +8,7 @@
         <title>Auction Online</title>
     </head>
     <body>
-        <div class="topnav">
-            <div class="menu-trigger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <div class="login">Login</div>
-        </div>
+		<%@include file="templates/navbar.jsp" %>
         <div class="item-form">
             <form action="servlet/ItemRegister" method="post">
                 <div class="row">
@@ -49,7 +44,7 @@
                 <div class="row">
                     <div class="col">
                     	<label for="mod">
-                        	Modalit√† asta
+                        	Modalit‡ asta
                     	</label>
                     </div>
                     <div class="col">

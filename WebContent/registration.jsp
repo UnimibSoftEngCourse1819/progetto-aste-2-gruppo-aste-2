@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,16 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="Menu.css" />
 	</head>
 	<body>
-		<div class="topnav">
-            <div class="menu-trigger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <div class="login">Login</div>
-        </div>
+		<%@include file="templates/navbar.jsp" %>
         <div class="item-form">
-        	<form action="servlet/registrato" method="post">
+        	<form action="register" method="post">
         		<div class="row">
                     <div class="col">
                     	<label for="name">
@@ -49,7 +44,7 @@
                 <div class="row">
                     <div class="col">
                     	<label for="city">
-                        	Citt√†
+                        	Citt‡
                        	</label>
                     </div>
                     <div class="col">
@@ -88,22 +83,22 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                    	<label for="pass">
+                    	<label for="password">
                         	Password
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="password" id="pass" name="pass"/>
+                        <input type="password" id="password" name="password"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                    	<label for="pass2">
+                    	<label for="passwordRep">
                         	Ripeti password
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="password" id="pass2" name="pass2"/>
+                        <input type="password" id="passwordRep" name="passwordRep"/>
                     </div>
                 </div>
                 <div class="btn-container">
