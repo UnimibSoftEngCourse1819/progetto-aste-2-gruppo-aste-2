@@ -21,6 +21,7 @@ public class User implements Storable {
 	private String phone;
 	private String password;
 	private String id;
+	private long portofolio;
 	private List<UserAttribute> data;
 	
 	public User(HttpServletRequest request) {
@@ -53,5 +54,19 @@ public class User implements Storable {
 		sqlData.add("City", SQLParameter.VARCHAR + "(25)", city);
 		
 		return sqlData;
+	}
+
+	/**
+	 * <p>
+	 * Note: this will also change the <b> value of the instance </b> !!
+	 * If you use this method be sure to write code to get
+	 * value back if an error occur !!!
+	 * </p>
+	 * s
+	 * @param amount , to detract just pass a negative value
+	 */
+	public long addAmount(long amount) {
+		portofolio += amount;
+		return portofolio;
 	}
 }

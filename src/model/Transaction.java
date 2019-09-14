@@ -5,6 +5,7 @@ import java.util.List;
 
 import controller.database.SQLOperation;
 import controller.database.SQLParameter;
+import controller.database.UpdateOperation;
 import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 import model.user.User;
 
@@ -39,6 +40,8 @@ public class Transaction extends Operation {
 		valuesToChangeOfReceiver.add(new Pair<String, SQLParameter>("Portfolio", new SQLParameter(SQLParameter.INTEGER, receiver.addAmount(amount))));
 		
 		operation.add(new UpdateOperation("user", clausesOfReceiver, valuesToChangeOfReceiver));
+		
+		return operation;
 	}
 	
 	
