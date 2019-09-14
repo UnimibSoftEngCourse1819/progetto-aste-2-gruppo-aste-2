@@ -8,6 +8,9 @@
         
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="sqlite-jdbc-3.27.2.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Massi/eclipse-workspace/ProgettoAsteOnline/otherLibraries/sqlite-jdbc-3.27.2.1.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
                                 
         
         

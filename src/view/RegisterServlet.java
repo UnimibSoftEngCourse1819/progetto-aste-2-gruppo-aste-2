@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			areValidParameter(request);
-			
+
 			User user = new User(request);
 			authService.registerUser(user);
 			

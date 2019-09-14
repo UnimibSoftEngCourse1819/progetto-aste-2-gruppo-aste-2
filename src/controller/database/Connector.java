@@ -10,7 +10,7 @@ import exception.MyConnectionException;
 public class Connector {
 	private static final String path = "database" + File.separator;
 	private static final String DATABASE_DRIVER = "jdbc:sqlite:";
-	private static final String DATABASE_NAME = "aste2.db";
+	private static final String DATABASE_NAME = "asta2.db";
 	
 	public static Connection getConnection() throws MyConnectionException {
 		try {
