@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +33,7 @@ public class AuthenticationService {
 		DatabaseManager.create(user);		
 	}
 	
-	public boolean authenticate(HttpServletRequest request) throws MyConnectionException {
+	public boolean authenticate(HttpServletRequest request) throws MyConnectionException, IOException {
 		boolean authenticated = false;
 		
 		try {

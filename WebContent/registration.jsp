@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<title>Registrazione</title>
 		<link rel="stylesheet" type="text/css" href="css/form.css" />
+		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
