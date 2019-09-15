@@ -25,3 +25,4 @@ someOtherfoler/
 *.rar
 *.tar
 *.zip
+/build/

@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="Menu.css">
+        <link rel="stylesheet" type="text/css" href="css/form.css">
         <title>Auction Online</title>
     </head>
     <body>
