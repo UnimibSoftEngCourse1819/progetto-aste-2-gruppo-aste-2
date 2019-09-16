@@ -1,6 +1,8 @@
 package view;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,19 +30,12 @@ public class LoginServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			if(authenticationService.authenticate(request)) {
+			String user = authenticationService.authenticate(request);
+			if(user != null) {
 				// Get the current session
 				HttpSession oldSession = request.getSession(false);
 				if(oldSession != null) {
@@ -48,17 +43,18 @@ public class LoginServlet extends HttpServlet {
 				}
 				
 				HttpSession currentSession = request.getSession(true); // create a new session
-				currentSession.setAttribute("email", request.getParameter("email"));
+				currentSession.setAttribute("name", user);
 				currentSession.setMaxInactiveInterval(5 * 60); // maximum five minutes of inactivity
 				
 				response.sendRedirect("index.jsp"); // got to the next page
 			} 
 			else {
 				// If authentication fails
-				response.sendRedirect("login.jsp");
+				request.setAttribute("errorMessage", "Email o password errati!");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+				requestDispatcher.forward(request, response);
 			}
 		} catch (MyConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

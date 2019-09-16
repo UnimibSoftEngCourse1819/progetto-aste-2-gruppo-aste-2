@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/form.css">
         <link rel="stylesheet" type="text/css" href="css/navBar.css" />
+        <script type="text/javascript" src="slideMenu.js"></script>
         <title>Auction Online</title>
     </head>
     <body>

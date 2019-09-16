@@ -7,11 +7,16 @@
 		<title>Login</title>
 		<link rel="stylesheet" type="text/css" href="css/form.css" />
 		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
+		<script type="text/javascript" src="slideMenu.js"></script>
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
         <div class="item-form">
         	<form action="login" method="post">
+        		<%
+					if(request.getAttribute("errorMessage") != null)
+						out.println(request.getAttribute("errorMessage"));
+				%>
                 <div class="row">
                     <div class="col">
                     	<label for="email">

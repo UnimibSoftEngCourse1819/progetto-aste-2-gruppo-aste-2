@@ -33,8 +33,8 @@ public class AuthenticationService {
 		DatabaseManager.create(user);		
 	}
 	
-	public boolean authenticate(HttpServletRequest request) throws MyConnectionException, IOException {
-		boolean authenticated = false;
+	public String authenticate(HttpServletRequest request) throws MyConnectionException, IOException {
+		String name = null;
 		
 		try {
 			Connection connection = Connector.getConnection();
@@ -46,14 +46,11 @@ public class AuthenticationService {
 			ResultSet resultSet = statement.executeQuery();
 			resultSet.next();
 			
-			if(resultSet.getString("Email") != null) {
-				authenticated = true;
-			}
+			name = resultSet.getString("Name");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return authenticated;
+		return name;
 	}
 }
