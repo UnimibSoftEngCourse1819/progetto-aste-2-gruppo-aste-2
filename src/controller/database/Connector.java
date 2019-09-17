@@ -11,12 +11,14 @@ import exception.MyConnectionException;
 public class Connector {
 	private static final String path = "database" + File.separator;
 	private static final String DATABASE_DRIVER = "jdbc:sqlite:";
+//	private static final String 
 	private static final String DATABASE_NAME = "asta2.db";
 	
 	public static Connection getConnection() throws MyConnectionException, IOException {
 		try {
 			Class.forName("org.sqlite.JDBC");
-		
+			String currentDirectory = System.getProperty("user.dir");
+			System.out.println(currentDirectory);//TODO
 			return DriverManager.getConnection("jdbc:sqlite:C:\\Users\\Massi\\eclipse-workspace\\ProgettoAsteOnline\\database\\asta2.db");
 		} catch (SQLException | ClassNotFoundException e) {
 			throw new MyConnectionException();

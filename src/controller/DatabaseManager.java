@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import controller.database.Connector;
+import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
+import controller.database.select.SelectOperation;
 import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
 import exception.FailRollBackException;
@@ -69,6 +71,19 @@ public class DatabaseManager {
 			operation.configure(statement);
 			statement.execute();
 		}
+	}
+	
+	public static ResultDatabase executeSelect(SelectOperation select) throws SQLException {
+		ResultDatabase result = null;
+		try(Connection connection = Connector.getConnection();
+				PreparedStatement statement = connection.prepareStatement(select.getStatement())){
+			select.configure(statement);
+			result = new ResultDatabase(statement.executeQuery());//TODO 
+		} catch (MyConnectionException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
