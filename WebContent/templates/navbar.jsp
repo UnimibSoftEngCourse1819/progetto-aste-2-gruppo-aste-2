@@ -29,7 +29,7 @@
            	if(name == null || name.equals("")) {
           %>
             	<a href="login.jsp">Login</a>
-          <%
+         <%
             }
            	else {
           %>
@@ -38,4 +38,13 @@
          	}
           %>
             </div>
+          <%
+           	if(name == null || name.equals("")) {
+          %>
+	            <div class="register">
+	            	<a href="registration.jsp">Registrati</a>
+	            </div>
+	      <%
+	      	} 
+	      %>
 </div>

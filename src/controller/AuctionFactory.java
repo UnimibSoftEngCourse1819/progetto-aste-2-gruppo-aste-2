@@ -18,13 +18,14 @@ public class AuctionFactory {
 
 	public static Auction createAuction(String parameter, HttpServletRequest request) throws InexistentTypeParameterException {
 		Auction result = null;
-		if(parameter.equalsIgnoreCase("Busta chiusa")) {
+		System.out.println(parameter);
+		if(parameter.equalsIgnoreCase("firstSealed")) {
 			result =  new AuctionFirstSealed(request);
-		}else if(parameter.equalsIgnoreCase("Busta chiusa a secondo prezzo")) {
+		}else if(parameter.equalsIgnoreCase("secondSealed")) {
 			result =  new AuctionSecondSealed(request);
-		}else if(parameter.equalsIgnoreCase("Asta inglese")) {
+		}else if(parameter.equalsIgnoreCase("englishAuction")) {
 			result =  new EnglishAuction(request);
-		}else if(parameter.equalsIgnoreCase("Asta olandese")) {
+		}else if(parameter.equalsIgnoreCase("dutchAuction")) {
 			result =  new DutchAuction(request);
 		}else {
 			throw new InexistentTypeParameterException();

@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/form.css" />
 		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 		<link rel="stylesheet" type="text/css" href="css/catalogue.css" />
-		<script type="text/javascript" src="slideMenu.js"></script>
+		<script type="text/javascript" src="javascript/slideMenu.js"></script>
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>

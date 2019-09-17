@@ -51,6 +51,41 @@ div.login a:focus {
 	text-decoration: none;
 }
 
+.register {
+	display: inline-block;
+	text-align: center;
+	color: #fff;
+	padding: 8px;
+	font-size: 2rem;
+	cursor: pointer;
+	float: right;
+}
+
+.register:hover {
+	background: #0080C0;
+}
+
+div.register a {
+	text-decoration: none;
+	color: #fff;
+}
+
+div.register a:visited {
+	text-decoration: none;
+}
+
+div.register a:focus {
+	text-decoration: none;
+}
+
+div.register a:hover {
+	text-decoration: none;
+}
+
+div.register a:focus {
+	text-decoration: none;
+}
+
 .menu-trigger {
     display: inline-block;
     background: #F5F5F5;
@@ -78,6 +113,9 @@ div.login a:focus {
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 60px; /* Place content 60px from the top */
 	transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+	-moz-box-shadow:    3px 0px 10px 1px gray;
+  	-webkit-box-shadow: 3px 0px 10px 1px gray;
+  	box-shadow:         3px 0px 10px 1px gray;
 }
 
 .slide-menu a {

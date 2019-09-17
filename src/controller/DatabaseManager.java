@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import exception.SQLiteFailRequestException;
 
 public class DatabaseManager {
 
-	public static void create(Storable newData) throws SQLiteFailRequestException {
+	public static void create(Storable newData) throws SQLiteFailRequestException, IOException {
 		SQLiteData sqlData = newData.getSQLiteData();
 		try(Connection connection = Connector.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sqlData.getInsertStatement())){
@@ -30,8 +31,9 @@ public class DatabaseManager {
 	 * Note : the entire operation will be 
 	 * treated as a sql transaction
 	 * @throws FailRollBackException 
+	 * @throws IOException 
 	 */
-	public static void execute(List<SQLOperation> operations) throws SQLiteFailRequestException, FailRollBackException {
+	public static void execute(List<SQLOperation> operations) throws SQLiteFailRequestException, FailRollBackException, IOException {
 		Connection connection = null;
 		try{
 			connection = Connector.getConnection();

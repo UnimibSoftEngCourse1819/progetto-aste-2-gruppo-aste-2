@@ -29,7 +29,7 @@ public class AuthenticationService {
 		users = new ArrayList<>();
 	}
 	
-	public void registerUser(User user) throws SQLiteFailRequestException {
+	public void registerUser(User user) throws SQLiteFailRequestException, IOException {
 		DatabaseManager.create(user);		
 	}
 	

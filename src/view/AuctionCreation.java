@@ -16,7 +16,7 @@ import exception.SQLiteFailRequestException;
 /**
  * Servlet implementation class AuctionCreation
  */
-@WebServlet("/AuctionCreation")
+@WebServlet("/auctionCreation")
 public class AuctionCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,21 +25,19 @@ public class AuctionCreation extends HttpServlet {
      */
     public AuctionCreation() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    
     @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	boolean successfulOperation = false;
 		
-		boolean successfulOperation = false;
-		
-		try (PrintWriter out = response.getWriter()){
+		try {
 			AuctionRequestManager.createAuction(request);
 			successfulOperation = true;
+			if(successfulOperation)
+				response.sendRedirect("index.jsp");
+			else
+				response.sendRedirect("auctionCreation.jsp");
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
 			// TODO manda un pop-up di fallimento
 			e.printStackTrace();
@@ -51,14 +49,5 @@ public class AuctionCreation extends HttpServlet {
 			 * se risponde di no lo reindirizza nella pagina di home
 			 */
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    }
 }

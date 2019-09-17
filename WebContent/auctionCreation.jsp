@@ -6,13 +6,14 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/form.css">
         <link rel="stylesheet" type="text/css" href="css/navBar.css" />
-        <script type="text/javascript" src="slideMenu.js"></script>
+        <script type="text/javascript" src="javascript/slideMenu.js"></script>
+        <script type="text/javascript" src="javascript/append.js"></script>
         <title>Auction Online</title>
     </head>
     <body>
 		<%@include file="templates/navbar.jsp" %>
         <div class="item-form">
-            <form action="servlet/ItemRegister" method="post">
+            <form action="auctionCreation" method="post">
                 <div class="row">
                     <div class="col">
                     	<label for="titolo">
@@ -35,28 +36,34 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                    	<label for="cat">
-                        	Categorie
-                        </label>
-                    </div>
-                    <div class="col">
-                        <input type="text" id="cat" name="userEmail"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
                     	<label for="mod">
                         	Modalità asta
                     	</label>
                     </div>
                     <div class="col">
-                        <select id="mod">
+                        <select id="mod" name="mod">
                             <option value="firstSealed">Busta chiusa</option>
                             <option value="secondSealed">Busta chiusa al "secondo prezzo"</option>
                             <option value="englishAuction">Asta "inglese"</option>
                             <option value="dutchAuction">Asta "olandese"</option>
                         </select>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                    	<label for="cat">
+                        	Categorie
+                        </label>
+                    </div>
+                    <div class="col" id="txt-btn">
+                        <input type="text" id="cat" name="category" />
+                    	<button type="button" onclick="append(document.getElementById('cat').value)">Aggiungi</button>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col"></div>
+                	<div class="col" id="category-container">
+                	</div>
                 </div>
                 <div class="row">
                     <label for="pic" class="pic-label">Seleziona immagine</label>
