@@ -16,9 +16,9 @@ public class UpdateOperation implements SQLOperation {
 	private List<String> typeClauses;//TODO replace the String with an enum
 	
 	//TODO replace these value into enum
-	public static final String EQUALS = "= ";
-	public static final String GREATER = "> ";
-	public static final String LOWER = "< ";
+	public static final String EQUALS_OPERATION = "= ";
+	public static final String GREATER_OPERATION = "> ";
+	public static final String LOWER_OPERATION = "< ";
 	
 	/**
 	 * Note : this will make all the clauses as
@@ -27,10 +27,10 @@ public class UpdateOperation implements SQLOperation {
 	public UpdateOperation(String tableName, List<Pair<String, SQLParameter>> clauses,
 			List<Pair<String, SQLParameter>> valuesToChange) {
 		this.tableName = tableName;
-		this.clauses = clauses;
+		this.valuesToChange = clauses;
 		typeClauses = new ArrayList<>();
 		for(int counter = 0; counter < clauses.size(); counter++) {
-			typeClauses.add(EQUALS);
+			typeClauses.add(EQUALS_OPERATION);
 		}
 	}
 

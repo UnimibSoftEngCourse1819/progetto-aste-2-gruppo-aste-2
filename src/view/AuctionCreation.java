@@ -34,20 +34,14 @@ public class AuctionCreation extends HttpServlet {
 		try {
 			AuctionRequestManager.createAuction(request);
 			successfulOperation = true;
-			if(successfulOperation)
-				response.sendRedirect("index.jsp");
-			else
-				response.sendRedirect("auctionCreation.jsp");
+				
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
-			// TODO manda un pop-up di fallimento
+			response.sendRedirect("auctionCreation.jsp");
+			// TODO manda un pop-up di fallimento con spiegazione 
 			e.printStackTrace();
 		}
 		if(successfulOperation) {
-			/**
-			 * TODO manda un pop-up di successo che chiede se vuole farne un'altra
-			 * se risponde di si rimane nella pagina e pulisce i campi
-			 * se risponde di no lo reindirizza nella pagina di home
-			 */
+			response.sendRedirect("index.jsp");
 		}
     }
 }
