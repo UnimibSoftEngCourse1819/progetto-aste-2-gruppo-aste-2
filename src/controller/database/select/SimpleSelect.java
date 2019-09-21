@@ -65,14 +65,7 @@ public class SimpleSelect implements SelectComponent {
 	}
 	
 	public int getNumberParametersRequired() {
-		int counter = 0; 
-		  
-	    for (int indexCharacter = 0; indexCharacter < basicQuery.length(); indexCharacter++) {	    	
-	    	if (basicQuery.charAt(indexCharacter) == '?') {
-	    		counter++; 
-	    	}
-	    }
-	    return counter; 
+		return SelectComponent.getNumberOfValuesFromStatement(basicQuery);
 	}
 
 }

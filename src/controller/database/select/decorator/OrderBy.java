@@ -1,10 +1,12 @@
-package controller.database.select;
+package controller.database.select.decorator;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import controller.database.select.SelectComponent;
 
 public class OrderBy extends SelectDecorator {
 	
@@ -60,6 +62,7 @@ public class OrderBy extends SelectDecorator {
 			}
 		}
 		
+		orderByClause.append(" ");
 		return inner.getStatement() + orderByClause.toString();
 	}
 
