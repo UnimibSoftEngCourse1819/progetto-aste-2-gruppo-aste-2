@@ -33,7 +33,7 @@ public class ReadJSON {
             	JSONObject jObject = (JSONObject) statement;
             	JSONObject sqlObject = (JSONObject) jObject.get("sqlStatement");
             	
-            	map.put((String)sqlObject.get("Name"), parseSQLStatement(sqlObject));
+            	map.put(((String)sqlObject.get("name")).toUpperCase(), parseSQLStatement(sqlObject));
             }
  
         } catch (FileNotFoundException e) {

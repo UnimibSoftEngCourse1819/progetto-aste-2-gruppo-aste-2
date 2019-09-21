@@ -72,7 +72,10 @@ public class ResultDatabase {
 				values.add(result.getString(name));
 				break;
 			case Types.DATE :
-				values.add(result.getDate(name).toLocalDate());
+				Object value = result.getObject(name);//TODO viene ricevuto come stringa 1997-06-28
+				String type = value.getClass().toString();
+//				values.add(().toLocalDate());
+				System.out.print(type);
 			default:
 				//this shouldn't happen ... maybe we should throw an Exception
 			}
