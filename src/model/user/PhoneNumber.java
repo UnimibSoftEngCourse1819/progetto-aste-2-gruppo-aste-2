@@ -15,7 +15,7 @@ public class PhoneNumber extends UserAttribute{
 	}
 	
 	public static boolean isValidNumber(String number) {
-		number.replaceAll("\\s+","");
+		number = "" + number.replaceAll("\\s+","");
 		if(number.startsWith("+")) {
 			number = number.substring(1);
 		}

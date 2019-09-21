@@ -6,7 +6,13 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+
+/**
+ * TODO maybe we should create null object 
+ *
+ */
 public class ResultDatabase {
 	private List<SQLColumn> table;
 	
@@ -26,6 +32,18 @@ public class ResultDatabase {
 		}
 	}
 	
+	public Object getValue(String nameColumn, int index) {
+		SQLColumn result = getColumn(nameColumn);
+		return result == null ? null : result.getValue(index);
+	}
+	
+	private SQLColumn getColumn(String nameColumn) {
+		Optional<SQLColumn> result = table.stream()
+				.filter(singleColumn -> singleColumn.getName().equals(nameColumn))
+				.findFirst();
+		return result.isPresent() ? result.get() : null;
+	}
+	
 	private class SQLColumn{
 		private String name;
 		private int type; //these are from java.sql.Types
@@ -35,6 +53,14 @@ public class ResultDatabase {
 			name = columnLabel;
 			type = columnType;
 			values = new ArrayList<>();
+		}
+		
+		protected String getName() {
+			return name;
+		}
+		
+		protected Object getValue(int index) {
+			return values.get(index);
 		}
 
 		public void addValue(ResultSet result) throws SQLException {

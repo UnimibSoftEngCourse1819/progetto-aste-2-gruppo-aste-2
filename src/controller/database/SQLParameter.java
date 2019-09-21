@@ -32,6 +32,7 @@ public class SQLParameter{
 			break;
 		case DATE:
 			statement.setObject(indexStatement, (LocalDate) value);
+			break;
 		default://this should be avoid
 			statement.setObject(indexStatement, value);
 		}

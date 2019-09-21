@@ -11,6 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import controller.database.Connector;
+import controller.database.ResultDatabase;
+import controller.database.select.SimpleSelect;
 import exception.MyConnectionException;
 import exception.SQLiteFailRequestException;
 import model.user.User;
@@ -23,7 +25,8 @@ import model.user.User;
 
 public class AuthenticationService {
 	
-	List<User> users;
+	List<User> users; //<-- TODO per favore metti la visibilità !!!
+ 	
 	
 	public AuthenticationService() {
 		users = new ArrayList<>();
@@ -33,10 +36,15 @@ public class AuthenticationService {
 		DatabaseManager.create(user);		
 	}
 	
-	public String authenticate(HttpServletRequest request) throws MyConnectionException, IOException {
+	public String authenticate(HttpServletRequest request){
 		String name = null;
 		
 		try {
+			SimpleSelect select = new SimpleSelect("Authentication", request.getParameter("email"), request.getParameter("password"));
+			ResultDatabase result = DatabaseManager.executeSelect(select);
+			name = (String) result.getValue("Name", 0);
+			
+			//*********OLD AND DISGUSTING WAY !!!!
 			Connection connection = Connector.getConnection();
 			String  statementString = "SELECT * FROM user WHERE Email = ? AND Password = ?";
 			PreparedStatement statement =  connection.prepareStatement(statementString);
@@ -47,7 +55,7 @@ public class AuthenticationService {
 			resultSet.next();
 			
 			name = resultSet.getString("Name");
-		} catch (SQLException e) {
+		} catch (SQLException | SQLiteFailRequestException | MyConnectionException e) {
 			e.printStackTrace();
 		}
 		

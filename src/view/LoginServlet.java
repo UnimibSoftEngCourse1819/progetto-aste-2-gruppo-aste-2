@@ -32,9 +32,10 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response){
 		try {
 			String user = authenticationService.authenticate(request);
+			
 			if(user != null) {
 				// Get the current session
 				HttpSession oldSession = request.getSession(false);
@@ -54,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 				requestDispatcher.forward(request, response);
 			}
-		} catch (MyConnectionException e) {
+		} catch (MyConnectionException | IOException | ServletException e) {
 			e.printStackTrace();
 		}
 	}

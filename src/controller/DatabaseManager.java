@@ -16,7 +16,19 @@ import exception.FailRollBackException;
 import exception.MyConnectionException;
 import exception.SQLiteFailRequestException;
 
+/**
+ * This class will manage
+ * ALL the request with the 
+ * database
+ * @author Vallero
+ *
+ */
+
 public class DatabaseManager {
+	
+	private DatabaseManager() {
+		//this class is only called by static methods
+	}
 
 	public static void create(Storable newData) throws SQLiteFailRequestException, IOException {
 		SQLiteData sqlData = newData.getSQLiteData();
@@ -35,7 +47,7 @@ public class DatabaseManager {
 	 * @throws FailRollBackException 
 	 * @throws IOException 
 	 */
-	public static void execute(List<SQLOperation> operations) throws SQLiteFailRequestException, FailRollBackException, IOException {
+	public static void execute(List<SQLOperation> operations) throws SQLiteFailRequestException, FailRollBackException {
 		Connection connection = null;
 		try{
 			connection = Connector.getConnection();
