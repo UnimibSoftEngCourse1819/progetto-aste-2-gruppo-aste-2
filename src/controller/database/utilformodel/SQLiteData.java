@@ -39,7 +39,7 @@ public class SQLiteData {
 	
 	public void configureStatement(PreparedStatement statement) throws SQLException {
 		for(int indexParameter = 0; indexParameter < data.size(); indexParameter++) {
-			SQLParameter singleParameter = data.get(indexParameter).snd;
+			SQLParameter singleParameter = data.get(indexParameter).second;
 			singleParameter.configure(indexParameter + 1, statement);
 		}
 	}

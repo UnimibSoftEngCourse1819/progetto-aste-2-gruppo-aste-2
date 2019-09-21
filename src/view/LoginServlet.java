@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
 				requestDispatcher.forward(request, response);
 			}
-		} catch (MyConnectionException | IOException | ServletException e) {
+		} catch (IOException | ServletException e) {
 			e.printStackTrace();
 		}
 	}

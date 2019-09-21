@@ -3,6 +3,8 @@ package controller.database;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SQLParameter{
 	public static final String INTEGER = "INTEGER";
@@ -36,5 +38,13 @@ public class SQLParameter{
 		default://this should be avoid
 			statement.setObject(indexStatement, value);
 		}
+	}
+
+	public static List<SQLParameter> parse(List<String> typeParameters, List<Object> parameters) {
+		List<SQLParameter> result = new ArrayList<>();
+		for(int indexParameter = 0; indexParameter < typeParameters.size(); indexParameter++) {
+			result.add(new SQLParameter(typeParameters.get(indexParameter), parameters.get(indexParameter)));
+		}
+		return result;
 	}
 }
