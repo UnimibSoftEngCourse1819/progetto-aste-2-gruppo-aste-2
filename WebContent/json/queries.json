@@ -1,0 +1,23 @@
+[
+  {
+    "sqlStatement" : {
+      "name" : "authentication",
+      "statement" : "SELECT * FROM user WHERE Email = ? AND Password = ?",
+      "values" : "VARCHAR-VARCHAR"
+    }
+  },
+  {
+    "sqlStatement" : {
+      "name" : "auctions",
+      "statement" : "SELECT * FROM auction WHERE Creation < NOW()",
+      "values" : ""
+    }
+  },
+  {
+    "sqlStatement" : {
+      "name" : "userAuctions",
+      "statement" : "SELECT * FROM auction WHERE Seller = ?",
+      "values" : "INTEGER"
+    }
+  }
+]

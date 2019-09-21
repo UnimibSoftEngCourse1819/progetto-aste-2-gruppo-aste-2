@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,18 +17,23 @@ import controller.database.select.QueryData;
 
 public class ReadJSON {
 	private static JSONParser jsonParser = new JSONParser();
+	private static final String PATH = File.separator + "WebContent" + File.separator + "json" + File.separator;
+	private static final String FILE_NAME = "queries.json";
 	
 	public static Map<String, QueryData> read() {
-		try (FileReader reader = new FileReader("queries.json"))
+		Map<String, QueryData> map = new HashMap<String, QueryData>();
+		
+		try (FileReader reader = new FileReader(System.getProperty("user.dir") + PATH + FILE_NAME))
         {
             //Read JSON file
             Object object = jsonParser.parse(reader);
-            Map<String, QueryData> map = new HashMap<String, QueryData>();
             JSONArray statementList = (JSONArray) object;
              
-            statementList.forEach( statement -> parseSQLStatement( (JSONObject) statement ) );
             for(Object statement : statementList) {
-        		
+            	JSONObject jObject = (JSONObject) statement;
+            	JSONObject sqlObject = (JSONObject) jObject.get("sqlStatement");
+            	
+            	map.put((String)sqlObject.get("Name"), parseSQLStatement(sqlObject));
             }
  
         } catch (FileNotFoundException e) {
@@ -37,15 +43,15 @@ public class ReadJSON {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+		
+		return map;
 	}
 	
 	private static QueryData parseSQLStatement(JSONObject object)
-    {
-        JSONObject statementObject = (JSONObject) object.get("sqlAuthentication");
-         
-        String statement = (String) statementObject.get("statement");            
-        String type[] = (String[]) statementObject.get("values"); 
+    {   
+        String statement = (String) object.get("statement");            
+        String type = (String) object.get("values"); 
         
-        return new QueryData(statement, Arrays.asList(type));
+        return new QueryData(statement, Arrays.asList(type.split("-")));
     }
 }

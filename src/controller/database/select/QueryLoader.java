@@ -1,6 +1,8 @@
 package controller.database.select;
 
 import java.util.Map;
+
+import controller.ReadJSON;
 /**
  * <p>
  * Singleton Design Pattern Applied
@@ -20,6 +22,7 @@ public class QueryLoader {
 	
 	private QueryLoader() {
 		//TODO something that read from the queries.json
+		queries = ReadJSON.read();
 	}
 	
 	public static QueryLoader getInstance() {

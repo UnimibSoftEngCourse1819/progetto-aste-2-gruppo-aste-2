@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.AuthenticationService;
+import controller.ReadJSON;
 import exception.MyConnectionException;
 
 /**
@@ -34,6 +35,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response){
 		try {
+			ReadJSON.read();
 			String user = authenticationService.authenticate(request);
 			
 			if(user != null) {
