@@ -5,6 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Login</title>
+		<link rel="stylesheet" type="text/css" href="css/form.css" />
 		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 		<link rel="stylesheet" type="text/css" href="css/carousel.css" />
 		<script type="text/javascript" src="javascript/slideMenu.js"></script>

@@ -12,7 +12,7 @@
     if(name != null) {
 %>	
 	<a href="auctionCreation.jsp">Apri nuova asta</a>
-	<a href="#">Gestisci profilo</a>
+	<a href="personalArea.jsp">Area personale</a>
 	<a href="logout">Logout</a>
 <%
     }
