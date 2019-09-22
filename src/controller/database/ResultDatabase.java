@@ -93,9 +93,7 @@ public class ResultDatabase {
 				break;
 			case Types.DATE :
 				Object value = result.getObject(name);//TODO viene ricevuto come stringa 1997-06-28
-				String type = value.getClass().toString();
-//				values.add(().toLocalDate());
-				System.out.print(type);
+				//Fare in modo che lo convertisce in LocalDate di java e lo aggiunge a values
 			default:
 				//this shouldn't happen ... maybe we should throw an Exception
 			}

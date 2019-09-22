@@ -1,11 +1,16 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import controller.database.ResultDatabase;
+import controller.database.SQLOperation;
+import controller.database.SQLParameter;
 import controller.database.select.SimpleSelect;
+import controller.database.utilformodel.SQLiteData;
+import controller.database.utilformodel.Storable;
 import exception.SQLiteFailRequestException;
 
 /**
@@ -15,10 +20,14 @@ import exception.SQLiteFailRequestException;
  */
 public class CategoryAuction {
 	private static CategoryAuction instance = null;
-	private final Map<String,Integer> categoryList;
+	private static Map<String,Integer> categoryList;
 	private final String queryName = "Category";//TODO da aggiungere nel file json deve prendere tutta la tabella category
 	
 	private CategoryAuction(){
+		loadData();
+	}
+	
+	private void loadData() {
 		categoryList = new HashMap<>();
 		SimpleSelect select = new SimpleSelect(queryName);
 		try {
@@ -36,15 +45,41 @@ public class CategoryAuction {
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}
+		
 	}
-	
+
 	public static CategoryAuction getInstance() {
 		if (instance == null) {
 			instance = new CategoryAuction();
 		}
 		return instance;
 	}
-	
+
+	public void addMissing(List<String> auctionCategory) {
+		List<String> newCategory = new ArrayList<>();
+		for(String singleAuction : auctionCategory) {
+			if(!categoryList.containsKey(singleAuction)) {
+				newCategory.add(singleAuction);
+			}
+		}
+		if(!newCategory.isEmpty()) {
+			loadData();
+		}
+	}
+
+	public static List<SQLOperation> getSQLInsert(List<String> auctionCategory, Integer auction) {
+		List<SQLOperation> relations = new ArrayList<>();
+
+		for(String singleAuction : auctionCategory) {
+			SQLiteData temporarySQLData = new SQLiteData("auctionCategory");
+			temporarySQLData.add("auction", SQLParameter.INTEGER , auction);
+			Integer idAuction = categoryList.get(singleAuction);
+			temporarySQLData.add("category", SQLParameter.INTEGER , idAuction);
+			
+			relations.add(temporarySQLData);
+		}
+		return relations;
+	}
 	
 	
 }

@@ -33,8 +33,8 @@ public class DatabaseManager {
 	public static void create(Storable newData) throws SQLiteFailRequestException, IOException {
 		SQLiteData sqlData = newData.getSQLiteData();
 		try(Connection connection = Connector.getConnection();
-				PreparedStatement statement = connection.prepareStatement(sqlData.getInsertStatement())){
-			sqlData.configureStatement(statement);
+				PreparedStatement statement = connection.prepareStatement(sqlData.getStatement())){
+			sqlData.configure(statement);
 			statement.execute();
 		} catch (SQLException | MyConnectionException e) {
 			throw new SQLiteFailRequestException();
