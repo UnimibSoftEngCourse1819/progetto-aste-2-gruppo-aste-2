@@ -66,6 +66,13 @@
                 	</div>
                 </div>
                 <div class="row">
+                	<div class="col">Risarcimento</div>
+                	<div class="col">
+                		<label style="font-weight:normal;"><input type="radio" name="refund" value="noPenalty" />Risarcimento completo</label>
+                		<label style="font-weight:normal;"><input type="radio" name="refund" value="penalty" checked="checked">Nessun risarcimento</label>
+                	</div>
+                </div>
+                <div class="row">
                     <label for="pic" class="pic-label">Seleziona immagine</label>
                     <input type="file" id="pic" name="pic" accept="image/*" style="display: none" />
                 </div>

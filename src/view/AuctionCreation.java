@@ -1,7 +1,6 @@
 package view;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +32,6 @@ public class AuctionCreation extends HttpServlet {
 		
 		try {
 			AuctionRequestManager.createAuction(request);
-			
 			successfulOperation = true;
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
 			response.sendRedirect("auctionCreation.jsp");
@@ -41,9 +39,7 @@ public class AuctionCreation extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(successfulOperation) {
-			try {
 				response.sendRedirect("index.jsp");
-			}
 		}
     }
 }

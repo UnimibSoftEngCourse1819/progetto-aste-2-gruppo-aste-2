@@ -127,6 +127,14 @@ div.register a:focus {
 	transition: 0.3s;
 }
 
+.slide-menu a:not(.closebtn) {
+	border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+#fst-row {
+	border-top: 1px solid rgba(0,0,0,.125);
+}
+
 .slide-menu a:hover:not(.closebtn) {
   color: #fff;
   background-color: #428bca;

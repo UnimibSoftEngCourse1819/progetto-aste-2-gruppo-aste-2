@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.sun.tools.javac.util.Pair;
+
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
 import exception.SQLiteFailRequestException;
-import model.user.User;
+import model.User;
 
 /**
  * This class manages the user
@@ -30,18 +32,21 @@ public class AuthenticationService {
 		DatabaseManager.create(user);		
 	}
 	
-	public String authenticate(HttpServletRequest request){
-		String name = null;
+	public Pair<Integer, String> authenticate(HttpServletRequest request){
+		Pair<Integer, String> values = null;
 		
 		try {
+			String name = null;
+			int id = -1;
 			SimpleSelect select = new SimpleSelect("Authentication", request.getParameter("email"), request.getParameter("password"));
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			name = (String) result.getValue("Name", 0);
-			
+			id = (int) result.getValue("ID", 0);
+			values = new Pair<Integer, String>(id, name);
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}
 		
-		return name;
+		return values;
 	}
 }

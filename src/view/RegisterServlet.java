@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.AuthenticationService;
 import exception.InvalidParameterException;
 import exception.SQLiteFailRequestException;
-import model.user.User;
+import model.User;
 
 /**
  * Servlet implementation class RegisterServlet

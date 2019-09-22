@@ -2,7 +2,7 @@ package model.auction.firstsealed;
 
 
 import model.Offer;
-import model.user.User;
+import model.User;
 
 public class FirstSealedOffer implements Offer, Comparable<FirstSealedOffer>{
 	private User bidder;

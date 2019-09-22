@@ -1,7 +1,7 @@
 package model.auction.dutchauction;
 
 import model.Offer;
-import model.user.User;
+import model.User;
 
 public class DutchOffer implements Offer{
 	private User bidder;

@@ -1,7 +1,7 @@
 package model.auction.englishauction;
 
 import model.Offer;
-import model.user.User;
+import model.User;
 
 public class EnglishOffer implements Offer, Comparable<EnglishOffer> {
 	private User bidder;

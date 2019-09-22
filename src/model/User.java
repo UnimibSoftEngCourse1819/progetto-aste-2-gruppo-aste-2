@@ -1,4 +1,4 @@
-package model.user;
+package model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,9 +20,15 @@ public class User implements Storable {
 	private String email;
 	private String phone;
 	private String password;
-	private String id;
+	private int id;
 	private long portofolio;
-	private List<UserAttribute> data;
+	
+	/**
+	 * use this Constructor carefully since set only the id
+	 */
+	public User(int id) {
+		this.id = id;
+	}
 	
 	public User(HttpServletRequest request) {
 		name = request.getParameter("name");
@@ -37,7 +43,7 @@ public class User implements Storable {
 		password = request.getParameter("password");
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
