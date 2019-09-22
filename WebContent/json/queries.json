@@ -19,5 +19,12 @@
       "statement" : "SELECT * FROM auction WHERE Seller = ?",
       "values" : "INTEGER"
     }
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "categories",
+  		"statement" : "SELECT * FROM category",
+  		"values" : ""
+  	}
   }
 ]
