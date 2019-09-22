@@ -22,10 +22,14 @@ import model.user.User;
 public abstract class Auction implements Storable{
 	
 	protected static final String SQL_TABLE = "auction";
+	public static final String STANDBY = "STANDBY";
+	public static final String ON_GOING = "ON_GOING";
+	public static final String END = "END";
 	protected User seller;
 	protected String title;
 	protected String description;
 	protected LocalDate creation;
+	protected String status;
 	protected int penalty;//TODO manca il campo sulla pagina
 	
 	protected Auction(HttpServletRequest request) {
@@ -33,6 +37,7 @@ public abstract class Auction implements Storable{
 		title = request.getParameter("");
 		description = request.getParameter("");
 		creation = LocalDate.now();
+		status = STANDBY;
 	}
 	
 	@Override
@@ -44,6 +49,7 @@ public abstract class Auction implements Storable{
 		sqlData.add("Creation", SQLParameter.DATE, creation);
 		sqlData.add("Type", SQLParameter.VARCHAR + "(30)", getType());
 		//TODO missing penalty
+		sqlData.add("Status", SQLParameter.VARCHAR + "(20)", status);
 		return sqlData;
 	}
 	

@@ -37,6 +37,22 @@ public class ResultDatabase {
 		return result == null ? null : result.getValue(index);
 	}
 	
+	public List<Object> getValuesList(String nameColumn){
+		SQLColumn result = getColumn(nameColumn);
+		return result == null ? null : result.getValueList();
+	}
+	
+	@SuppressWarnings("unchecked")//we checked the type on the first value
+	public static <T> List<T> castListInto(Class<T> type, List<Object> listToCast) {
+		List<T> resultList = new ArrayList<>();
+		if(listToCast.get(0).getClass().equals(type.getClass())) {
+			for(Object singleElement : listToCast) {
+				resultList.add((T) singleElement );
+			}
+		}
+		return resultList;
+	}
+	
 	private SQLColumn getColumn(String nameColumn) {
 		Optional<SQLColumn> result = table.stream()
 				.filter(singleColumn -> singleColumn.getName().equals(nameColumn))
@@ -61,6 +77,10 @@ public class ResultDatabase {
 		
 		protected Object getValue(int index) {
 			return values.get(index);
+		}
+		
+		protected List<Object> getValueList() {
+			return values;
 		}
 
 		public void addValue(ResultSet result) throws SQLException {
