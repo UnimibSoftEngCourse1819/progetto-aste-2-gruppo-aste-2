@@ -6,7 +6,7 @@
 %>
 <nav id="slide-menu" class="slide-menu">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	<a href="index.jsp">Home</a>
+	<a href="index.jsp" id="fst-row">Home</a>
 	<a href="displayAuctions.jsp">Sfoglia aste</a>	
 <%
     if(name != null) {

@@ -23,22 +23,28 @@ public abstract class Auction implements Storable{
 	
 	protected static final String SQL_TABLE = "auction";
 	protected User seller;
+	protected int id;
 	protected String title;
 	protected String description;
 	protected LocalDate creation;
-	protected int penalty;//TODO manca il campo sulla pagina
+	protected int penalty;
 	
 	protected Auction(HttpServletRequest request) {
 		//TODO qualcosa che capisca chi è l'utente
-		title = request.getParameter("");
-		description = request.getParameter("");
+		id = (int) request.getSession().getAttribute("id");
+		title = request.getParameter("auctionTitle");
+		description = request.getParameter("auctionDescription");
 		creation = LocalDate.now();
+		if(request.getParameter("refund").equals(""))
+			penalty = 0;
+		else
+			penalty = 1;
 	}
 	
 	@Override
 	public SQLiteData getSQLiteData() {
 		SQLiteData sqlData = new SQLiteData(SQL_TABLE);
-		sqlData.add("Seller", SQLParameter.INTEGER, seller.getId());
+		sqlData.add("Seller", SQLParameter.INTEGER, id);
 		sqlData.add("Title", SQLParameter.VARCHAR + "(25)", title);
 		sqlData.add("Description", SQLParameter.VARCHAR + "(255)", description);
 		sqlData.add("Creation", SQLParameter.DATE, creation);
