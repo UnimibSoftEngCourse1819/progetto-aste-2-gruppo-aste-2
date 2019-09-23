@@ -14,7 +14,6 @@ import model.auction.Auction;
 public class EnglishAuction extends Auction {
 	public EnglishAuction(HttpServletRequest request) {
 		super(request);
-		// TODO Auto-generated constructor stub
 	}
 
 	private List<EnglishOffer> offers;

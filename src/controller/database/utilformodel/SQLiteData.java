@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.sun.tools.javac.util.Pair;
+
 import controller.database.SQLOperation;
 import controller.database.SQLParameter;
-import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
+
 
 
 public class SQLiteData implements SQLOperation{
@@ -25,7 +27,7 @@ public class SQLiteData implements SQLOperation{
 		statement.append(table + " (");
 		Iterator<Pair<String, SQLParameter>> typeIterator = data.iterator();
 		while(typeIterator.hasNext()) {
-			statement.append(typeIterator.next().first);
+			statement.append(typeIterator.next().fst);
 			if(typeIterator.hasNext()) {
 				statement.append(", ");
 			}
@@ -40,7 +42,7 @@ public class SQLiteData implements SQLOperation{
 	
 	public void configure(PreparedStatement statement) throws SQLException {
 		for(int indexParameter = 0; indexParameter < data.size(); indexParameter++) {
-			SQLParameter singleParameter = data.get(indexParameter).second;
+			SQLParameter singleParameter = data.get(indexParameter).snd;
 			singleParameter.configure(indexParameter + 1, statement);
 		}
 	}

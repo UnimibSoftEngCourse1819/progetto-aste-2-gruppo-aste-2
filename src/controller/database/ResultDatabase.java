@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -93,7 +94,9 @@ public class ResultDatabase {
 				break;
 			case Types.DATE :
 				Object value = result.getObject(name);//TODO viene ricevuto come stringa 1997-06-28
-				//Fare in modo che lo convertisce in LocalDate di java e lo aggiunge a values
+				//Fare in modo che lo converta in LocalDate di java e lo aggiunge a values
+				values.add(LocalDate.parse(String.valueOf(value)));
+				break;
 			default:
 				//this shouldn't happen ... maybe we should throw an Exception
 			}

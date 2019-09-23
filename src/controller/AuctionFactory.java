@@ -18,7 +18,7 @@ public class AuctionFactory {
 
 	public static Auction createAuction(String parameter, HttpServletRequest request) throws InexistentTypeParameterException {
 		Auction result = null;
-		System.out.println(parameter);
+		
 		if(parameter.equalsIgnoreCase("firstSealed")) {
 			result =  new AuctionFirstSealed(request);
 		}else if(parameter.equalsIgnoreCase("secondSealed")) {

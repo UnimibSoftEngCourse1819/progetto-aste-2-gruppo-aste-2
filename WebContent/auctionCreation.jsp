@@ -8,6 +8,8 @@
         <link rel="stylesheet" type="text/css" href="css/navBar.css" />
         <script type="text/javascript" src="javascript/slideMenu.js"></script>
         <script type="text/javascript" src="javascript/append.js"></script>
+        <script type="text/javascript" src="javascript/sendData.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <title>Auction Online</title>
     </head>
     <body>
@@ -77,7 +79,7 @@
                     <input type="file" id="pic" name="pic" accept="image/*" style="display: none" />
                 </div>
                 <div class="btn-container">
-                    <input type="submit" value="Registra"/>
+                    <button type="button" onclick="send()" id="register-button">Registra</button>
                 </div>
             </form>
         </div>

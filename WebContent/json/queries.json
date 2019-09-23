@@ -22,7 +22,7 @@
   },
   {
   	"sqlStatement" : {
-  		"name" : "Categories",
+  		"name" : "categories",
   		"statement" : "SELECT * FROM category",
   		"values" : ""
   	}

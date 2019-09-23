@@ -12,7 +12,7 @@ public class Where extends SelectDecorator {
 	private String clauseDecorator;
 	private List<SQLParameter> values;
 	
-	protected Where(SelectComponent inner, String extraClause, SQLParameter...values) {
+	public Where(SelectComponent inner, String extraClause, SQLParameter...values) {
 		super(inner);
 		clauseDecorator = extraClause;
 		this.values = Arrays.asList(values);

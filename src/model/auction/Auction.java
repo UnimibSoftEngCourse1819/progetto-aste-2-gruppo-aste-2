@@ -51,13 +51,15 @@ public abstract class Auction implements Storable{
 	@Override
 	public SQLiteData getSQLiteData() {
 		SQLiteData sqlData = new SQLiteData(SQL_TABLE);
-		sqlData.add("Seller", SQLParameter.INTEGER, id);
+		
+		sqlData.add("Seller", SQLParameter.INTEGER, seller.getId());
 		sqlData.add("Title", SQLParameter.VARCHAR + "(25)", title);
 		sqlData.add("Description", SQLParameter.VARCHAR + "(255)", description);
 		sqlData.add("Creation", SQLParameter.DATE, creation);
 		sqlData.add("Type", SQLParameter.VARCHAR + "(30)", getType());
 		sqlData.add("penalty", SQLParameter.INTEGER, penalty);
 		sqlData.add("Status", SQLParameter.VARCHAR + "(20)", status);
+		
 		return sqlData;
 	}
 	

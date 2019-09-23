@@ -36,6 +36,7 @@ body {
 
 .btn-container {
     text-align: right;
+    display: flex;
 }
 
 .txtarea {
@@ -216,6 +217,22 @@ button:hover {
 	background: #0080C0;
 }
 
+#register-button {
+	color: #fff;
+	padding: 10px 16px; 
+	font-size: 18px;
+    background: #428bca;
+    border: 1px solid;
+    border-color: #357ebd;
+    cursor:pointer;
+    -webkit-border-radius: 6px;
+    border-radius: 6px; 
+    -moz-border-radius: 6px; /* firefox */
+    -webkit-border-radius: 6px; /* safari, chrome */	
+    display: inline-block;
+    margin-left: auto;
+}
+
 input[type=submit] {
 	color: #fff;
 	padding: 10px 16px; 
@@ -262,4 +279,8 @@ input[type=submit]:hover {
     margin-top: 3px;
     float: left;
     margin-left: 3px;
+}
+
+.cat-text {
+	display: inline-block;
 }

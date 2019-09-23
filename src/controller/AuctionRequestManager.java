@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import controller.database.ResultDatabase;
+import controller.database.select.SimpleSelect;
+import controller.database.select.decorator.OrderBy;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
@@ -21,11 +24,24 @@ public class AuctionRequestManager {
 		Auction newAuction = AuctionFactory.createAuction(request.getParameter("mod"), request);
 		CategoryAuction categories = CategoryAuction.getInstance();
 		List<String> auctionCategory = new ArrayList<>(); 
-		//TODO qualcosa che prenda tutte le stringe delle categorie e li mette su auctionCategory
+		
+		String[] values = request.getParameterValues("categories[]");
+		
+		for(String category : values) {
+			auctionCategory.add(category);
+		}
+		
 		categories.addMissing(auctionCategory);
 		
 		DatabaseManager.create(newAuction);
-		Integer idAuction = -1; //TODO qualcosa che ricevi l'ID del nuovoAuciton
+		
+		SimpleSelect selectAuction = new SimpleSelect("userAuctions", (int)request.getSession().getAttribute("id"));
+		OrderBy orderedSelect = new OrderBy(selectAuction, "Creation");
+		orderedSelect.setDesc(true);
+		
+		ResultDatabase result = DatabaseManager.executeSelect(orderedSelect);
+		Integer idAuction = (int)result.getValue("ID", 0);
+		
 		DatabaseManager.execute(CategoryAuction.getSQLInsert(auctionCategory, idAuction));
 	}
 }

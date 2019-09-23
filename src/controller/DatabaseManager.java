@@ -9,6 +9,7 @@ import java.util.List;
 import controller.database.Connector;
 import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
+import controller.database.select.SelectComponent;
 import controller.database.select.SimpleSelect;
 import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
@@ -85,7 +86,7 @@ public class DatabaseManager {
 		}
 	}
 	
-	public static ResultDatabase executeSelect(SimpleSelect select) throws SQLiteFailRequestException{
+	public static ResultDatabase executeSelect(SelectComponent select) throws SQLiteFailRequestException{
 		ResultDatabase result = null;
 		try(Connection connection = Connector.getConnection();
 				PreparedStatement statement = connection.prepareStatement(select.getStatement())){

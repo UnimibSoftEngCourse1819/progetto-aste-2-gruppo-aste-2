@@ -21,7 +21,7 @@ import exception.SQLiteFailRequestException;
 public class CategoryAuction {
 	private static CategoryAuction instance = null;
 	private static Map<String,Integer> categoryList;
-	private final String queryName = "Category";//TODO da aggiungere nel file json deve prendere tutta la tabella category
+	private final String queryName = "categories";
 	
 	private CategoryAuction(){
 		loadData();

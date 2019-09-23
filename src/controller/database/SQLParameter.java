@@ -35,16 +35,18 @@ public class SQLParameter{
 		case DATE:
 			statement.setObject(indexStatement, (LocalDate) value);
 			break;
-		default://this should be avoid
+		default://this should be avoided
 			statement.setObject(indexStatement, value);
 		}
 	}
 
 	public static List<SQLParameter> parse(List<String> typeParameters, List<Object> parameters) {
 		List<SQLParameter> result = new ArrayList<>();
-		for(int indexParameter = 0; indexParameter < typeParameters.size(); indexParameter++) {
+		
+		for(int indexParameter = 0; indexParameter < parameters.size(); indexParameter++) {
 			result.add(new SQLParameter(typeParameters.get(indexParameter), parameters.get(indexParameter)));
 		}
+		
 		return result;
 	}
 }

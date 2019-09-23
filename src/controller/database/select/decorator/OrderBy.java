@@ -17,7 +17,7 @@ public class OrderBy extends SelectDecorator {
 	 * Note : like sql the columns are order 
 	 * by ascending
 	 */
-	protected OrderBy(SelectComponent inner, String...columns) {
+	public OrderBy(SelectComponent inner, String...columns) {
 		super(inner);
 		fields = Arrays.asList(columns);
 		isDesc = new ArrayList<>();

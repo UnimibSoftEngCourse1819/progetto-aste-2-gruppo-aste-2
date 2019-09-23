@@ -14,7 +14,6 @@ import model.auction.Auction;
 public class DutchAuction extends Auction {
 	public DutchAuction(HttpServletRequest request) {
 		super(request);
-		// TODO Auto-generated constructor stub
 	}
 
 	private long minPrice;

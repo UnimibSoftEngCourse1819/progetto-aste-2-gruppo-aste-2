@@ -9,7 +9,7 @@ public abstract class SelectDecorator implements SelectComponent {
 
 	protected SelectComponent inner;
 	
-	protected SelectDecorator(SelectComponent inner){
+	public SelectDecorator(SelectComponent inner){
 		this.inner = inner;
 	}
 	

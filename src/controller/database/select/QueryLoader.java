@@ -21,7 +21,6 @@ public class QueryLoader {
 	private static Map<String, QueryData> queries;
 	
 	private QueryLoader() {
-		//TODO something that read from the queries.json
 		queries = ReadJSON.read();
 	}
 	
