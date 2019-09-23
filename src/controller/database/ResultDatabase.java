@@ -46,7 +46,7 @@ public class ResultDatabase {
 	@SuppressWarnings("unchecked")//we checked the type on the first value
 	public static <T> List<T> castListInto(Class<T> type, List<Object> listToCast) {
 		List<T> resultList = new ArrayList<>();
-		if(listToCast.get(0).getClass().equals(type.getClass())) {
+		if(listToCast.get(0).getClass().equals(type)) {
 			for(Object singleElement : listToCast) {
 				resultList.add((T) singleElement );
 			}

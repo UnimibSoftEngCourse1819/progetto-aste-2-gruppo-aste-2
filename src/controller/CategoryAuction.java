@@ -11,7 +11,9 @@ import controller.database.SQLParameter;
 import controller.database.select.SimpleSelect;
 import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
+import exception.FailRollBackException;
 import exception.SQLiteFailRequestException;
+import model.Category;
 
 /**
  * Singleton Design Pattern Applied
@@ -63,6 +65,19 @@ public class CategoryAuction {
 			}
 		}
 		if(!newCategory.isEmpty()) {
+			List<Storable> categoriesToAdd = new ArrayList<>();
+
+			for(String singleCategory : newCategory) {
+				categoriesToAdd.add(new Category(singleCategory));
+			}
+			
+			try {
+				DatabaseManager.create(categoriesToAdd);
+			} catch (SQLiteFailRequestException | FailRollBackException e) {
+				// This shouldn't happen
+				e.printStackTrace();
+			}
+			
 			loadData();
 		}
 	}

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,13 +24,8 @@ public class AuctionRequestManager {
 	public static void createAuction(HttpServletRequest request) throws SQLiteFailRequestException, InexistentTypeParameterException, IOException, FailRollBackException {
 		Auction newAuction = AuctionFactory.createAuction(request.getParameter("mod"), request);
 		CategoryAuction categories = CategoryAuction.getInstance();
-		List<String> auctionCategory = new ArrayList<>(); 
 		
-		String[] values = request.getParameterValues("categories[]");
-		
-		for(String category : values) {
-			auctionCategory.add(category);
-		}
+		List<String> auctionCategory = Arrays.asList(request.getParameterValues("categories[]"));
 		
 		categories.addMissing(auctionCategory);
 		

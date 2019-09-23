@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import controller.database.Connector;
 import controller.database.ResultDatabase;
@@ -42,6 +44,13 @@ public class DatabaseManager {
 		}
 	}
 	
+	public static void create(List<Storable> newData) throws SQLiteFailRequestException, FailRollBackException {
+		List<SQLOperation> insert = newData.stream()
+				.map(Storable::getSQLiteData)
+				.collect(Collectors .toCollection(ArrayList::new));
+		execute(insert);
+	}
+	
 	/**
 	 * Note : the entire operation will be 
 	 * treated as a sql transaction
@@ -58,6 +67,7 @@ public class DatabaseManager {
 				execute(singleOperation, connection);
 			}
 			
+			connection.commit();
 		} catch (SQLException | MyConnectionException e) {
 			if(connection != null) {
 				try {

@@ -40,7 +40,12 @@ public class AuctionCreation extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(successfulOperation) {
-				response.sendRedirect("index.jsp");
+			try {
+				response.sendRedirect("index.jsp");				
+			}catch(Exception e) {
+				//This shouldn't happen
+				e.printStackTrace();
+			}
 		}
     }
 }
