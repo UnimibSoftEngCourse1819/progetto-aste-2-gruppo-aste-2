@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,11 +99,25 @@ public class ResultDatabase {
 			case Types.DATE :
 				Object value = result.getObject(name);//TODO viene ricevuto come stringa 1997-06-28
 				//Fare in modo che lo converta in LocalDate di java e lo aggiunge a values
-				values.add(LocalDate.parse(String.valueOf(value)));
+				values.add(castToLocalDateTime(value));
 				break;
 			default:
 				//this shouldn't happen ... maybe we should throw an Exception
 			}
+		}
+		
+		private Object castToLocalDateTime(Object date) {
+			Object result = null;
+			String dateString = (String) date;
+			
+			if(dateString.contains("T")) {
+				result = LocalDateTime.parse(dateString);
+			}
+			else {
+				result = LocalDate.parse(dateString);
+			}		
+			
+			return result;
 		}
 		
 	}

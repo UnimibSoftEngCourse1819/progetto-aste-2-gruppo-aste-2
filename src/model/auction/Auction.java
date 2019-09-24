@@ -1,6 +1,7 @@
 package model.auction;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,7 @@ public abstract class Auction implements Storable{
 	protected int id;
 	protected String title;
 	protected String description;
-	protected LocalDate creation;
+	protected LocalDateTime creation;
 	protected String status;
 	protected int penalty;
 	
@@ -37,7 +38,7 @@ public abstract class Auction implements Storable{
 		seller = new User((int)request.getSession().getAttribute("id")); 
 		title = request.getParameter("auctionTitle");
 		description = request.getParameter("auctionDescription");
-		creation = LocalDate.now();
+		creation = LocalDateTime.now();
 		status = STANDBY;
 		
 		if(request.getParameter("refund").equals("")) {
@@ -55,7 +56,7 @@ public abstract class Auction implements Storable{
 		sqlData.add("Seller", SQLParameter.INTEGER, seller.getId());
 		sqlData.add("Title", SQLParameter.VARCHAR + "(25)", title);
 		sqlData.add("Description", SQLParameter.VARCHAR + "(255)", description);
-		sqlData.add("Creation", SQLParameter.DATE, creation);
+		sqlData.add("Creation", SQLParameter.DATE_TIME, creation);
 		sqlData.add("Type", SQLParameter.VARCHAR + "(30)", getType());
 		sqlData.add("penalty", SQLParameter.INTEGER, penalty);
 		sqlData.add("Status", SQLParameter.VARCHAR + "(20)", status);

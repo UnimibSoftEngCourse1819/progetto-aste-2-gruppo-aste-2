@@ -3,12 +3,14 @@ package controller.database;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SQLParameter{
 	public static final String INTEGER = "INTEGER";
 	public static final String VARCHAR = "VARCHAR";
+	public static final String DATE_TIME = "DATETIME";
 	public static final String DATE = "DATE";
 	
 	private String type;
@@ -34,6 +36,9 @@ public class SQLParameter{
 			break;
 		case DATE:
 			statement.setObject(indexStatement, (LocalDate) value);
+			break;
+		case DATE_TIME:
+			statement.setObject(indexStatement, (LocalDateTime) value);
 			break;
 		default://this should be avoided
 			statement.setObject(indexStatement, value);
