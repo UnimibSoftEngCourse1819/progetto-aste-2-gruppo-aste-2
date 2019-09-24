@@ -1,4 +1,4 @@
-package view;
+package controller.servlet;
 
 import java.io.IOException;
 
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 				currentSession.setAttribute("name", userValues.snd);
 				currentSession.setMaxInactiveInterval(5 * 60); // maximum five minutes of inactivity
 				
-				response.sendRedirect("index.jsp"); // got to the next page
+				response.sendRedirect("index"); // got to the next page
 			} 
 			else {
 				// If authentication fails

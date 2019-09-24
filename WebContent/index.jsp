@@ -14,46 +14,21 @@
 	<body>
 		<%@include file="templates/navbar.jsp" %>
 		<div class="carousel-container">
-			<div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-			</div>
+			<%
+				String[][] auctions = (String[][])request.getAttribute("auctions");
+				for(int i = 0; i < auctions.length; ++i) {
+			%>
+					<div class="box">
+				      <div class="pic">
+				        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
+				      </div>
+				      <div class="title"><%= auctions[i][1] %></div>
+				      <div class="text"><%= auctions[i][2] %></div>
+				      <div class="btn"><%= auctions[i][0] %></div>
+				    </div>
+		    <%
+				}
+		    %>
 	  	</div>
 	  	<div class="carousel-container">
 			<div class="box">

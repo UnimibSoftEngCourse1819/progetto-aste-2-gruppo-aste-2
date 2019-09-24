@@ -1,4 +1,4 @@
-package view;
+package controller.servlet;
 
 import java.io.IOException;
 
@@ -41,7 +41,7 @@ public class AuctionCreation extends HttpServlet {
 		}
 		if(successfulOperation) {
 			try {
-				response.sendRedirect("index.jsp");				
+				response.sendRedirect("index.jsp");		
 			}catch(Exception e) {
 				//This shouldn't happen
 				e.printStackTrace();

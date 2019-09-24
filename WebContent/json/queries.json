@@ -9,7 +9,7 @@
   {
     "sqlStatement" : {
       "name" : "auctions",
-      "statement" : "SELECT * FROM auction WHERE Creation < NOW()",
+      "statement" : "SELECT * FROM auction",
       "values" : ""
     }
   },

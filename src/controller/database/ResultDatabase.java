@@ -111,8 +111,7 @@ public class ResultDatabase {
 				values.add(result.getString(name));
 				break;
 			case Types.DATE :
-				Object value = result.getObject(name);//TODO viene ricevuto come stringa 1997-06-28
-				//Fare in modo che lo converta in LocalDate di java e lo aggiunge a values
+				Object value = result.getObject(name);
 				values.add(castToLocalDateTime(value));
 				break;
 			default:

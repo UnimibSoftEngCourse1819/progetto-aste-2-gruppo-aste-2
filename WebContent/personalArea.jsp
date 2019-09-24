@@ -7,9 +7,49 @@
 		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 		<link rel="stylesheet" type="text/css" href="css/table.css" />
 		<script type="text/javascript" src="javascript/slideMenu.js"></script>
+		<%@ page import ="java.util.ArrayList"%>
+		<%@ page import ="java.util.List"%>
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
+		<section>
+		  <!--for demo wrap-->
+		  <h1>Le tue aste</h1>
+		  <div class="tbl-header">
+		    <table cellpadding="0" cellspacing="0" border="0">
+		      <thead>
+		        <tr>
+		          <th>Titolo</th>
+		          <th>Descrizione</th>
+		          <th>Prezzo</th>
+		          <th>Data</th>
+		          <th>Gestione</th>
+		        </tr>
+		      </thead>
+		    </table>
+		  </div>
+		  <div class="tbl-content">
+		    <table cellpadding="0" cellspacing="0" border="0">
+		      <tbody>
+		      	<%
+					List<String[]> auctions = (ArrayList<String[]>) request.getAttribute("userAuctions");
+					for(int i = 0; i < auctions.size(); ++i) {
+				%>
+				        <tr>
+				          <td><%= auctions.get(i)[1] %></td>
+				          <td><%= auctions.get(i)[2] %></td>
+				          <td><%= auctions.get(i)[0] %></td>
+				          <td><%= auctions.get(i)[3] %></td>
+				          <td>Qualcosa</td>
+				        </tr> 
+		        <%
+					}
+		        %>
+		      </tbody>
+		    </table>
+		  </div>
+		</section>
+		
 		<section>
 		  <!--for demo wrap-->
 		  <h1>Aste che segui</h1>

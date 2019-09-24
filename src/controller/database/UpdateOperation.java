@@ -9,6 +9,21 @@ import java.util.List;
 import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 
 public class UpdateOperation implements SQLOperation {
+	private enum Operator {
+		EQUALS("= "), 
+		GREATER("> "), 
+		LOWER("< ");
+		
+		private String compareOperator;
+		
+		Operator(String operator) {
+			this.compareOperator = operator;
+		}
+		
+		public String getOperator() {
+			return compareOperator;
+		}
+	}
 	
 	private String tableName;
 	private List<Pair<String, SQLParameter>> valuesToChange;
@@ -16,9 +31,10 @@ public class UpdateOperation implements SQLOperation {
 	private List<String> typeClauses;//TODO replace the String with an enum
 	
 	//TODO replace these value into enum
-	public static final String EQUALS_OPERATION = "= ";
+	/*public static final String EQUALS_OPERATION = "= ";
 	public static final String GREATER_OPERATION = "> ";
 	public static final String LOWER_OPERATION = "< ";
+	*/
 	
 	/**
 	 * Note : this will make all the clauses as
@@ -30,7 +46,7 @@ public class UpdateOperation implements SQLOperation {
 		this.valuesToChange = clauses;
 		typeClauses = new ArrayList<>();
 		for(int counter = 0; counter < clauses.size(); counter++) {
-			typeClauses.add(EQUALS_OPERATION);
+			typeClauses.add(Operator.EQUALS.getOperator());
 		}
 	}
 
