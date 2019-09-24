@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Login</title>
+		<title>Home</title>
 		<link rel="stylesheet" type="text/css" href="css/form.css" />
 		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 		<link rel="stylesheet" type="text/css" href="css/carousel.css" />
@@ -16,7 +16,7 @@
 		<div class="carousel-container">
 			<div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -24,7 +24,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -32,7 +32,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -40,7 +40,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -48,7 +48,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -58,7 +58,7 @@
 	  	<div class="carousel-container">
 			<div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -66,7 +66,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -74,7 +74,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -82,7 +82,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>
@@ -90,7 +90,7 @@
 		    </div>
 		    <div class="box">
 		      <div class="pic">
-		        <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 		      </div>
 		      <div class="title">Titolo</div>
 		      <div class="text">Descrizione</div>

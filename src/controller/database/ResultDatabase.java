@@ -37,6 +37,16 @@ public class ResultDatabase {
 		}
 	}
 	
+	public boolean isEmpty() {
+		boolean result = false;
+		for(SQLColumn column : table) {
+			if(column.isEmpty()) {
+				result = true;
+			}
+		}
+		return result;
+	}
+	
 	public Object getValue(String nameColumn, int index) {
 		SQLColumn result = getColumn(nameColumn);
 		return result == null ? null : result.getValue(index);
@@ -76,12 +86,16 @@ public class ResultDatabase {
 			values = new ArrayList<>();
 		}
 		
+		public boolean isEmpty() {
+			return values.isEmpty();
+		}
+
 		protected String getName() {
 			return name;
 		}
 		
 		protected Object getValue(int index) {
-			return values.get(index);
+			return values.size() > index ? values.get(index) : null;
 		}
 		
 		protected List<Object> getValueList() {

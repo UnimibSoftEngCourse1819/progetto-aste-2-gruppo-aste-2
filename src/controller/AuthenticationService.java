@@ -36,13 +36,16 @@ public class AuthenticationService {
 		Pair<Integer, String> values = null;
 		
 		try {
-			String name = null;
-			int id = -1;
+			
 			SimpleSelect select = new SimpleSelect("Authentication", request.getParameter("email"), request.getParameter("password"));
 			ResultDatabase result = DatabaseManager.executeSelect(select);
-			name = (String) result.getValue("Name", 0);
-			id = (int) result.getValue("ID", 0);
-			values = new Pair<Integer, String>(id, name);
+			
+			if(!result.isEmpty()) {
+				String name = (String) result.getValue("Name", 0);
+				Integer id = (Integer) result.getValue("ID", 0);
+				
+				values = new Pair<>(id, name);
+			}
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}

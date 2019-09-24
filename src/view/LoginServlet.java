@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			Pair<Integer, String> userValues = authenticationService.authenticate(request);
 			
-			if(userValues.fst > 0 && userValues.snd != null) {
+			if(userValues != null && userValues.fst > 0 && userValues.snd != null) {
 				// Get the current session
 				HttpSession oldSession = request.getSession(false);
 				if(oldSession != null) {
