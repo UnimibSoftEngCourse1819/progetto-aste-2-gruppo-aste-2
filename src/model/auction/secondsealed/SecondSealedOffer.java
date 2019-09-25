@@ -1,5 +1,7 @@
 package model.auction.secondsealed;
 
+import java.util.Objects;
+
 import model.Offer;
 import model.User;
 
@@ -28,5 +30,24 @@ public class SecondSealedOffer implements Offer, Comparable<SecondSealedOffer> {
 		}
 		return result;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bidder, price);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof SecondSealedOffer)) {
+			return false;
+		}
+		SecondSealedOffer other = (SecondSealedOffer) obj;
+		return Objects.equals(bidder, other.bidder) && price == other.price;
+	}
+	
+	
 
 }

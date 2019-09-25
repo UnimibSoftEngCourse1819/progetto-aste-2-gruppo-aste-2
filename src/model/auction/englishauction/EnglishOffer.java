@@ -1,5 +1,7 @@
 package model.auction.englishauction;
 
+import java.util.Objects;
+
 import model.Offer;
 import model.User;
 
@@ -27,6 +29,23 @@ public class EnglishOffer implements Offer, Comparable<EnglishOffer> {
 			result = price > other.price ? 1 : -1;
 		}
 		return result;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bidder, price);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof EnglishOffer)) {
+			return false;
+		}
+		EnglishOffer other = (EnglishOffer) obj;
+		return Objects.equals(bidder, other.bidder) && price == other.price;
 	}
 	
 	

@@ -4,6 +4,6 @@ import java.util.List;
 
 import controller.database.SQLOperation;
 
-public abstract class Operation {
+public abstract interface Operation {
 	public abstract List<SQLOperation> getSQLOperations();
 }

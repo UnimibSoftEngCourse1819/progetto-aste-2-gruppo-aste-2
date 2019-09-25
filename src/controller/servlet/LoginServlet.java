@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.tools.javac.util.Pair;
 
 import controller.AuthenticationService;
+import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 
 /**
  * Servlet implementation class LoginServlet
@@ -33,11 +33,12 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response){
 		try {
 			Pair<Integer, String> userValues = authenticationService.authenticate(request);
 			
-			if(userValues != null && userValues.fst > 0 && userValues.snd != null) {
+			if(userValues != null && userValues.first > 0 && userValues.second != null) {
 				// Get the current session
 				HttpSession oldSession = request.getSession(false);
 				if(oldSession != null) {
@@ -46,8 +47,8 @@ public class LoginServlet extends HttpServlet {
 				
 				HttpSession currentSession = request.getSession(true); // create a new session
 				
-				currentSession.setAttribute("id", userValues.fst);
-				currentSession.setAttribute("name", userValues.snd);
+				currentSession.setAttribute("id", userValues.first);
+				currentSession.setAttribute("name", userValues.second);
 				currentSession.setMaxInactiveInterval(5 * 60); // maximum five minutes of inactivity
 				
 				response.sendRedirect("index"); // got to the next page

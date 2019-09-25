@@ -3,11 +3,10 @@ package controller;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.sun.tools.javac.util.Pair;
-
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
 import exception.SQLiteFailRequestException;
+import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 import model.User;
 
 /**
@@ -19,7 +18,7 @@ import model.User;
 public class AuthenticationService {	
 	
 	public AuthenticationService() {
-
+		super();
 	}
 	
 	public void registerUser(User user) throws SQLiteFailRequestException, IOException {

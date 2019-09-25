@@ -24,7 +24,7 @@ public abstract class Auction implements Storable{
 	protected static final String SQL_TABLE = "auction";
 	public static final String STANDBY = "STANDBY";
 	public static final String ON_GOING = "ON_GOING";
-	public static final String END = "END";
+	public static final String ENDED = "END";
 	protected User seller;
 	protected int id;
 	protected String title;

@@ -1,5 +1,6 @@
 package controller.database.select;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import controller.ReadJSON;
@@ -18,7 +19,7 @@ import controller.ReadJSON;
 
 public class QueryLoader {
 	private static QueryLoader instance;
-	private static Map<String, QueryData> queries;
+	private static Map<String, QueryData> queries = new HashMap<>();
 	
 	private QueryLoader() {
 		queries = ReadJSON.read();

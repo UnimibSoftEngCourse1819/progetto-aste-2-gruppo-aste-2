@@ -43,7 +43,7 @@ public class UpdateOperation implements SQLOperation {
 	public UpdateOperation(String tableName, List<Pair<String, SQLParameter>> clauses,
 			List<Pair<String, SQLParameter>> valuesToChange) {
 		this.tableName = tableName;
-		this.valuesToChange = clauses;
+		this.valuesToChange = valuesToChange;
 		typeClauses = new ArrayList<>();
 		for(int counter = 0; counter < clauses.size(); counter++) {
 			typeClauses.add(Operator.EQUALS.getOperator());

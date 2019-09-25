@@ -8,7 +8,7 @@ import controller.database.SQLParameter;
 import controller.database.UpdateOperation;
 import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 
-public class Transaction extends Operation {
+public class Transaction implements Operation {
 
 	private User donator;
 	private User receiver;
