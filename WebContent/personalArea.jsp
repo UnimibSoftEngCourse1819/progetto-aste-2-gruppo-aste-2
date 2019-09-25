@@ -32,7 +32,12 @@
 		    <table cellpadding="0" cellspacing="0" border="0">
 		      <tbody>
 		      	<%
-					List<String[]> auctions = (ArrayList<String[]>) request.getAttribute("userAuctions");
+		      		List<String[]> auctions = null;
+				  
+		      		if(request.getAttribute("userAuctions") instanceof ArrayList<?>) {
+						auctions = (ArrayList<String[]>) request.getAttribute("userAuctions");
+		      		}
+		      	
 					for(int i = 0; i < auctions.size(); ++i) {
 				%>
 				        <tr>
@@ -40,7 +45,7 @@
 				          <td><%= auctions.get(i)[2] %></td>
 				          <td><%= auctions.get(i)[0] %></td>
 				          <td><%= auctions.get(i)[3] %></td>
-				          <td>Qualcosa</td>
+				          <td><button type="button" class="manage-button" id="<%= auctions.get(i)[0] %>">Modifica</button></td>
 				        </tr> 
 		        <%
 					}

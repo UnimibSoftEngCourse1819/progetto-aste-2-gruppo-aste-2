@@ -16,6 +16,7 @@
 			<div id="filter">
 				<b>Tipologia asta</b>
 				<div class="auction-type">
+					<input type="radio" name="auctionType" value="tutte" checked="checked">Tutte le tipologie di aste<br />
 					<input type="radio" name="auctionType" value="busta chiusa">Asta in busta chiusa<br />
 					<input type="radio" name="auctionType" value="secondo prezzo">Asta in busta chiusa al "secondo prezzo"<br />
 					<input type="radio" name="auctionType" value="inglese">Asta "inglese"<br />
@@ -23,6 +24,7 @@
 				</div>
 				<b>Categorie</b>
 				<div class="categories">
+					<input type="radio" name="category" value="tutte" checked="checked">Tutte le categorie<br />
 					<input type="radio" name="category" value="abbigliamento">Abbigliamento<br />
 					<input type="radio" name="category" value="auto e moto">Auto e moto<br />
 					<input type="radio" name="category" value="bellezza">Bellezza<br />
@@ -38,7 +40,7 @@
 				</div>
 				<b>Mostra</b>
 				<div class="show">
-					<input type="checkbox" name="all" value="Tutte le aste">Tutte le aste<br>
+					<input type="checkbox" name="all" value="Tutte le aste" checked="checked">Tutte le aste<br>
 					<input type="checkbox" name="notOpened" value="Aste non aperte">Aste non aperte<br>
 					<input type="checkbox" name="opened" value="Aste aperte">Aste aperte<br>
 					<input type="checkbox" name="closing" value="Aste in chiusura">Aste in chiusura<br>

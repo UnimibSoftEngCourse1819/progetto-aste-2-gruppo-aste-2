@@ -1,9 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.sun.tools.javac.util.Pair;
@@ -19,13 +16,10 @@ import model.User;
  *
  */
 
-public class AuthenticationService {
-	
-	private List<User> users;
- 	
+public class AuthenticationService {	
 	
 	public AuthenticationService() {
-		users = new ArrayList<>();
+
 	}
 	
 	public void registerUser(User user) throws SQLiteFailRequestException, IOException {

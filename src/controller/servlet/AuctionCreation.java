@@ -1,14 +1,22 @@
 package controller.servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import controller.AuctionRequestManager;
+import controller.ImageUploader;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
@@ -17,6 +25,7 @@ import exception.SQLiteFailRequestException;
  * Servlet implementation class AuctionCreation
  */
 @WebServlet("/auctionCreation")
+@MultipartConfig
 public class AuctionCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,18 +39,17 @@ public class AuctionCreation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	boolean successfulOperation = false;
-		
-		try {
+    	
+		try {						
 			AuctionRequestManager.createAuction(request);
 			successfulOperation = true;
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
-			response.sendRedirect("auctionCreation.jsp");
-			// TODO manda un pop-up di fallimento con spiegazione 
 			e.printStackTrace();
 		}
+		
 		if(successfulOperation) {
 			try {
-				response.sendRedirect("index.jsp");		
+				response.sendRedirect("index");		
 			}catch(Exception e) {
 				//This shouldn't happen
 				e.printStackTrace();

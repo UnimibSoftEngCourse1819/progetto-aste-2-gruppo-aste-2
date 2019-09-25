@@ -24,7 +24,7 @@
 				      </div>
 				      <div class="title"><%= auctions[i][1] %></div>
 				      <div class="text"><%= auctions[i][2] %></div>
-				      <div class="btn"><%= auctions[i][0] %></div>
+				      <div class="btn"><button id="<%= auctions[i][0] %>">Apri</button></div>
 				    </div>
 		    <%
 				}

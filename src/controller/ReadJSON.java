@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
@@ -20,8 +19,12 @@ public class ReadJSON {
 	private static final String PATH = File.separator + "WebContent" + File.separator + "json" + File.separator;
 	private static final String FILE_NAME = "queries.json";
 	
+	private ReadJSON() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static Map<String, QueryData> read() {
-		Map<String, QueryData> map = new HashMap<String, QueryData>();
+		Map<String, QueryData> map = new HashMap<>();
 		
 		try (FileReader reader = new FileReader(System.getProperty("user.dir") + PATH + FILE_NAME))
         {
@@ -36,11 +39,7 @@ public class ReadJSON {
             	map.put(((String)sqlObject.get("name")).toUpperCase(), parseSQLStatement(sqlObject));
             }
  
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException  | ParseException e) {
             e.printStackTrace();
         }
 		

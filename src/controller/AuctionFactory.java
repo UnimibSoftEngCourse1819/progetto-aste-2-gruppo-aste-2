@@ -15,6 +15,9 @@ import model.auction.secondsealed.AuctionSecondSealed;
  *
  */
 public class AuctionFactory {
+	private AuctionFactory() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static Auction createAuction(String parameter, HttpServletRequest request) throws InexistentTypeParameterException {
 		Auction result = null;

@@ -23,15 +23,15 @@ import model.Category;
 public class CategoryAuction {
 	private static CategoryAuction instance = null;
 	private static Map<String,Integer> categoryList;
-	private final String queryName = "categories";
+	private static final String QUERY_NAME = "categories";
 	
 	private CategoryAuction(){
 		loadData();
 	}
 	
-	private void loadData() {
+	private static void loadData() {
 		categoryList = new HashMap<>();
-		SimpleSelect select = new SimpleSelect(queryName);
+		SimpleSelect select = new SimpleSelect(QUERY_NAME);
 		try {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			

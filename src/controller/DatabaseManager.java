@@ -12,7 +12,6 @@ import controller.database.Connector;
 import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
 import controller.database.select.SelectComponent;
-import controller.database.select.SimpleSelect;
 import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
 import exception.FailRollBackException;

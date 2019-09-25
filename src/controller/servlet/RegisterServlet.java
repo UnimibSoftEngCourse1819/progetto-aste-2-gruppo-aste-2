@@ -44,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
 			User user = new User(request);
 			authService.registerUser(user);
 			
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index");
 		} catch (InvalidParameterException | SQLiteFailRequestException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("registration.jsp").forward(request, response);
