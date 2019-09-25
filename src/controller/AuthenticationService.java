@@ -1,17 +1,17 @@
 package controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
 import exception.SQLiteFailRequestException;
-import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 import model.User;
 
 /**
  * This class manages the user
- * 
  *
  */
 
@@ -25,8 +25,8 @@ public class AuthenticationService {
 		DatabaseManager.create(user);		
 	}
 	
-	public Pair<Integer, String> authenticate(HttpServletRequest request){
-		Pair<Integer, String> values = null;
+	public HashMap<String, Object> authenticate(HttpServletRequest request){
+		HashMap<String, Object> values = null;
 		
 		try {
 			
@@ -34,10 +34,7 @@ public class AuthenticationService {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
-				String name = (String) result.getValue("Name", 0);
-				Integer id = (Integer) result.getValue("ID", 0);
-				
-				values = new Pair<>(id, name);
+				values = result.getRowValues(0);
 			}
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();

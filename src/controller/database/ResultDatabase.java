@@ -7,6 +7,7 @@ import java.sql.Types;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,14 @@ public class ResultDatabase {
 	public List<Object> getValuesList(String nameColumn){
 		SQLColumn result = getColumn(nameColumn);
 		return result == null ? null : result.getValueList();
+	}
+	
+	public HashMap<String, Object> getRowValues(int indexRow) {
+		HashMap <String, Object> result = new HashMap<>();
+		for(SQLColumn field : table) {
+			result.put(field.getName(), field.getValue(indexRow));
+		}
+		return result;
 	}
 	
 	@SuppressWarnings("unchecked")//we checked the type on the first value

@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 
 import controller.AuthenticationService;
-import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
 
 /**
  * Servlet implementation class LoginServlet
@@ -36,9 +36,9 @@ public class LoginServlet extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response){
 		try {
-			Pair<Integer, String> userValues = authenticationService.authenticate(request);
+			HashMap<String, Object> userValues = authenticationService.authenticate(request);
 			
-			if(userValues != null && userValues.first > 0 && userValues.second != null) {
+			if(userValues != null) {
 				// Get the current session
 				HttpSession oldSession = request.getSession(false);
 				if(oldSession != null) {
@@ -47,8 +47,8 @@ public class LoginServlet extends HttpServlet {
 				
 				HttpSession currentSession = request.getSession(true); // create a new session
 				
-				currentSession.setAttribute("id", userValues.first);
-				currentSession.setAttribute("name", userValues.second);
+				currentSession.setAttribute("id", (int) userValues.get("ID"));
+				currentSession.setAttribute("name", (String) userValues.get("Name"));
 				currentSession.setMaxInactiveInterval(5 * 60); // maximum five minutes of inactivity
 				
 				response.sendRedirect("index"); // got to the next page

@@ -4,9 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
-
-import jdk.javadoc.internal.doclets.toolkit.util.Utils.Pair;
+import java.util.Map;
 
 public class UpdateOperation implements SQLOperation {
 	private enum Operator {
@@ -26,8 +26,8 @@ public class UpdateOperation implements SQLOperation {
 	}
 	
 	private String tableName;
-	private List<Pair<String, SQLParameter>> valuesToChange;
-	private List<Pair<String, SQLParameter>> clauses;
+	private LinkedHashMap<String, SQLParameter> valuesToChange;
+	private LinkedHashMap<String, SQLParameter> clauses;
 	private List<String> typeClauses;//TODO replace the String with an enum
 	
 	//TODO replace these value into enum
@@ -40,10 +40,11 @@ public class UpdateOperation implements SQLOperation {
 	 * Note : this will make all the clauses as
 	 * EQUALS type.
 	 */
-	public UpdateOperation(String tableName, List<Pair<String, SQLParameter>> clauses,
-			List<Pair<String, SQLParameter>> valuesToChange) {
+	public UpdateOperation(String tableName, LinkedHashMap<String, SQLParameter> clauses,
+			LinkedHashMap<String, SQLParameter> valuesToChange) {
 		this.tableName = tableName;
 		this.valuesToChange = valuesToChange;
+		this.clauses = clauses;
 		typeClauses = new ArrayList<>();
 		for(int counter = 0; counter < clauses.size(); counter++) {
 			typeClauses.add(Operator.EQUALS.getOperator());
@@ -56,10 +57,11 @@ public class UpdateOperation implements SQLOperation {
 		statement.append(tableName + " ");
 		
 		statement.append("SET ");
-		Iterator<Pair<String, SQLParameter>> indexValues = valuesToChange.iterator();
+		
+		Iterator<String> indexValues = valuesToChange.keySet().iterator();
 		while(indexValues.hasNext()) {
 			
-			statement.append(indexValues.next().first + " = ? ");
+			statement.append(indexValues.next() + " = ? ");
 			
 			if(indexValues.hasNext()) {
 				statement.append(", ");
@@ -67,16 +69,19 @@ public class UpdateOperation implements SQLOperation {
 		}
 		
 		statement.append("WHERE ");
-		for(int indexClauses = 0; indexClauses < clauses.size(); indexClauses++) {
-			statement.append(clauses.get(indexClauses).first + " ");
+		
+		int indexClauses = 0;
+		for(String singleClause : clauses.keySet()) {
+			statement.append(singleClause + " ");
 			statement.append(typeClauses.get(indexClauses) + " ? ");
+			
 			if(indexClauses != clauses.size() -1) {
 				statement.append(", ");
 			}else {
 				statement.append(";");
 			}
+			indexClauses++;
 		}
-		
 		
 		return statement.toString();
 	}
@@ -85,12 +90,12 @@ public class UpdateOperation implements SQLOperation {
 	public void configure(PreparedStatement statement) throws SQLException{
 		int indexParameter = 0;
 		
-		for(Pair<String, SQLParameter> singleValue : valuesToChange) {
-			singleValue.second.configure(indexParameter++, statement);
+		for(Map.Entry<String, SQLParameter> singleValue : valuesToChange.entrySet()) {
+			singleValue.getValue().configure(indexParameter++, statement);
 		}
 		
-		for(Pair<String, SQLParameter> singleClause : clauses) {
-			singleClause.second.configure(indexParameter++, statement);
+		for(Map.Entry<String, SQLParameter> singleClause : clauses.entrySet()) {
+			singleClause.getValue().configure(indexParameter++, statement);
 		}
 	}
 
