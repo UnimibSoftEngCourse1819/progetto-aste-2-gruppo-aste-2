@@ -11,40 +11,46 @@
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
+		<%
+			String[] auction = (String[]) request.getAttribute("auction");
+		%>
 		<div class="form">
         	<form action="login" method="post">
-        		<div class="col">
-        			<div class="row">
-        				<div class="col">
-			        		<div class="pic">
-			            		<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-			        		</div>
-			        	</div>
-			        	<div class="col">
-			        		<div class="box">
-	        					Prova
-	        				</div>
-			        	</div>
-		        	</div>
-		        	<div class="row">
-		        		<div class="col">
-			        		<div class="title">
-			        			Titolo
-			        		</div>
-			        	</div>
-			        	<div class="col"></div>
-		        	</div>
-		        	<div class="row">
-		        		<div class="col">
-			        		<div class="description">
-			        			Descrizione
-			        		</div>
+       			<div class="row">
+       				<div class="col">
+		        		<div class="pic">
+		            		<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
 		        		</div>
-		        		<div class="col"></div>
+		        	</div>
+		        	<div class="col">
+		        		<div class="box">
+        					Prova
+        				</div>
 		        	</div>
 	        	</div>
-	        	<div class="col">
-	        		
+	        	<div class="row">
+	        		<div class="col">
+		        		<div class="title">
+		        			<%= auction[1] %>
+		        		</div>
+		        	</div>
+		        	<div class="col"></div>
+	        	</div>
+	        	<div class="row">
+	        		<div class="col">
+		        		<div class="description">
+		        			<%= auction[2] %>
+		        		</div>
+	        		</div>
+	        		<div class="col">
+	        		</div>
+	        	</div>
+	        	<div class="row">
+	        		<div class="col" id="last-col"></div>
+	        		<div class="col">
+	        			<input type="number" min="0.00" max="10000.00" step="0.01" />
+	        			<input type="submit" value="Invia" />
+	        		</div>
 	        	</div>
         	</form>
         </div>

@@ -26,5 +26,19 @@
   		"statement" : "SELECT * FROM category",
   		"values" : ""
   	}
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "auction",
+  		"statement" : "SELECT * FROM auction WHERE ID = ?",
+  		"values" : "INTEGER"
+  	}
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "auctionOffers",
+  		"statement" : "SELECT * FROM offer WHERE Auction = ?",
+  		"values" : "INTEGER"
+  	}
   }
 ]

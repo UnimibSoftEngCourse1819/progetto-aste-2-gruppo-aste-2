@@ -15,46 +15,40 @@ import controller.database.select.SimpleSelect;
 import exception.SQLiteFailRequestException;
 
 /**
- * Servlet implementation class IndexServlet
+ * Servlet implementation class AuctionServlet
  */
-@WebServlet("/index")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/auction")
+public class AuctionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IndexServlet() {
+    public AuctionServlet() {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			SimpleSelect select = new SimpleSelect("auctions");
+			SimpleSelect select = new SimpleSelect("auction", Integer.parseInt(request.getParameter("id")));
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
-				int index = 0;
-				String[][] auctions = new String[10][3];
+				String[] auction = new String[3];
 				
-				while(index < 10 && result.getValue("ID", index) != null) {
-					auctions[index][0] = Integer.toString((Integer) result.getValue("ID", index));
-					auctions[index][1] = (String) result.getValue("Title", index);
-					auctions[index][2] = (String) result.getValue("Description", index);
-					++index;
-				}
+				auction[0] = Integer.toString((Integer) result.getValue("ID", 0));
+				auction[1] = (String) result.getValue("Title", 0);
+				auction[2] = (String) result.getValue("Description", 0);
 				
-				request.setAttribute("auctions", auctions);
+				request.setAttribute("auction", auction);
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("auction.jsp");
 				dispatcher.forward(request, response);
 			}
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 }

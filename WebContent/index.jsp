@@ -24,7 +24,12 @@
 				      </div>
 				      <div class="title"><%= auctions[i][1] %></div>
 				      <div class="text"><%= auctions[i][2] %></div>
-				      <div class="btn"><button id="<%= auctions[i][0] %>">Apri</button></div>
+				      <div class="btn">
+				      	<form action="auction" method="get">
+				      		<input type="hidden" name="id" value="<%= auctions[i][0] %>" />
+				      		<input type="submit" value="Apri" />
+				      	</form>
+				      </div>
 				    </div>
 		    <%
 				}
