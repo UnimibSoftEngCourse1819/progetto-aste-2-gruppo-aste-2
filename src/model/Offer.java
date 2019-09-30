@@ -15,12 +15,12 @@ public abstract class Offer implements Storable {
 	protected static final String SQL_TABLE = "offer";
 	protected User bidder;
 	protected int auction;
-	protected long price;
+	protected int price;
 	
 	protected Offer(HttpServletRequest request) {
 		bidder = new User((int) request.getSession().getAttribute("id"));
 		auction = Integer.parseInt(request.getParameter("auctionID"));
-		price = Long.parseLong(request.getParameter("price"));
+		price = Integer.parseInt(request.getParameter("price"));
 	}
 	
 	public SQLiteData getSQLiteData() {

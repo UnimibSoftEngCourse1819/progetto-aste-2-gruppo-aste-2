@@ -42,7 +42,7 @@ public class SQLiteData implements SQLOperation{
 	
 	public void configure(PreparedStatement statement) throws SQLException {
 		Set<String> columnsName = data.keySet();
-		int indexParameter = 0;
+		int indexParameter = 1;
 		
 		for(String singleColumn : columnsName) {
 			SQLParameter parameterToConfigure = data.get(singleColumn);
