@@ -5,6 +5,8 @@ function send() {
 	var categories = [];
 	var elements = document.getElementsByClassName("cat-text");
 	var refund = document.querySelector('input[name=refund]:checked').value;
+	var date = document.getElementById("date").value;
+	var time = document.getElementById("time").value;
 	
 	var file = document.getElementById("pic").files[0];
 	
@@ -22,6 +24,8 @@ function send() {
 				"auctionTitle" : title,
 				"auctionDescription" : description,
 				"mod" : mode,
+				"date" : date,
+				"time" : time,
 				"categories" : categories,
 				"refund": refund
 			},

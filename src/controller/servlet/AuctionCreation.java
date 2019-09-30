@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -32,7 +33,7 @@ public class AuctionCreation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	boolean successfulOperation = false;
-    	
+    	Enumeration<String> values = request.getParameterNames();
 		try {						
 			AuctionRequestManager.createAuction(request);
 			successfulOperation = true;

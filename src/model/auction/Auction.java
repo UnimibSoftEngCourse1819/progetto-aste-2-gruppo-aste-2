@@ -48,7 +48,6 @@ public abstract class Auction implements Storable{
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		formatter = formatter.withLocale(Locale.getDefault());
-		Enumeration<String> values = request.getParameterNames();
 		String data = request.getParameter("date");
 		LocalDate tempDate = LocalDate.parse(request.getParameter("date"), formatter);
 		LocalTime tempTime = LocalTime.parse(request.getParameter("time"));
