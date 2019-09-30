@@ -2,24 +2,13 @@ package model.auction.secondsealed;
 
 import java.util.Objects;
 
-import model.Offer;
-import model.User;
+import javax.servlet.http.HttpServletRequest;
 
-public class SecondSealedOffer implements Offer, Comparable<SecondSealedOffer> {
-	private User bidder;
-	private long price;
-	
-	public SecondSealedOffer(User bidder, long price) {
-		this.bidder = bidder;
-		this.price = price;
-	}
-	
-	public User getBidder() {
-		return bidder;
-	}
-	
-	public long getPrice() {
-		return price;
+import model.Offer;
+
+public class SecondSealedOffer extends Offer implements Comparable<SecondSealedOffer> {
+	public SecondSealedOffer(HttpServletRequest request) {
+		super(request);
 	}
 	
 	@Override
@@ -47,7 +36,9 @@ public class SecondSealedOffer implements Offer, Comparable<SecondSealedOffer> {
 		SecondSealedOffer other = (SecondSealedOffer) obj;
 		return Objects.equals(bidder, other.bidder) && price == other.price;
 	}
-	
-	
 
+	@Override
+	protected String getType() {
+		return "SecondSealedOffer";
+	}
 }

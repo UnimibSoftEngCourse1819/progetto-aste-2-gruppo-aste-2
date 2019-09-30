@@ -3,24 +3,14 @@ package model.auction.firstsealed;
 
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+
 import model.Offer;
-import model.User;
 
-public class FirstSealedOffer implements Offer, Comparable<FirstSealedOffer>{
-	private User bidder;
-	private long price;
+public class FirstSealedOffer extends Offer implements Comparable<FirstSealedOffer> {
 	
-	public FirstSealedOffer(User bidder, long price) {
-		this.bidder = bidder;
-		this.price = price;
-	}
-	
-	public User getBidder() {
-		return bidder;
-	}
-
-	public long getPrice() {
-		return price;
+	public FirstSealedOffer(HttpServletRequest request) {
+		super(request);
 	}
 
 	@Override
@@ -47,5 +37,10 @@ public class FirstSealedOffer implements Offer, Comparable<FirstSealedOffer>{
 		}
 		FirstSealedOffer other = (FirstSealedOffer) obj;
 		return Objects.equals(bidder, other.bidder) && price == other.price;
+	}
+
+	@Override
+	protected String getType() {
+		return "FirstSealedOffer";
 	}
 }

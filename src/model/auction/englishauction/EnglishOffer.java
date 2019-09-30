@@ -2,24 +2,13 @@ package model.auction.englishauction;
 
 import java.util.Objects;
 
-import model.Offer;
-import model.User;
+import javax.servlet.http.HttpServletRequest;
 
-public class EnglishOffer implements Offer, Comparable<EnglishOffer> {
-	private User bidder;
-	private long price;
-	
-	public EnglishOffer(User bidder, long price) {
-		this.bidder = bidder;
-		this.price = price;
-	}
-	
-	public User getBidder() {
-		return bidder;
-	}
-	
-	public long getPrice() {
-		return price;
+import model.Offer;
+
+public class EnglishOffer extends Offer implements Comparable<EnglishOffer> {	
+	public EnglishOffer(HttpServletRequest request) {
+		super(request);
 	}
 	
 	@Override
@@ -46,6 +35,11 @@ public class EnglishOffer implements Offer, Comparable<EnglishOffer> {
 		}
 		EnglishOffer other = (EnglishOffer) obj;
 		return Objects.equals(bidder, other.bidder) && price == other.price;
+	}
+
+	@Override
+	protected String getType() {
+		return ("EnglishOffer");
 	}
 	
 	

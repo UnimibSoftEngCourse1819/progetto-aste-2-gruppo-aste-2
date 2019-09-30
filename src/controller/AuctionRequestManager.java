@@ -12,6 +12,7 @@ import controller.database.select.decorator.OrderBy;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
+import model.Offer;
 import model.auction.Auction;
 
 public class AuctionRequestManager {
@@ -38,5 +39,11 @@ public class AuctionRequestManager {
 		Integer idAuction = (int)result.getValue("ID", 0);
 		
 		DatabaseManager.execute(CategoryAuction.getSQLInsert(auctionCategory, idAuction));
+	}
+	
+	public static void makeOffer(HttpServletRequest request) throws SQLiteFailRequestException, InexistentTypeParameterException, IOException {
+		Offer newOffer = OfferFactory.createOffer(request.getParameter("mod"), request);	
+		
+		DatabaseManager.create(newOffer);
 	}
 }

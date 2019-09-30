@@ -15,7 +15,9 @@
 			String[] auction = (String[]) request.getAttribute("auction");
 		%>
 		<div class="form">
-        	<form action="login" method="post">
+        	<form action="auction" method="post">
+        		<input type="hidden" name="auctionID" value="<%= auction[0] %>" />
+        		<input type="hidden" name="mod" value="<%= auction[3] %>" />
        			<div class="row">
        				<div class="col">
 		        		<div class="pic">
@@ -48,7 +50,7 @@
 	        	<div class="row">
 	        		<div class="col" id="last-col"></div>
 	        		<div class="col">
-	        			<input type="number" min="0.00" max="10000.00" step="0.01" />
+	        			<input type="number" min="0.00" max="10000.00" step="0.01" name="price" />
 	        			<input type="submit" value="Invia" />
 	        		</div>
 	        	</div>

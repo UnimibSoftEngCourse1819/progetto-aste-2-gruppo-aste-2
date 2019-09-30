@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.AuctionRequestManager;
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
+import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
 
 /**
@@ -34,12 +36,13 @@ public class AuctionServlet extends HttpServlet {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
-				String[] auction = new String[3];
+				String[] auction = new String[4];
 				
 				auction[0] = Integer.toString((Integer) result.getValue("ID", 0));
 				auction[1] = (String) result.getValue("Title", 0);
 				auction[2] = (String) result.getValue("Description", 0);
-				
+				auction[3] = (String) result.getValue("Type", 0);
+
 				request.setAttribute("auction", auction);
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("auction.jsp");
@@ -50,5 +53,14 @@ public class AuctionServlet extends HttpServlet {
 		}
 		
 		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		try {
+			AuctionRequestManager.makeOffer(request);
+		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
+			e.printStackTrace();
+		}
 	}
 }
