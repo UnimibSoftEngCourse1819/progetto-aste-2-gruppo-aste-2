@@ -52,6 +52,26 @@
                     </div>
                 </div>
                 <div class="row">
+                	<div class="col">
+                		<label for="date">
+                			Termine
+                		</label>
+                	</div>
+                	<div class="col">
+                		<input type="date" id="date" name="date" />
+                	</div>
+                </div>
+                <div class="row">
+                	<div class="col">
+                		<label for="time">
+                			Ora
+                		</label>
+                	</div>
+                	<div class="col">
+                		<input type="time" id="time" name="time" />
+                	</div>
+                </div>
+                <div class="row">
                     <div class="col">
                     	<label for="cat">
                         	Categorie

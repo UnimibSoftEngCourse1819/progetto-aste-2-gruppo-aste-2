@@ -148,6 +148,28 @@ input[type=email]:hover {
     transition: all 0.25s;
 }
 
+input[type=time] {
+	background: #fff;
+	color: #525865;
+	border-radius: 4px;
+	border: 1px solid #d1d1d1;
+	box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.07);
+	font-family: inherit;
+	font-size: 1em;
+	line-height: 1.45;
+	outline: none;
+	padding: 1px 1px 1px;
+	-webkit-transition: .18s ease-out;
+	-moz-transition: .18s ease-out;
+	-o-transition: .18s ease-out;
+	transition: .18s ease-out;
+}
+
+input[type=time]:hover {
+	background-color: rgba(0,0,0,0.125);
+    transition: all 0.25s;
+}
+
 textarea {
 	background: #fff;
 	color: #525865;

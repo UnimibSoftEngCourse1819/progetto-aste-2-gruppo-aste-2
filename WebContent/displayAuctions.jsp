@@ -47,7 +47,10 @@
 				</div>
 			</div>
 			<div id="wrap">
-				<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search.." title="Type in a name">
+				<form action="search" method="post">
+					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Cerca.." title="Type in a name">
+					<input type="submit" id="send" value="Cerca" />
+				</form>
 				<div id="columns" class="columns_4">
 	  				<figure>
 	  					<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />

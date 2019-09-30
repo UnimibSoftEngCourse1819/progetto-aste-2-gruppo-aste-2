@@ -1,7 +1,12 @@
 package model.auction;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,6 +35,7 @@ public abstract class Auction implements Storable{
 	protected String title;
 	protected String description;
 	protected LocalDateTime creation;
+	protected LocalDateTime ending;
 	protected String status;
 	protected int penalty;
 	
@@ -39,6 +45,14 @@ public abstract class Auction implements Storable{
 		description = request.getParameter("auctionDescription");
 		creation = LocalDateTime.now();
 		status = STANDBY;
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		formatter = formatter.withLocale(Locale.getDefault());
+		Enumeration<String> values = request.getParameterNames();
+		String data = request.getParameter("date");
+		LocalDate tempDate = LocalDate.parse(request.getParameter("date"), formatter);
+		LocalTime tempTime = LocalTime.parse(request.getParameter("time"));
+		ending = LocalDateTime.of(tempDate, tempTime);
 		
 		if(request.getParameter("refund").equals("")) {
 			penalty = 0;
@@ -56,6 +70,7 @@ public abstract class Auction implements Storable{
 		sqlData.add("Title", SQLParameter.VARCHAR + "(25)", title);
 		sqlData.add("Description", SQLParameter.VARCHAR + "(255)", description);
 		sqlData.add("Creation", SQLParameter.DATE_TIME, creation);
+		sqlData.add("Conclusion", SQLParameter.DATE_TIME, ending);
 		sqlData.add("Type", SQLParameter.VARCHAR + "(30)", getType());
 		sqlData.add("penalty", SQLParameter.INTEGER, penalty);
 		sqlData.add("Status", SQLParameter.VARCHAR + "(20)", status);
