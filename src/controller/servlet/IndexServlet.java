@@ -20,6 +20,7 @@ import exception.SQLiteFailRequestException;
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final int MAX_ITEMS_ON_ROW = 10;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,9 +40,9 @@ public class IndexServlet extends HttpServlet {
 			
 			if(!result.isEmpty()) {
 				int index = 0;
-				String[][] auctions = new String[10][3];
+				String[][] auctions = new String[MAX_ITEMS_ON_ROW][3];
 				
-				while(index < 10 && result.getValue("ID", index) != null) {
+				while(index < MAX_ITEMS_ON_ROW && result.getValue("ID", index) != null) {
 					auctions[index][0] = Integer.toString((Integer) result.getValue("ID", index));
 					auctions[index][1] = (String) result.getValue("Title", index);
 					auctions[index][2] = (String) result.getValue("Description", index);

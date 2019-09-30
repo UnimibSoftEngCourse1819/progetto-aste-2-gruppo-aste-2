@@ -52,7 +52,7 @@ public class PersonalAreaServlet extends HttpServlet {
 					data[3] = result.getValue("Creation", index).toString();
 					
 					userAuctions.add(data);
-					++index;
+					index++;
 				}
 				
 				request.setAttribute("userAuctions", userAuctions);
