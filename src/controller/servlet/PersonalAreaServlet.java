@@ -29,21 +29,17 @@ public class PersonalAreaServlet extends HttpServlet {
     public PersonalAreaServlet() {
         super();
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-    @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			SimpleSelect select = new SimpleSelect("userAuctions", request.getSession(false).getAttribute("id"));
+    
+    private List<String[]> getAuctions(SimpleSelect select) {
+    	List<String[]> auctions = new ArrayList<>();
+    	
+    	try {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
 				int index = 0;
-				List<String[]> userAuctions = new ArrayList<>();			
-						
-				while(result.getValue("Seller", index) != null) {
+				
+				while(result.getValue("ID", index) != null) {
 					String[] data = new String[4];
 					
 					data[0] = Integer.toString((Integer) result.getValue("ID", index));
@@ -51,18 +47,50 @@ public class PersonalAreaServlet extends HttpServlet {
 					data[2] = (String) result.getValue("Description", index);
 					data[3] = result.getValue("Creation", index).toString();
 					
-					userAuctions.add(data);
+					auctions.add(data);
 					index++;
 				}
-				
-				request.setAttribute("userAuctions", userAuctions);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("personalArea.jsp");
-				dispatcher.forward(request, response);
 			}
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}
+    	
+    	return auctions;
+    }
+    
+    private String getUserCredit(SimpleSelect select) {
+    	String userCredit = "";
+    	
+    	try {
+    		ResultDatabase result = DatabaseManager.executeSelect(select);
+    		
+    		if(!result.isEmpty()) {
+    			userCredit = Integer.toString((Integer) result.getValue("Credit", 0));
+    		}
+    	}
+    	catch (SQLiteFailRequestException e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return userCredit;
+    }
+    
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Object userID = request.getSession(false).getAttribute("id");
+		List<String[]> userAuctions = getAuctions(new SimpleSelect("userAuctions", userID));
+		List<String[]> auctionOffered = getAuctions(new SimpleSelect("auctionOffered", userID));
+		String userCredit = getUserCredit(new SimpleSelect("userCredit", userID));
+		
+		request.setAttribute("userAuctions", userAuctions);
+		request.setAttribute("auctionOffered", auctionOffered);
+		request.setAttribute("userCredit", userCredit);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("personalArea.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

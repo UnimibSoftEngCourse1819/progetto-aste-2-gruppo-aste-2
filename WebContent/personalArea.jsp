@@ -12,7 +12,11 @@
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
-		<section>
+		<%
+			String credit = (String) request.getAttribute("userCredit");
+		%>
+		<div class="credit">Il tuo credito disponibile: <%= credit %></div>
+		<section id="first">
 		  <!--for demo wrap-->
 		  <h1>Le tue aste</h1>
 		  <div class="tbl-header">
@@ -74,83 +78,25 @@
 		  <div class="tbl-content">
 		    <table cellpadding="0" cellspacing="0" border="0">
 		      <tbody>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>XXD</td>
-		          <td>ADITYA BIRLA</td>
-		          <td>$1.02</td>
-		          <td>-1.01</td>
-		          <td>+2.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>XXD</td>
-		          <td>ADITYA BIRLA</td>
-		          <td>$1.02</td>
-		          <td>-1.01</td>
-		          <td>+2.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>     
+		      	<%
+		      		List<String[]> auctionOffered = null;
+				  
+		      		if(request.getAttribute("auctionOffered") instanceof ArrayList<?>) {
+						auctions = (ArrayList<String[]>) request.getAttribute("auctionOffered");
+		      		}
+		      	
+					for(int i = 0; i < auctions.size(); ++i) {
+				%>
+				        <tr>
+				          <td><%= auctions.get(i)[1] %></td>
+				          <td><%= auctions.get(i)[2] %></td>
+				          <td><%= auctions.get(i)[0] %></td>
+				          <td><%= auctions.get(i)[3] %></td>
+				          <td><button type="button" class="manage-button" id="<%= auctions.get(i)[0] %>">Modifica</button></td>
+				        </tr> 
+		        <%
+					}
+		        %>     
 		      </tbody>
 		    </table>
 		  </div>

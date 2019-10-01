@@ -1,6 +1,6 @@
 div.carousel-container {
 	padding: 10px;
-	margin-top: 200px;
+	margin-top: 10px;
 	margin-left: 100px;
 	margin-right: 100px;
 	white-space: nowrap;
@@ -73,4 +73,10 @@ img {
 .carousel-container button {
 	margin: 10px;
 	padding: 5px;
+}
+
+.carousel-title {
+	margin-top: 100px;
+	margin-left: 100px;
+	font-weight: bold;
 }

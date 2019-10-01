@@ -25,8 +25,11 @@
 		        		</div>
 		        	</div>
 		        	<div class="col">
-		        		<div class="box">
-        					Prova
+		        		<div class="data">
+							Termine: <%= auction[4] %>
+        				</div>
+        				<div class="auction-type">
+        					Tipo: <%= auction[5] %>
         				</div>
 		        	</div>
 	        	</div>
@@ -45,6 +48,7 @@
 		        		</div>
 	        		</div>
 	        		<div class="col">
+						<div class="credit">I tuoi crediti: </div>
 	        		</div>
 	        	</div>
 	        	<div class="row">

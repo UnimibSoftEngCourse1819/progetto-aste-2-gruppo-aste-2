@@ -5,8 +5,8 @@ function send() {
 	var categories = [];
 	var elements = document.getElementsByClassName("cat-text");
 	var refund = document.querySelector('input[name=refund]:checked').value;
-	
-	var file = document.getElementById("pic").files[0];
+	var date = document.getElementById("date").value;
+	var time = document.getElementById("time").value;
 	
 	for(var i = 0; i < elements.length; ++i) {
 		categories.push(elements[i].innerHTML);
@@ -22,12 +22,13 @@ function send() {
 				"auctionTitle" : title,
 				"auctionDescription" : description,
 				"mod" : mode,
+				"date" : date,
+				"time" : time,
 				"categories" : categories,
 				"refund": refund
 			},
 			success: function() {
 				window.location.href = "index";
-				alert("Asta creata correttamente!");
 			}
 		});
 	}

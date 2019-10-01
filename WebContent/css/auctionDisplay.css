@@ -28,6 +28,7 @@ img {
 .title {
 	padding: 5px;
 	width: 250px%;
+	font-weight: bold;
 }
 
 .description {
@@ -50,12 +51,6 @@ img {
 	flex-direction: row;
 	width: 100%;
 	margin-bottom: 5px;
-}
-
-.box {
-	padding: 5px;
-	width: 100%;
-	box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 input[type=text] {
@@ -101,4 +96,16 @@ input[type=submit]:hover {
 
 #last-col {
 	width: 250px;
+}
+
+.credit {
+	font-weight: bold;
+}
+
+.data {
+	font-weight: bold;
+}
+
+.auction-type {
+	font-weight: bold;
 }
