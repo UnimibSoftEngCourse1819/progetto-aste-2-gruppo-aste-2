@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import model.Offer;
 
-public class DutchOffer extends Offer implements Comparable<DutchOffer> {	
+public class DutchOffer extends Offer implements Comparable<DutchOffer> {
+	
+	public static String nameType = "DutchOffer";
+	
 	public DutchOffer(HttpServletRequest request) {
 		super(request);
 	}
@@ -44,7 +47,7 @@ public class DutchOffer extends Offer implements Comparable<DutchOffer> {
 
 	@Override
 	protected String getType() {
-		return "DutchOffer";
+		return "DucthOffer";
 	}
 
 }

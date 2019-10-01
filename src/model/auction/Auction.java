@@ -7,9 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import controller.database.SQLOperation;
 import controller.database.SQLParameter;
 import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
@@ -62,6 +64,17 @@ public abstract class Auction implements Storable{
 		}
 	}
 	
+	public Auction(Map<String, Object> rowValues) {
+		id = (Integer) rowValues.get("ID"); 
+		seller = new User((Integer) rowValues.get("Seller")); 
+		title = (String) rowValues.get("Title");
+		description = (String) rowValues.get("Description");
+		creation = (LocalDateTime) rowValues.get("Creation");
+		ending = (LocalDateTime) rowValues.get("Conclusion");
+		status = (String) rowValues.get("Status");
+		penalty = (Integer) rowValues.get("Penalty");
+	}
+
 	@Override
 	public SQLiteData getSQLiteData() {
 		SQLiteData sqlData = new SQLiteData(SQL_TABLE);
@@ -79,6 +92,6 @@ public abstract class Auction implements Storable{
 	}
 	
 	public abstract void addOffer(Offer newOffer) throws IncompatibilityClassException;
-	public abstract List<Operation> end();
-	protected abstract String getType();
+	public abstract List<SQLOperation> getCloseOperation();
+	public abstract String getType();
 }

@@ -11,7 +11,6 @@ import controller.database.SQLOperation;
 import controller.database.SQLParameter;
 
 
-
 public class SQLiteData implements SQLOperation{
 	private String table;
 	private LinkedHashMap<String, SQLParameter> data;
@@ -21,6 +20,9 @@ public class SQLiteData implements SQLOperation{
 		data = new LinkedHashMap<>();
 	}
 	
+	/**
+	 * This works as Insert Into statement
+	 */
 	public String getStatement(){
 		StringBuilder statement = new StringBuilder("INSERT INTO ");
 		statement.append(table + " (");
@@ -40,6 +42,9 @@ public class SQLiteData implements SQLOperation{
 		return statement.toString();
 	}
 	
+	/**
+	 * This works as Insert Into statement
+	 */
 	public void configure(PreparedStatement statement) throws SQLException {
 		Set<String> columnsName = data.keySet();
 		int indexParameter = 1;

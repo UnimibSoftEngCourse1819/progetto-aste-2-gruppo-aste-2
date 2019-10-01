@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -18,7 +19,6 @@ import java.util.Optional;
  */
 public class ResultDatabase {
 	private List<SQLColumn> table;
-	
 	
 	public ResultDatabase(ResultSet result) throws SQLException {
 		ResultSetMetaData resultMetadata = result.getMetaData();
@@ -45,6 +45,15 @@ public class ResultDatabase {
 		return result;
 	}
 	
+	public int size() {
+		int result = 0;
+		if(!isEmpty()) {
+			result = table.get(0).values.size();
+		}
+		
+		return result;
+	}
+	
 	public Object getValue(String nameColumn, int index) {
 		SQLColumn result = getColumn(nameColumn);
 		return result == null ? null : result.getValue(index);
@@ -55,7 +64,7 @@ public class ResultDatabase {
 		return result == null ? null : result.getValueList();
 	}
 	
-	public HashMap<String, Object> getRowValues(int indexRow) {
+	public Map<String, Object> getRowValues(int indexRow) {
 		HashMap <String, Object> result = new HashMap<>();
 		for(SQLColumn field : table) {
 			result.put(field.getName(), field.getValue(indexRow));

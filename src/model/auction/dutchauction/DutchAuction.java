@@ -1,19 +1,23 @@
 package model.auction.dutchauction;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import controller.database.SQLOperation;
 import exception.IncompatibilityClassException;
 import model.Offer;
-import model.Operation;
 import model.Transaction;
 import model.auction.Auction;
 
 public class DutchAuction extends Auction {
 	public DutchAuction(HttpServletRequest request) {
 		super(request);
+	}
+
+	public DutchAuction(Map<String, Object> rowValues) {
+		super(rowValues);
 	}
 
 	private long minPrice;
@@ -28,19 +32,18 @@ public class DutchAuction extends Auction {
 	
 	@Override
 	public void addOffer(Offer newOffer) throws IncompatibilityClassException {
-		//TODO da decidere quando verrà implementato le pagine per le offerte
+		//TODO caso particolare
 	}
 
 	@Override
-	public List<Operation> end() {
-		List<Operation> operationToDo = new ArrayList<>();
-		operationToDo.add(new Transaction(offer.getBidder(), seller, currentPrice));
+	public List<SQLOperation> getCloseOperation() {
+		Transaction singleTransaction = new Transaction(offer.getBidder(), seller, currentPrice);
 		
-		return operationToDo;
+		return singleTransaction.getSQLOperations();
 	}
 
 	@Override
-	protected String getType() {
+	public String getType() {
 		return "Dutch";
 	}
 
