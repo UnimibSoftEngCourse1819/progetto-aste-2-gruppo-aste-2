@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.AuctionReaper;
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
@@ -21,6 +22,7 @@ import exception.SQLiteFailRequestException;
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_ITEMS_ON_ROW = 10;
+	private boolean initializedEnderManager = false;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,6 +36,10 @@ public class IndexServlet extends HttpServlet {
 	 */
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	if(!initializedEnderManager) {
+    		AuctionReaper.getInstance();
+    	}
 		try {
 			SimpleSelect select = new SimpleSelect("auctions");
 			ResultDatabase result = DatabaseManager.executeSelect(select);

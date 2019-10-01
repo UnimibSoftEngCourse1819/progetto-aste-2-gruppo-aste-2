@@ -20,11 +20,11 @@ public class AuctionReaper {
 
 	private static AuctionReaper instance = null;
 	private static final int REFRESH_TIME_LAPSE = 1; //this is in hour
-	private LocalDateTime startLapse;
+	private LocalDateTime launchedRefresherTime;
 	private LocalDateTime endLapse;
 	
 	private AuctionReaper() {
-		start();
+		prepareTask();
 	}
 	
 	public static AuctionReaper getInstance() {
@@ -33,15 +33,13 @@ public class AuctionReaper {
 		}
 		return instance;
 	}
-	
-	private void start() {
-		Timer timer = new Timer();
-		timer.schedule(new RefreshTask(), getTimeToSchedule());
-		
-	}
 
-	protected void refresh() {
-		SelectComponent select = new SimpleSelect("closingAuction", startLapse, endLapse);
+	protected void prepareTask() {
+		calculateTimeTask();
+		Timer timerRefresher = new Timer();
+		timerRefresher.schedule(new RefreshTask(), Date.from(endLapse.atZone(ZoneId.systemDefault()).toInstant()));
+		
+		SelectComponent select = new SimpleSelect("closingAuction", launchedRefresherTime, endLapse);
 		try {
 			ResultDatabase auctions = DatabaseManager.executeSelect(select);
 			for(int index = 0; index < auctions.size(); index++) {
@@ -56,32 +54,24 @@ public class AuctionReaper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}			
-
 		
-		
-		
+		//TODO manca da gestire le aste non chiuse prima del richiamo getTimeToSchedule()
 	}
 	
-	/**
-	 * Example 17:12 45 s -> 18:00 0 s
-	 * 
-	 * @return
-	 */
-	private Date getTimeToSchedule() {
-		LocalDateTime currentTime = LocalDateTime.now();
-		currentTime = currentTime.plusHours(REFRESH_TIME_LAPSE);
-		currentTime = currentTime.plusMinutes(- currentTime.getMinute());
-		currentTime = currentTime.plusSeconds(- currentTime.getSecond());
+	private void calculateTimeTask() {
+		launchedRefresherTime = LocalDateTime.now();
 		
-		return Date.from(currentTime.atZone(ZoneId.systemDefault()).toInstant());
+		endLapse = launchedRefresherTime.plusHours(REFRESH_TIME_LAPSE);
+		endLapse = endLapse.plusMinutes(- endLapse.getMinute());
+		endLapse = endLapse.plusSeconds(- endLapse.getSecond());
+		
 	}
-	
 	
 	private class RefreshTask extends TimerTask{
 
 		@Override
 		public void run() {
-			AuctionReaper.getInstance().refresh();
+			AuctionReaper.getInstance().prepareTask();
 			
 		}
 		
@@ -103,6 +93,7 @@ public class AuctionReaper {
 		@Override
 		public void run() {
 			List<SQLOperation> operation = strategy.getCloseOperation();
+			
 			try {
 				DatabaseManager.execute(operation);
 			} catch (SQLiteFailRequestException | FailRollBackException e) {

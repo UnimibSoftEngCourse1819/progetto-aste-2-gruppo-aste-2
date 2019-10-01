@@ -16,7 +16,6 @@ import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
 import exception.IncompatibilityClassException;
 import model.Offer;
-import model.Operation;
 import model.User;
 
 /**
