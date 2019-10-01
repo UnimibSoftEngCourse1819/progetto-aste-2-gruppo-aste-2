@@ -13,6 +13,7 @@
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
+		<div class="carousel-title">Aste più recenti</div>
 		<div class="carousel-container">
 			<%
 				String[][] auctions = (String[][])request.getAttribute("auctions");
@@ -35,6 +36,7 @@
 				}
 		    %>
 	  	</div>
+	  	<div class="carousel-title">Aste che scadono oggi</div>
 	  	<div class="carousel-container">
 			<div class="box">
 		      <div class="pic">

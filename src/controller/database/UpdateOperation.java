@@ -28,13 +28,7 @@ public class UpdateOperation implements SQLOperation {
 	private String tableName;
 	private LinkedHashMap<String, SQLParameter> valuesToChange;
 	private LinkedHashMap<String, SQLParameter> clauses;
-	private List<String> typeClauses;//TODO replace the String with an enum
-	
-	//TODO replace these value into enum
-	/*public static final String EQUALS_OPERATION = "= ";
-	public static final String GREATER_OPERATION = "> ";
-	public static final String LOWER_OPERATION = "< ";
-	*/
+	private List<String> typeClauses;
 	
 	/**
 	 * Note : this will make all the clauses as

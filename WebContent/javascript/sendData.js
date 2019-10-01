@@ -8,8 +8,6 @@ function send() {
 	var date = document.getElementById("date").value;
 	var time = document.getElementById("time").value;
 	
-	var file = document.getElementById("pic").files[0];
-	
 	for(var i = 0; i < elements.length; ++i) {
 		categories.push(elements[i].innerHTML);
 	}
@@ -31,7 +29,6 @@ function send() {
 			},
 			success: function() {
 				window.location.href = "index";
-				alert("Asta creata correttamente!");
 			}
 		});
 	}

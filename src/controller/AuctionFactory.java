@@ -5,13 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import exception.InexistentTypeParameterException;
 import model.auction.Auction;
 import model.auction.dutchauction.DutchAuction;
-import model.auction.dutchauction.DutchOffer;
 import model.auction.englishauction.EnglishAuction;
-import model.auction.englishauction.EnglishOffer;
 import model.auction.firstsealed.AuctionFirstSealed;
-import model.auction.firstsealed.FirstSealedOffer;
 import model.auction.secondsealed.AuctionSecondSealed;
-import model.auction.secondsealed.SecondSealedOffer;
 
 /**
  * Simple Factory idiom applied

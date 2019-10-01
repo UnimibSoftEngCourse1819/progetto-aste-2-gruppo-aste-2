@@ -40,5 +40,19 @@
   		"statement" : "SELECT * FROM offer WHERE Auction = ?",
   		"values" : "INTEGER"
   	}
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "auctionOffered",
+  		"statement" : "SELECT * FROM auction, offer WHERE offer.Offerer = ? AND offer.Auction = auction.ID",
+  		"values" : "INTEGER"
+  	}
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "userCredit",
+  		"statement" : "SELECT * FROM user WHERE ID = ?",
+  		"values" : "INTEGER"
+  	}
   }
 ]
