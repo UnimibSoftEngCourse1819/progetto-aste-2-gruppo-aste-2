@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -50,8 +49,6 @@ public abstract class Auction implements Storable{
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		formatter = formatter.withLocale(Locale.getDefault());
-		Enumeration<String> values = request.getParameterNames();
-		String data = request.getParameter("date");
 		LocalDate tempDate = LocalDate.parse(request.getParameter("date"), formatter);
 		LocalTime tempTime = LocalTime.parse(request.getParameter("time"));
 		ending = LocalDateTime.of(tempDate, tempTime);
