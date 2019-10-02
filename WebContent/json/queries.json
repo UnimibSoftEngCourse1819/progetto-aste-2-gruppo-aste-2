@@ -54,5 +54,19 @@
   		"statement" : "SELECT * FROM user WHERE ID = ?",
   		"values" : "INTEGER"
   	}
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "closingAuction",
+  		"statement" : "SELECT * FROM auction WHERE Conclusion >= ? AND Conclusion <= ?",
+  		"values" : "DATETIME-DATETIME"
+  	}
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "auctionOffers",
+  		"statement" : "SELECT * FROM offer, auction WHERE offer.Auction = ? AND auction.ID = ?",
+  		"values" : "INTEGER"
+  	}
   }
 ]

@@ -34,7 +34,7 @@ public class AuthenticationService {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
-				values = result.getRowValues(0);
+				values = (HashMap<String, Object>) result.getRowValues(0);
 			}
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();

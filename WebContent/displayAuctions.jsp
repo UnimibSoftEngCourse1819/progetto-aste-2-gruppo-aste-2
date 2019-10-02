@@ -40,7 +40,6 @@
 				</div>
 				<b>Mostra</b>
 				<div class="show">
-					<input type="checkbox" name="all" value="Tutte le aste" checked="checked">Tutte le aste<br>
 					<input type="checkbox" name="notOpened" value="Aste non aperte">Aste non aperte<br>
 					<input type="checkbox" name="opened" value="Aste aperte">Aste aperte<br>
 					<input type="checkbox" name="closing" value="Aste in chiusura">Aste in chiusura<br>
