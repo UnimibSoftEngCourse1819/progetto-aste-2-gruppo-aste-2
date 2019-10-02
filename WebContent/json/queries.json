@@ -36,7 +36,7 @@
   },
   {
   	"sqlStatement" : {
-  		"name" : "auctionOffers",
+  		"name" : "offersOfAuction",
   		"statement" : "SELECT * FROM offer WHERE Auction = ? ",
   		"values" : "INTEGER"
   	}
@@ -58,14 +58,21 @@
   {
   	"sqlStatement" : {
   		"name" : "closingAuction",
-  		"statement" : "SELECT * FROM auction WHERE Conclusion >= ? AND Conclusion <= ? ",
+  		"statement" : "SELECT * FROM auction WHERE Conclusion <= ? ",
   		"values" : "DATETIME-DATETIME"
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "auctionOffers",
-  		"statement" : "SELECT * FROM offer, auction WHERE offer.Auction = ? AND auction.ID = ? ",
+  		"statement" : "SELECT offer.ID as OfferID, Price, auction.ID as auctionID, userSeller.ID as IDSeller, userSeller.Credit as SellerCredit, userBuyer.ID as IDBuyer, userBuyer.Credit as userCredit FROM offer, auction, user as userSeller, user as userBuyer WHERE offer.Auction = Auction.ID AND Auction.ID = 1 AND offer.Offerer = userBuyer.ID AND Auction.Seller = userSeller.ID AND Auction.ID = ? ",
+  		"values" : "INTEGER"
+  	}
+  }, 
+  {
+  	"sqlStatement" : {
+  		"name" : "creditUsed",
+  		"statement" : "SELECT Sum(Price) FROM offer, auction WHERE auction.ID = offer.Auction AND auction.Status = 'ON_GOING' AND Offerer = ? ",
   		"values" : "INTEGER"
   	}
   }

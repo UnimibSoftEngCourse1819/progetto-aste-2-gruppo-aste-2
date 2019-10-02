@@ -44,8 +44,8 @@ public class SearchServlet extends HttpServlet {
 			SelectComponent select = new SimpleSelect("auctions");
 			
 			List<SQLParameter> whereClause = new ArrayList<>();
-			whereClause.add(new SQLParameter("VARCHAR", Auction.ON_GOING));
-			whereClause.add(new SQLParameter("VARCHAR", Auction.STANDBY));
+			whereClause.add(new SQLParameter(SQLParameter.VARCHAR, Auction.ON_GOING));
+			whereClause.add(new SQLParameter(SQLParameter.VARCHAR, Auction.STANDBY));
 			select = new Where(select, "AND (auction.Status = ?  OR auction.Status = ? ", whereClause);
 			
 			OrderBy orderedSelect = new OrderBy(select, "Creation");
