@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Map;
-import java.util.TimerTask;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,8 +12,9 @@ import model.auction.firstsealed.AuctionFirstSealed;
 import model.auction.secondsealed.AuctionSecondSealed;
 
 /**
+ * A factory class for Auction
+ * 
  * Simple Factory idiom applied
- * @author Vallero
  *
  */
 public class AuctionFactory {

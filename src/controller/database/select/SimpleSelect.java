@@ -7,6 +7,14 @@ import java.util.List;
 
 import controller.database.SQLParameter;
 
+/**
+ * 
+ * This is the Core of the Decorator Design Pattern
+ * 
+ * This represent a select retrieved from the QueryLoader
+ * @author Vallero
+ *
+ */
 public class SimpleSelect implements SelectComponent {
 
 	private String basicQuery;

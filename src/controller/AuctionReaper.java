@@ -18,6 +18,10 @@ import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
 import model.auction.Auction;
 
+/**
+ * This class has the responsibility to close the auction
+ *
+ */
 public class AuctionReaper {
 
 	private static AuctionReaper instance = null;

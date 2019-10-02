@@ -14,6 +14,14 @@ import org.json.simple.parser.ParseException;
 
 import controller.database.select.QueryData;
 
+
+/**
+ * This class for now is used
+ * only for reading the json file of
+ * to get the queries however this class
+ * should be used also to read a list of auction
+ * 
+ */
 public class ReadJSON {
 	private static JSONParser jsonParser = new JSONParser();
 	private static final String PATH = File.separator + "WebContent" + File.separator + "json" + File.separator;

@@ -9,6 +9,13 @@ import model.auction.englishauction.EnglishOffer;
 import model.auction.firstsealed.FirstSealedOffer;
 import model.auction.secondsealed.SecondSealedOffer;
 
+/**
+ * A factory class for Offer
+ * 
+ * Simple Factory idiom applied
+ *
+ */
+
 public class OfferFactory {
 	private OfferFactory() {
 		throw new IllegalStateException("Utility class");

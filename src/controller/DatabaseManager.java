@@ -22,6 +22,13 @@ import exception.SQLiteFailRequestException;
  * This class will manage
  * ALL the request with the 
  * database
+ * 
+ * It's possible to use
+ * this class to make it as
+ * Unit of Work so we can
+ * reduce concurrency problems
+ * with the
+ * 
  * @author Vallero
  *
  */

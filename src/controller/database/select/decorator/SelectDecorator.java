@@ -3,7 +3,10 @@ package controller.database.select.decorator;
 import controller.database.select.SelectComponent;
 
 /**
- * TODO GROUP BY - HAVING
+ * This is the abstract class of the decorators
+ * 
+ * There some classes not implemented yet
+ * TODO : GROUP BY - HAVING 
  */
 public abstract class SelectDecorator implements SelectComponent {
 
