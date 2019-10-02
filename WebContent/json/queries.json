@@ -2,70 +2,70 @@
   {
     "sqlStatement" : {
       "name" : "authentication",
-      "statement" : "SELECT * FROM user WHERE Email = ? AND Password = ?",
+      "statement" : "SELECT * FROM user WHERE Email = ? AND Password = ? ",
       "values" : "VARCHAR-VARCHAR"
     }
   },
   {
     "sqlStatement" : {
       "name" : "auctions",
-      "statement" : "SELECT * FROM auction",
+      "statement" : "SELECT * FROM auction ",
       "values" : ""
     }
   },
   {
     "sqlStatement" : {
       "name" : "userAuctions",
-      "statement" : "SELECT * FROM auction WHERE Seller = ?",
+      "statement" : "SELECT * FROM auction WHERE Seller = ? ",
       "values" : "INTEGER"
     }
   },
   {
   	"sqlStatement" : {
   		"name" : "categories",
-  		"statement" : "SELECT * FROM category",
+  		"statement" : "SELECT * FROM category ",
   		"values" : ""
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "auction",
-  		"statement" : "SELECT * FROM auction WHERE ID = ?",
+  		"statement" : "SELECT * FROM auction WHERE ID = ? ",
   		"values" : "INTEGER"
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "auctionOffers",
-  		"statement" : "SELECT * FROM offer WHERE Auction = ?",
+  		"statement" : "SELECT * FROM offer WHERE Auction = ? ",
   		"values" : "INTEGER"
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "auctionOffered",
-  		"statement" : "SELECT * FROM auction, offer WHERE offer.Offerer = ? AND offer.Auction = auction.ID",
+  		"statement" : "SELECT * FROM auction, offer WHERE offer.Offerer = ? AND offer.Auction = auction.ID ",
   		"values" : "INTEGER"
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "userCredit",
-  		"statement" : "SELECT * FROM user WHERE ID = ?",
+  		"statement" : "SELECT * FROM user WHERE ID = ? ",
   		"values" : "INTEGER"
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "closingAuction",
-  		"statement" : "SELECT * FROM auction WHERE Conclusion >= ? AND Conclusion <= ?",
+  		"statement" : "SELECT * FROM auction WHERE Conclusion >= ? AND Conclusion <= ? ",
   		"values" : "DATETIME-DATETIME"
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "auctionOffers",
-  		"statement" : "SELECT * FROM offer, auction WHERE offer.Auction = ? AND auction.ID = ?",
+  		"statement" : "SELECT * FROM offer, auction WHERE offer.Auction = ? AND auction.ID = ? ",
   		"values" : "INTEGER"
   	}
   }
