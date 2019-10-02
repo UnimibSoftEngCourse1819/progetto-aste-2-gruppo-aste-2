@@ -1,6 +1,8 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,13 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
+import controller.database.select.SelectComponent;
 import controller.database.select.SimpleSelect;
+import controller.database.select.decorator.OrderBy;
 import exception.SQLiteFailRequestException;
 
 /**
  * Servlet implementation class CatalogueServlet
  */
-@WebServlet("/Ccatalogue")
+@WebServlet("/catalogue")
 public class CatalogueServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_ITEMS_ON_ROW = 10;
@@ -34,23 +38,22 @@ public class CatalogueServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			SimpleSelect select = new SimpleSelect("auctions");
+			SelectComponent select = new SimpleSelect("categories");
+			select = new OrderBy(select, "Name");
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
+				List<String> categories = new ArrayList<>();
 				int index = 0;
-				String[][] auctions = new String[MAX_ITEMS_ON_ROW][3];
 				
-				while(index < MAX_ITEMS_ON_ROW && result.getValue("ID", index) != null) {
-					auctions[index][0] = Integer.toString((Integer) result.getValue("ID", index));
-					auctions[index][1] = (String) result.getValue("Title", index);
-					auctions[index][2] = (String) result.getValue("Description", index);
+				while(result.getValue("ID", index) != null) {
+					categories.add((String) result.getValue("Name", index));
 					++index;
 				}
 				
-				request.setAttribute("auctions", auctions);
+				request.setAttribute("categories", categories);
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("displayAuctions.jsp");
 				dispatcher.forward(request, response);
 			}
 		} catch (SQLiteFailRequestException e) {
