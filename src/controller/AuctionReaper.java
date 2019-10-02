@@ -9,8 +9,10 @@ import java.util.TimerTask;
 
 import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
+import controller.database.SQLParameter;
 import controller.database.select.SelectComponent;
 import controller.database.select.SimpleSelect;
+import controller.database.select.decorator.Where;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
@@ -39,7 +41,16 @@ public class AuctionReaper {
 		Timer timerRefresher = new Timer();
 		timerRefresher.schedule(new RefreshTask(), Date.from(endLapse.atZone(ZoneId.systemDefault()).toInstant()));
 		
-		SelectComponent select = new SimpleSelect("closingAuction", launchedRefresherTime, endLapse);
+		createTimer();		
+		
+		closeOldAuctions();
+	}
+	
+	
+
+	private void createTimer() {
+		SelectComponent select = new SimpleSelect("closingAuction", endLapse);
+		select = new Where(select, "AND Conclusion >= ?", new SQLParameter(SQLParameter.DATE_TIME, launchedRefresherTime));
 		try {
 			ResultDatabase auctions = DatabaseManager.executeSelect(select);
 			for(int index = 0; index < auctions.size(); index++) {
@@ -53,11 +64,26 @@ public class AuctionReaper {
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}			
-		
-		//TODO manca da gestire le aste non chiuse prima del richiamo getTimeToSchedule()
+		}	
 	}
 	
+	private void closeOldAuctions() {
+		SelectComponent select = new SimpleSelect("closingAuction", launchedRefresherTime);
+		
+		try {
+			ResultDatabase auctions = DatabaseManager.executeSelect(select);
+			for(int index = 0; index < auctions.size(); index++) {
+				
+				Auction oldAuction = AuctionFactory.getAuctionFromValues(auctions.getRowValues(index));
+				DatabaseManager.execute(oldAuction.getCloseOperation());
+				
+			}
+		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private void calculateTimeTask() {
 		launchedRefresherTime = LocalDateTime.now();
 		

@@ -46,22 +46,20 @@ public class AuctionSecondSealed extends Auction {
 	@Override
 	public List<SQLOperation> getCloseOperation() {
 		List<SQLOperation> operationToDo = new ArrayList<>();
-		
+
 		SimpleSelect select = new SimpleSelect("auctionOffers", id);
 		OrderBy orderedSelect = new OrderBy(select, "Price");
 		orderedSelect.setDesc(true);
-		
+
 		ResultDatabase result;
-		
 		try {
 			result = DatabaseManager.executeSelect(orderedSelect);
-			
+
 			Transaction transaction = new Transaction(
-					new User((Integer) result.getValue("Offerer", 0)),
-					new User((Integer) result.getValue("Seller", 0)),
-					(Long) result.getValue("Price", 1)
-			);
-			
+					new User((Integer) result.getValue("IDBuyer", 0)),
+					new User((Integer) result.getValue("IDSeller", 0)),
+					(Integer) result.getValue("Price", 1));
+
 			operationToDo.addAll(transaction.getSQLOperations());
 			
 			LinkedHashMap<String, SQLParameter> clauses = new LinkedHashMap<>();

@@ -55,10 +55,9 @@ public class AuctionFirstSealed extends Auction {
 			result = DatabaseManager.executeSelect(orderedSelect);
 			
 			Transaction transaction = new Transaction(
-					new User((Integer) result.getValue("Offerer", 0)),
-					new User((Integer) result.getValue("Seller", 0)),
-					(Long) result.getValue("Price", 0)
-			);
+					new User((Integer) result.getValue("IDBuyer", 0)),
+					new User((Integer) result.getValue("IDSeller", 0)),
+					(Integer) result.getValue("Price", 0));
 			
 			operationToDo.addAll(transaction.getSQLOperations());
 			
@@ -67,6 +66,7 @@ public class AuctionFirstSealed extends Auction {
 			
 			LinkedHashMap<String, SQLParameter> valueToChange = new LinkedHashMap<>();
 			valueToChange.put("Status", new SQLParameter(SQLParameter.VARCHAR, ENDED));
+			valueToChange.put("Winner", new SQLParameter(SQLParameter.INTEGER, ENDED));
 			
 			operationToDo.add(new UpdateOperation("auction", clauses, valueToChange));
 		} catch (SQLiteFailRequestException e) {
