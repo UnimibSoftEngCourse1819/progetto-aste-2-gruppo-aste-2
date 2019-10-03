@@ -162,13 +162,30 @@
 		  <div class="tbl-content">
 		    <table cellpadding="0" cellspacing="0" border="0">
 		      <tbody>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>     
+		        <%
+		      		List<String[]> auctionWon = null;
+				  
+		      		if(request.getAttribute("auctionWon") instanceof ArrayList<?>) {
+						auctions = (ArrayList<String[]>) request.getAttribute("auctionWon");
+		      		}
+		      	
+					for(int i = 0; i < auctions.size(); ++i) {
+				%>
+				        <tr>
+				          <td><%= auctionWon.get(i)[1] %></td>
+				          <td><%= auctionWon.get(i)[2] %></td>
+				          <td><%= auctionWon.get(i)[3] %></td>
+				          <td><%= auctionWon.get(i)[4] %></td>
+				          <td>
+						  	<form action="auction" method="get">
+				          		<input type="hidden" value="<%= auctionWon.get(i)[0] %>" name="id" />
+				          		<input type="submit" class="manage-button" value="Apri" />
+				          	</form>
+						  </td>
+				        </tr> 
+		        <%
+					}
+		        %>         
 		      </tbody>
 		    </table>
 		  </div>

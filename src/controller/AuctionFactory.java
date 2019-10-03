@@ -44,7 +44,7 @@ public class AuctionFactory {
 		Auction result = null;
 		String type = (String) rowValues.get("Type");
 		
-		if(type.equalsIgnoreCase("irstSealed")) {
+		if(type.equalsIgnoreCase("firstSealed")) {
 			result =  new AuctionFirstSealed(rowValues);
 		}else if(type.equalsIgnoreCase("secondSealed")) {
 			result =  new AuctionSecondSealed(rowValues);

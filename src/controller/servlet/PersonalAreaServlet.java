@@ -99,10 +99,12 @@ public class PersonalAreaServlet extends HttpServlet {
 		Object userID = request.getSession(false).getAttribute("id");
 		List<String[]> userAuctions = getAuctions(new SimpleSelect("userAuctions", userID));
 		List<String[]> auctionOffered = getAuctions(new SimpleSelect("auctionOffered", userID));
+		List<String[]> auctionWon = getAuctions(new SimpleSelect("auctionWon", userID, "END"));
 		String userCredit = getUserCredit(new SimpleSelect("userCredit", userID));
 		
 		request.setAttribute("userAuctions", userAuctions);
 		request.setAttribute("auctionOffered", auctionOffered);
+		request.setAttribute("auctionWon", auctionWon);
 		request.setAttribute("userCredit", userCredit);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("personalArea.jsp");
