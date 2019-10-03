@@ -8,6 +8,13 @@ import java.util.List;
 import controller.database.SQLParameter;
 import controller.database.select.SelectComponent;
 
+/**
+ * This add more Where conditions to the Select
+ * We decided to put the string instead of
+ * declare a class that represent the sql condition
+ * since it require a lot of efforts
+ */
+
 public class Where extends SelectDecorator {
 	private String clauseDecorator;
 	private List<SQLParameter> values;

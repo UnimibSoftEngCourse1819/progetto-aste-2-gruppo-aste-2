@@ -10,6 +10,12 @@ import java.util.Set;
 import controller.database.SQLOperation;
 import controller.database.SQLParameter;
 
+/**
+ * This represent the insert into sql statement
+ * 
+ * @author Vallero
+ */
+
 
 public class SQLiteData implements SQLOperation{
 	private String table;

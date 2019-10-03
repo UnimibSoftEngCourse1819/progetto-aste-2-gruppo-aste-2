@@ -2,6 +2,9 @@ package controller.database.select;
 
 import java.util.List;
 
+/**
+ * This represent a single select
+ */
 public class QueryData {
 	private final String query;
 	private final List<String> typeParameters;

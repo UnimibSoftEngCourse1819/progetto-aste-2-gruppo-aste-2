@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This class represent a Single value of sql
+ * 
+ */
 public class SQLParameter{
 	public static final String INTEGER = "INTEGER";
 	public static final String VARCHAR = "VARCHAR";

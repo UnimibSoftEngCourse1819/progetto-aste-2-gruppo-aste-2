@@ -3,8 +3,7 @@ package controller.database.select;
 import controller.database.SQLOperation;
 
 /**
- * @author Vallero
- *
+ * Decorator Design pattern Applied
  */
 public interface SelectComponent extends SQLOperation{
 	abstract int getNumberParametersRequired();

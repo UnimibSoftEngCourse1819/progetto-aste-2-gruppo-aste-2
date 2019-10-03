@@ -16,6 +16,13 @@ import exception.SQLiteFailRequestException;
 import model.Category;
 
 /**
+ * 
+ * This class is used to save all the existing 
+ * categories and to avoid to request them 
+ * on the database.
+ * 
+ * This class use the eager strategy to save the categories.
+ * 
  * Singleton Design Pattern Applied
  * @author Vallero
  *

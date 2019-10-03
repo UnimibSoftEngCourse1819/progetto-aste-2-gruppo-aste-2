@@ -7,6 +7,11 @@ import java.sql.SQLException;
 
 import exception.MyConnectionException;
 
+/**
+ * This class is used to create a connection
+ * with the database
+ */
+
 public class Connector {
 	private static final String PATH = File.separator + "database" + File.separator;
 	private static final String DATABASE_DRIVER = "jdbc:sqlite:";

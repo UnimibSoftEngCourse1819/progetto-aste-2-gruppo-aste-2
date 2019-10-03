@@ -11,7 +11,7 @@ import exception.SQLiteFailRequestException;
 import model.User;
 
 /**
- * This class manages the user
+ * This class manages the users
  *
  */
 

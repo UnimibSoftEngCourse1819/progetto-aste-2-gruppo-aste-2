@@ -14,8 +14,7 @@ import java.util.Optional;
 
 
 /**
- * TODO maybe we should create null object 
- *
+ * This class represent a result from a select query
  */
 public class ResultDatabase {
 	private List<SQLColumn> table;

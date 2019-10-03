@@ -15,6 +15,13 @@ import exception.SQLiteFailRequestException;
 import model.Offer;
 import model.auction.Auction;
 
+/**
+ * This class manage the creation and the 
+ * offers
+ * 
+ * @author Vallero
+ *
+ */
 public class AuctionRequestManager {
 	
 	private AuctionRequestManager() {

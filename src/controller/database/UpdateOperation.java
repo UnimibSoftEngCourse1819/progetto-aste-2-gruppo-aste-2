@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class represent the sql update statement
+ */
 public class UpdateOperation implements SQLOperation {
 	private enum Operator {
 		EQUALS("= "), 
