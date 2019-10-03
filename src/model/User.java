@@ -20,7 +20,7 @@ public class User implements Storable {
 	private String phone;
 	private String password;
 	private int id;
-	private long portofolio;
+	private int portofolio;
 	
 	/**
 	 * use this Constructor carefully since set only the id
@@ -70,7 +70,7 @@ public class User implements Storable {
 	 * s
 	 * @param amount , to detract just pass a negative value
 	 */
-	public long addAmount(long amount) {
+	public int addAmount(int amount) {
 		portofolio += amount;
 		return portofolio;
 	}

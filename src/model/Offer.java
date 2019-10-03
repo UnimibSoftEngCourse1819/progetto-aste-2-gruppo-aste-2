@@ -39,7 +39,7 @@ public abstract class Offer implements Storable {
 		return bidder;
 	}
 	
-	public long getPrice() {
+	public int getPrice() {
 		return price;
 	}
 }

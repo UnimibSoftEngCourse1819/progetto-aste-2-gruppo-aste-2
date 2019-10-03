@@ -12,9 +12,9 @@ public class Transaction implements Operation {
 
 	private User donator;
 	private User receiver;
-	private long amount;
+	private int amount;
 	
-	public Transaction(User donator, User receiver, long amount) {
+	public Transaction(User donator, User receiver, int amount) {
 		this.donator = donator;
 		this.receiver = receiver;
 		this.amount = amount;
@@ -25,10 +25,10 @@ public class Transaction implements Operation {
 		List<SQLOperation> operation = new ArrayList<>();
 		
 		LinkedHashMap<String, SQLParameter> clauses = new LinkedHashMap<>();
-		clauses.put("ID", new SQLParameter(SQLParameter.INTEGER, donator));
+		clauses.put("ID", new SQLParameter(SQLParameter.INTEGER, donator.getId()));
 		
 		LinkedHashMap<String, SQLParameter> valuesToChange = new LinkedHashMap<>();
-		valuesToChange.put("Portfolio", new SQLParameter(SQLParameter.INTEGER, donator.addAmount(-amount)));
+		valuesToChange.put("Credit", new SQLParameter(SQLParameter.INTEGER, donator.addAmount(-amount)));
 		
 		operation.add(new UpdateOperation("user", clauses, valuesToChange));
 		
@@ -36,7 +36,7 @@ public class Transaction implements Operation {
 		clausesOfReceiver.put("ID", new SQLParameter(SQLParameter.INTEGER, receiver.getId()));
 		
 		LinkedHashMap<String, SQLParameter> valuesToChangeOfReceiver = new LinkedHashMap<>();
-		valuesToChangeOfReceiver.put("Portfolio", new SQLParameter(SQLParameter.INTEGER, receiver.addAmount(amount)));
+		valuesToChangeOfReceiver.put("Credit", new SQLParameter(SQLParameter.INTEGER, receiver.addAmount(amount)));
 		
 		operation.add(new UpdateOperation("user", clausesOfReceiver, valuesToChangeOfReceiver));
 		

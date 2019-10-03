@@ -66,7 +66,7 @@ public class AuctionFirstSealed extends Auction {
 			
 			LinkedHashMap<String, SQLParameter> valueToChange = new LinkedHashMap<>();
 			valueToChange.put("Status", new SQLParameter(SQLParameter.VARCHAR, ENDED));
-			valueToChange.put("Winner", new SQLParameter(SQLParameter.INTEGER, ENDED));
+			valueToChange.put("Winner", new SQLParameter(SQLParameter.INTEGER, result.getValue("IDBuyer", 0)));
 			
 			operationToDo.add(new UpdateOperation("auction", clauses, valueToChange));
 		} catch (SQLiteFailRequestException e) {
