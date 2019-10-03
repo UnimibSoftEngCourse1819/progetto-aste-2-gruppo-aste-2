@@ -25,8 +25,8 @@
 		        <tr>
 		          <th>Titolo</th>
 		          <th>Descrizione</th>
-		          <th>Prezzo</th>
-		          <th>Data</th>
+		          <th>Data creazione</th>
+		          <th>Data chiusura</th>
 		          <th>Gestione</th>
 		        </tr>
 		      </thead>
@@ -47,9 +47,14 @@
 				        <tr>
 				          <td><%= auctions.get(i)[1] %></td>
 				          <td><%= auctions.get(i)[2] %></td>
-				          <td><%= auctions.get(i)[0] %></td>
 				          <td><%= auctions.get(i)[3] %></td>
-				          <td><button type="button" class="manage-button" id="<%= auctions.get(i)[0] %>">Modifica</button></td>
+				          <td><%= auctions.get(i)[4] %></td>
+				          <td>
+				          	<form action="auction" method="get">
+				          		<input type="hidden" value="<%= auctions.get(i)[0] %>" name="id" />
+				          		<input type="submit" class="manage-button" value="Apri" />
+				          	</form>
+				          </td>
 				        </tr> 
 		        <%
 					}
@@ -68,8 +73,8 @@
 		        <tr>
 		          <th>Titolo</th>
 		          <th>Descrizione</th>
-		          <th>Prezzo</th>
-		          <th>Data</th>
+		          <th>Data creazione</th>
+		          <th>Data chiusura</th>
 		          <th>Gestione</th>
 		        </tr>
 		      </thead>
@@ -90,9 +95,14 @@
 				        <tr>
 				          <td><%= auctions.get(i)[1] %></td>
 				          <td><%= auctions.get(i)[2] %></td>
-				          <td><%= auctions.get(i)[0] %></td>
 				          <td><%= auctions.get(i)[3] %></td>
-				          <td><button type="button" class="manage-button" id="<%= auctions.get(i)[0] %>">Modifica</button></td>
+				          <td><%= auctions.get(i)[4] %></td>
+				          <td>
+						  	<form action="auction" method="get">
+				          		<input type="hidden" value="<%= auctions.get(i)[0] %>" name="id" />
+				          		<input type="submit" class="manage-button" value="Apri" />
+				          	</form>
+						  </td>
 				        </tr> 
 		        <%
 					}
@@ -111,8 +121,8 @@
 		        <tr>
 		          <th>Titolo</th>
 		          <th>Descrizione</th>
-		          <th>Prezzo</th>
-		          <th>Data</th>
+		          <th>Data creazione</th>
+		          <th>Data chiusura</th>
 		          <th>Gestione</th>
 		        </tr>
 		      </thead>
@@ -127,77 +137,7 @@
 		          <td>$1.38</td>
 		          <td>+2.01</td>
 		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>XXD</td>
-		          <td>ADITYA BIRLA</td>
-		          <td>$1.02</td>
-		          <td>-1.01</td>
-		          <td>+2.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>XXD</td>
-		          <td>ADITYA BIRLA</td>
-		          <td>$1.02</td>
-		          <td>-1.01</td>
-		          <td>+2.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>     
+		        </tr>   
 		      </tbody>
 		    </table>
 		  </div>
@@ -212,9 +152,9 @@
 		        <tr>
 		          <th>Titolo</th>
 		          <th>Descrizione</th>
+		          <th>Data creazione</th>
+		          <th>Data chiusura</th>
 		          <th>Prezzo</th>
-		          <th>Data</th>
-		          <th>Gestione</th>
 		        </tr>
 		      </thead>
 		    </table>
@@ -228,76 +168,6 @@
 		          <td>$1.38</td>
 		          <td>+2.01</td>
 		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>XXD</td>
-		          <td>ADITYA BIRLA</td>
-		          <td>$1.02</td>
-		          <td>-1.01</td>
-		          <td>+2.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>XXD</td>
-		          <td>ADITYA BIRLA</td>
-		          <td>$1.02</td>
-		          <td>-1.01</td>
-		          <td>+2.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAD</td>
-		          <td>AUSENCO</td>
-		          <td>$2.38</td>
-		          <td>-0.01</td>
-		          <td>-1.36%</td>
-		        </tr>
-		        <tr>
-		          <td>AAX</td>
-		          <td>ADELAIDE</td>
-		          <td>$3.22</td>
-		          <td>+0.01</td>
-		          <td>+1.36%</td>
 		        </tr>     
 		      </tbody>
 		    </table>

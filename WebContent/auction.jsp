@@ -12,7 +12,16 @@
 	<body>
 		<%@include file="templates/navbar.jsp" %>
 		<%
+			boolean isLogged = false;
+			boolean isOwner = false;
+			int credit = 0;
 			String[] auction = (String[]) request.getAttribute("auction");
+			
+			if((String) session.getAttribute("name") != null) {
+				isOwner = (Boolean) request.getAttribute("isOwner");
+				isLogged = true;
+				credit = (Integer) request.getAttribute("credit");
+			}
 		%>
 		<div class="form">
         	<form action="auction" method="post">
@@ -47,17 +56,21 @@
 		        			<%= auction[2] %>
 		        		</div>
 	        		</div>
-	        		<div class="col">
-						<div class="credit">I tuoi crediti: </div>
-	        		</div>
-	        	</div>
-	        	<div class="row">
-	        		<div class="col" id="last-col"></div>
-	        		<div class="col">
-	        			<input type="number" min="0.00" max="10000.00" step="0.01" name="price" />
-	        			<input type="submit" value="Invia" />
-	        		</div>
-	        	</div>
+		        	<div class="col">
+		        		<% if(!isOwner && isLogged) { %>
+							<div class="credit">I tuoi crediti: <%= credit %></div>
+		        	</div>
+		        	</div>
+		        	<div class="row">
+		        		<div class="col" id="last-col"></div>
+		        		<div class="col">
+		        			<input type="number" min="0.00" max="10000.00" step="0.01" name="price" />
+		        			<input type="submit" value="Invia" />
+		        		</div>
+		        	</div>
+		        <% 
+		        	}
+	        	%>
         	</form>
         </div>
 	</body>

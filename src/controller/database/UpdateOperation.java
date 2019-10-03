@@ -85,7 +85,7 @@ public class UpdateOperation implements SQLOperation {
 
 	@Override
 	public void configure(PreparedStatement statement) throws SQLException{
-		int indexParameter = 0;
+		int indexParameter = 1;
 		
 		for(Map.Entry<String, SQLParameter> singleValue : valuesToChange.entrySet()) {
 			singleValue.getValue().configure(indexParameter++, statement);

@@ -1,6 +1,11 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,12 +45,13 @@ public class PersonalAreaServlet extends HttpServlet {
 				int index = 0;
 				
 				while(result.getValue("ID", index) != null) {
-					String[] data = new String[4];
+					String[] data = new String[5];
 					
 					data[0] = Integer.toString((Integer) result.getValue("ID", index));
 					data[1] = (String) result.getValue("Title", index);
 					data[2] = (String) result.getValue("Description", index);
-					data[3] = result.getValue("Creation", index).toString();
+					data[3] = formatData(result.getValue("Creation", index).toString());
+					data[4] = formatData(result.getValue("Conclusion", index).toString());
 					
 					auctions.add(data);
 					index++;
@@ -73,6 +79,16 @@ public class PersonalAreaServlet extends HttpServlet {
     	}
     	
     	return userCredit;
+    }
+    
+    private String formatData(String dateTime) {
+    	LocalDateTime temp = LocalDateTime.parse(dateTime);
+    	LocalTime time = temp.toLocalTime().truncatedTo(ChronoUnit.MINUTES);
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+    	LocalDate date = temp.toLocalDate(); 			   	
+    	
+    	return formatter.format(date) + " " + time.toString();
     }
     
 	/**
