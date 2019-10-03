@@ -15,6 +15,13 @@
   },
   {
     "sqlStatement" : {
+      "name" : "auctionsSearch",
+      "statement" : "SELECT * FROM auction, category, auctionCategory Where auction.ID = auctionCategory.auction AND category.ID = auctionCategory.category AND category.Name = ? ",
+      "values" : "VARCHAR"
+    }
+  },
+  {
+    "sqlStatement" : {
       "name" : "userAuctions",
       "statement" : "SELECT * FROM auction WHERE Seller = ? ",
       "values" : "INTEGER"

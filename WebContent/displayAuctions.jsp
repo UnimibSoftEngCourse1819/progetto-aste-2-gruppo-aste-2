@@ -21,10 +21,10 @@
 					<b>Tipologia asta</b>
 					<div class="auction-type">
 						<input type="radio" name="auctionType" value="tutte" checked="checked">Tutte le tipologie di aste<br />
-						<input type="radio" name="auctionType" value="busta chiusa">Asta in busta chiusa<br />
-						<input type="radio" name="auctionType" value="secondo prezzo">Asta in busta chiusa al "secondo prezzo"<br />
-						<input type="radio" name="auctionType" value="inglese">Asta "inglese"<br />
-						<input type="radio" name="auctionType" value="olandese">Asta "olandese"<br />
+						<input type="radio" name="auctionType" value="FirstSealed">Asta in busta chiusa<br />
+						<input type="radio" name="auctionType" value="SecondSealed">Asta in busta chiusa al "secondo prezzo"<br />
+						<input type="radio" name="auctionType" value="English">Asta "inglese"<br />
+						<input type="radio" name="auctionType" value="Dutch">Asta "olandese"<br />
 					</div>
 					<b>Categorie</b>
 					<div class="categories">
@@ -45,9 +45,8 @@
 					</div>
 					<b>Mostra</b>
 					<div class="show">
-						<input type="checkbox" name="notOpened" value="Aste non aperte">Aste non aperte<br>
-						<input type="checkbox" name="opened" value="Aste aperte">Aste aperte<br>
-						<input type="checkbox" name="closing" value="Aste in chiusura">Aste in chiusura<br>
+						<input type="checkbox" name="notOpened" value="true">Aste non aperte<br>
+						<input type="checkbox" name="opened" value="true">Aste aperte<br>
 					</div>
 					<input type="submit" id="send" value="Cerca" />
 				</form>
