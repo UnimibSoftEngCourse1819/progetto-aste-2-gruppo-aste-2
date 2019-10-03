@@ -166,10 +166,10 @@
 		      		List<String[]> auctionWon = null;
 				  
 		      		if(request.getAttribute("auctionWon") instanceof ArrayList<?>) {
-						auctions = (ArrayList<String[]>) request.getAttribute("auctionWon");
+						auctionWon = (ArrayList<String[]>) request.getAttribute("auctionWon");
 		      		}
 		      	
-					for(int i = 0; i < auctions.size(); ++i) {
+					for(int i = 0; i < auctionWon.size(); ++i) {
 				%>
 				        <tr>
 				          <td><%= auctionWon.get(i)[1] %></td>

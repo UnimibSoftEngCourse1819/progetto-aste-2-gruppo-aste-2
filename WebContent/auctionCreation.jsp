@@ -23,7 +23,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="text" id="titolo" name="auctionTitle"/>
+                        <input type="text" id="titolo" name="auctionTitle" required />
                     </div>
                 </div>
                 <div class="row">
