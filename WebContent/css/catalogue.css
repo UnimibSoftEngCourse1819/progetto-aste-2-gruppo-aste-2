@@ -11,7 +11,7 @@ img {
 	display: inline-block;
 	max-width: 1100px;
 	margin-left: 20px;
-	width: 80%;
+	width: auto;
 }
 
 .columns_2 figure{
@@ -55,10 +55,6 @@ img {
 	-moz-transform:scale(1.1);
 	transform: scale(1.1);
 
-}
-
-#columns:hover figure:not(:hover) {
-	opacity: 0.4;
 }
 
 div#columns figure {
@@ -147,8 +143,8 @@ a.button:hover{
 	display: inline-block;
 	padding: 5px;
 	margin-top: 0px;
-	width: 20%;
-	max-width: 190px;
+	width: 30%;
+	max-width: 200px;
 	
 	float: left;
 	border-right: 1px solid #ccc;

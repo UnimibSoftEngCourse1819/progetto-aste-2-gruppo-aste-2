@@ -1,6 +1,11 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,11 +57,28 @@ public class AuctionServlet extends HttpServlet {
     	return type;
     }
     
+    private String formatData(String dateTime) {
+    	LocalDateTime temp = LocalDateTime.parse(dateTime);
+    	LocalTime time = temp.toLocalTime().truncatedTo(ChronoUnit.MINUTES);
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+    	LocalDate date = temp.toLocalDate(); 			   	
+    	
+    	return formatter.format(date) + " " + time.toString();
+    }
+    
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			SimpleSelect select = new SimpleSelect("auction", Integer.parseInt(request.getParameter("id")));
 			ResultDatabase result = DatabaseManager.executeSelect(select);
+			
+			if(request.getSession(false).getAttribute("id") != null) {
+				SimpleSelect selectCredit = new SimpleSelect("userCredit", (Integer) request.getSession(false).getAttribute("id"));
+				ResultDatabase resultCredit = DatabaseManager.executeSelect(selectCredit);
+				
+				request.setAttribute("credit", resultCredit.getValue("Credit", 0));
+			}
 			
 			if(!result.isEmpty()) {
 				String[] auction = new String[6];
@@ -65,10 +87,18 @@ public class AuctionServlet extends HttpServlet {
 				auction[1] = (String) result.getValue("Title", 0);
 				auction[2] = (String) result.getValue("Description", 0);
 				auction[3] = (String) result.getValue("Type", 0);
-				auction[4] = (String) result.getValue("Conclusion", 0);
+				auction[4] = formatData((String) result.getValue("Conclusion", 0));
 				auction[5] = getAuctionType((String) result.getValue("Type", 0));
 				
 				request.setAttribute("auction", auction);
+				
+				if(request.getSession(false).getAttribute("id") != null) {
+					int seller = (Integer) result.getValue("Seller", 0);
+					int id = (Integer) request.getSession().getAttribute("id");
+					boolean isOwner = seller == id ? true : false;
+					
+					request.setAttribute("isOwner", isOwner);
+				}
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("auction.jsp");
 				dispatcher.forward(request, response);
