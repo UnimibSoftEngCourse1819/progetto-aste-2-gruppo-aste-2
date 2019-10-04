@@ -87,30 +87,35 @@ div#columns figure figcaption {
   font-size: .9rem;
   color: #444;
   line-height: 1.5;
-  height:60px;
+  height: 30px;
   font-weight:600;
   text-overflow:ellipsis;
 }
 
-a.button{
-  padding:10px;
-  background: #428bca;
-  margin:10px;
-  display:block;
-  text-align:center;
-  color:#fff;
-  transition:all 1s linear;
-  text-decoration:none;
-  text-shadow:1px 1px 3px rgba(0,0,0,0.3);
-  border-radius:3px;
-  border-bottom:3px solid #0080C0;
-  box-shadow:1px 1px 3px rgba(0,0,0,0.3);
+.price {
+	height: 60px;
 }
 
-a.button:hover{
-  background:#0080C0;
-  border-bottom:3px solid #428bca;
-  color:#f1f2f3;
+input[type=submit] {
+	padding:10px;
+  	background: #428bca;
+  	margin: 10px 10px 10px 0px;
+  	display:block;
+  	text-align:center;
+  	color:#fff;
+  	transition:all 1s linear;
+  	text-decoration:none;
+  	text-shadow:1px 1px 3px rgba(0,0,0,0.3);
+  	border-radius:3px;
+  	border-bottom:3px solid #0080C0;
+  	box-shadow:1px 1px 3px rgba(0,0,0,0.3);
+  	width: 70px;
+}
+
+input[type=submit]:hover {
+	background:#0080C0;
+  	border-bottom:3px solid #428bca;
+  	color:#f1f2f3;
 }
 
 @media screen and (max-width: 960px) { 

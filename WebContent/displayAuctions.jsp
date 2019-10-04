@@ -16,8 +16,8 @@
 		<%@include file="templates/navbar.jsp" %>
 		<div class="main">
 			<div id="filter">
-				<form action="search" method="post">
-					<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Cerca.." title="Type in a name">
+				<form action="search" method="get">
+					<input type="text" id="myInput" name="search" placeholder="Cerca.." title="Type in a name">
 					<b>Tipologia asta</b>
 					<div class="auction-type">
 						<input type="radio" name="auctionType" value="tutte" checked="checked">Tutte le tipologie di aste<br />
@@ -53,68 +53,31 @@
 			</div>
 			<div id="wrap">
 				<div id="columns" class="columns_4">
-	  				<figure>
-	  					<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-						<figcaption>Green Checkered Shirt</figcaption>
-	    				<span class="price">$44</span>
-	    				<a class="button" href="#">Buy Now</a>
-					</figure>
-		
-					<figure>
-						<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-						<figcaption>Green and Black Flowers</figcaption>
-	    				<span class="price">$44</span>
-	    				<a class="button" href="#">Buy Now</a>
-					</figure>
-		
-	  				<figure>
-						<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-						<figcaption>Black Dots</figcaption>
-	    				<span class="price">$44</span>
-	    				<a class="button" href="#">Buy Now</a>
-					</figure>
-	  
-					<figure>
-						<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-						<figcaption>Red Flowy</figcaption>
-	    				<span class="price">$44</span>
-	    				<a class="button" href="#">Buy Now</a>
-					</figure>
-		
-	   				<figure>
-						 <img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-						<figcaption>Yellow Button-Up</figcaption>
-	    				<span class="price">$44</span>
-	    				<a class="button" href="#">Buy Now</a>
-					</figure>
-		
-	   				<figure>
-		 				<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-						<figcaption>Put a Bird On It</figcaption>
-	     				<span class="price">$44</span>
-	     				<a class="button" href="#">Buy Now</a>
-					</figure>
-	  
-					<figure>
-						<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
-						<figcaption>Polka Dots</figcaption>
-						<span class="price">$44</span>
-						<a class="button" href="#">Buy Now</a>
-					</figure>	
-					 
-					<figure>
-						<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495">
-						<figcaption>Blue Spots</figcaption>
-					    <span class="price">$44</span>
-					    <a class="button" href="#">Buy Now</a>
-					</figure>
-					 
-					<figure>
-						<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495">
-					   	<figcaption>Pink Dots</figcaption>
-					    <span class="price">$44</span>
-					    <a class="button" href="#">Buy Now</a>
-					</figure>	
+		  			<%
+		  				if(request.getAttribute("auctions") != null) {
+				      		List<String[]> auctions = null;
+						  
+				      		if(request.getAttribute("auctions") instanceof ArrayList<?>) {
+								auctions = (ArrayList<String[]>) request.getAttribute("auctions");
+				      		}
+				      	
+							for(int i = 0; i < auctions.size(); ++i) {
+					%>
+				  				<figure>
+				  					<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+									<figcaption><%= auctions.get(i)[1] %></figcaption>
+				    				<div class="price"><%= auctions.get(i)[2] %></div>
+				    				<div class="button">
+				    					<form action="auction" method="get">
+				    						<input type="hidden" name="id" value="<%= auctions.get(i)[0] %>" />
+				    						<input type="submit" value="Apri" />
+				    					</form>
+				    				</div>
+								</figure>
+					<%
+							}
+		  				}
+					%>	
 				</div>
 			</div>
 		</div>
