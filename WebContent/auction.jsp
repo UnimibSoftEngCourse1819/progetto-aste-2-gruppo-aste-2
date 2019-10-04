@@ -56,18 +56,27 @@
 		        			<%= auction[2] %>
 		        		</div>
 	        		</div>
-		        	<div class="col">
-		        		<% if(!isOwner && isLogged) { %>
-							<div class="credit">I tuoi crediti: <%= credit %></div>
-		        	</div>
-		        	</div>
-		        	<div class="row">
-		        		<div class="col" id="last-col"></div>
+		        	<% 
+		        		if(!isLogged) {
+		        	%>
+		        			<div class="col">
+								<div class="credit">Per effettuare un'offerta esegui il login.</div>
+		        			</div>	
+		        	<%
+		        		}
+		        		else if(!isOwner) { 
+		        	%>
 		        		<div class="col">
-		        			<input type="number" min="0.00" max="10000.00" step="0.01" name="price" />
-		        			<input type="submit" value="Invia" />
+							<div class="credit">I tuoi crediti: <%= credit %></div>
 		        		</div>
+		        </div>
+		        <div class="row">
+		        	<div class="col" id="last-col"></div>
+		        	<div class="col">
+		        		<input type="number" min="0.00" max="10000.00" step="0.01" name="price" />
+		        		<input type="submit" value="Invia" />
 		        	</div>
+		        </div>
 		        <% 
 		        	}
 	        	%>
