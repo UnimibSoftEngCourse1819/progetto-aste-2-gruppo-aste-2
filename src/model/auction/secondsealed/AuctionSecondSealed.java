@@ -44,40 +44,44 @@ public class AuctionSecondSealed extends Auction {
 	}
 
 	@Override
-	public List<SQLOperation> getCloseOperation() {
+	public  List<SQLOperation> getCloseOperation(){
 		List<SQLOperation> operationToDo = new ArrayList<>();
-
+		
 		SimpleSelect select = new SimpleSelect("auctionOffers", id);
 		OrderBy orderedSelect = new OrderBy(select, "Price");
 		orderedSelect.setDesc(true);
-
-		ResultDatabase result;
+		
 		try {
-			result = DatabaseManager.executeSelect(orderedSelect);
-
-			Transaction transaction = new Transaction(
-					new User((Integer) result.getValue("IDBuyer", 0)),
-					new User((Integer) result.getValue("IDSeller", 0)),
-					(Integer) result.getValue("Price", 1));
-
-			operationToDo.addAll(transaction.getSQLOperations());
-			
-			LinkedHashMap<String, SQLParameter> clauses = new LinkedHashMap<>();
-			clauses.put("ID", new SQLParameter(SQLParameter.INTEGER, id));
+			ResultDatabase result = DatabaseManager.executeSelect(orderedSelect);
 			
 			LinkedHashMap<String, SQLParameter> valueToChange = new LinkedHashMap<>();
 			valueToChange.put("Status", new SQLParameter(SQLParameter.VARCHAR, ENDED));
 			
+			LinkedHashMap<String, SQLParameter> clauses = new LinkedHashMap<>();
+			clauses.put("ID", new SQLParameter(SQLParameter.INTEGER, id));
+			
+			if(!result.isEmpty()) {
+				
+				Integer price = result.size() >= 2 ? (Integer) result.getValue("Price", 1) : (Integer) result.getValue("Price", 0);
+				
+				Transaction transaction = new Transaction(
+						new User((Integer) result.getValue("IDBuyer", 0)),
+						new User((Integer) result.getValue("IDSeller", 0)),
+						price);
+				
+				operationToDo.addAll(transaction.getSQLOperations());
+				
+				valueToChange.put("Winner", new SQLParameter(SQLParameter.INTEGER, result.getValue("IDBuyer", 0)));
+			}
+			
 			operationToDo.add(new UpdateOperation("auction", clauses, valueToChange));
-		}
-		catch(SQLiteFailRequestException e) {
+		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}
 		
 		return operationToDo;
-		
 	}
-
+	
 	@Override
 	public String getType() {
 		return "SecondSealed";

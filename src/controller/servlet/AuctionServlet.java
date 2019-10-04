@@ -35,38 +35,6 @@ public class AuctionServlet extends HttpServlet {
         super();
     }
     
-    private String getAuctionType(String auctionType) {
-    	String type = "";
-    	
-    	switch(auctionType) {
-    	case "FirstSealed":
-    		type = "Asta in busta chiusa";
-    		break;
-    	case "SecondSealed":
-    		type = "Asta in busta chiusa al \"secondo prezzo\"";
-    		break;
-    	case "English":
-    		type = "Asta \"inglese\"";
-    		break;
-    	case "Dutch":
-    		type = "Asta \"olandese\"";
-    		break;
-    	default:
-    	}
-    	
-    	return type;
-    }
-    
-    private String formatData(String dateTime) {
-    	LocalDateTime temp = LocalDateTime.parse(dateTime);
-    	LocalTime time = temp.toLocalTime().truncatedTo(ChronoUnit.MINUTES);
-    	
-    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-    	LocalDate date = temp.toLocalDate(); 			   	
-    	
-    	return formatter.format(date) + " " + time.toString();
-    }
-    
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -106,10 +74,40 @@ public class AuctionServlet extends HttpServlet {
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
+    private String getAuctionType(String auctionType) {
+    	String type = "";
+    	
+    	switch(auctionType) {
+    	case "FirstSealed":
+    		type = "Asta in busta chiusa";
+    		break;
+    	case "SecondSealed":
+    		type = "Asta in busta chiusa al \"secondo prezzo\"";
+    		break;
+    	case "English":
+    		type = "Asta \"inglese\"";
+    		break;
+    	case "Dutch":
+    		type = "Asta \"olandese\"";
+    		break;
+    	default:
+    	}
+    	
+    	return type;
+    }
+    
+    private String formatData(String dateTime) {
+    	LocalDateTime temp = LocalDateTime.parse(dateTime);
+    	LocalTime time = temp.toLocalTime().truncatedTo(ChronoUnit.MINUTES);
+    	
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+    	LocalDate date = temp.toLocalDate(); 			   	
+    	
+    	return formatter.format(date) + " " + time.toString();
+    }
+    
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		try {

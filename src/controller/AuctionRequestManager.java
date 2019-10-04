@@ -51,6 +51,8 @@ public class AuctionRequestManager {
 	public static void makeOffer(HttpServletRequest request) throws SQLiteFailRequestException, InexistentTypeParameterException, IOException {
 		Offer newOffer = OfferFactory.createOffer(request.getParameter("mod"), request);	
 		
+		
+		
 		DatabaseManager.create(newOffer);
 	}
 }

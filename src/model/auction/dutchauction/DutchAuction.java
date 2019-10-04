@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import controller.database.SQLOperation;
 import exception.IncompatibilityClassException;
 import model.Offer;
-import model.Transaction;
 import model.auction.Auction;
 
 public class DutchAuction extends Auction {
+	
 	public DutchAuction(HttpServletRequest request) {
 		super(request);
 	}
@@ -37,9 +37,9 @@ public class DutchAuction extends Auction {
 
 	@Override
 	public List<SQLOperation> getCloseOperation() {
-		Transaction singleTransaction = new Transaction(offer.getBidder(), seller, currentPrice);
+		//TODO
 		
-		return singleTransaction.getSQLOperations();
+		return null;
 	}
 
 	@Override

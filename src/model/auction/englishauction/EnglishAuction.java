@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import controller.database.SQLOperation;
 import exception.IncompatibilityClassException;
 import model.Offer;
-import model.Operation;
-import model.Transaction;
 import model.auction.Auction;
 
 public class EnglishAuction extends Auction {

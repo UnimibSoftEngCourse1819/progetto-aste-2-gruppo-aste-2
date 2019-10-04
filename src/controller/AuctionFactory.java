@@ -48,9 +48,9 @@ public class AuctionFactory {
 			result =  new AuctionFirstSealed(rowValues);
 		}else if(type.equalsIgnoreCase("secondSealed")) {
 			result =  new AuctionSecondSealed(rowValues);
-		}else if(type.equalsIgnoreCase("englishAuction")) {
+		}else if(type.equalsIgnoreCase("english")) {
 			result =  new EnglishAuction(rowValues);
-		}else if(type.equalsIgnoreCase("dutchAuction")) {
+		}else if(type.equalsIgnoreCase("dutch")) {
 			result =  new DutchAuction(rowValues);
 		}else {
 			throw new InexistentTypeParameterException();
