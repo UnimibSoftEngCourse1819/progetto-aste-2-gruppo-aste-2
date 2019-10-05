@@ -32,7 +32,7 @@
                         </label>
                     </div>
                     <div class="col">
-                        <textarea class="txtarea" id="descrip" name="auctionDescription"></textarea>
+                        <textarea class="txtarea" id="descrip" name="auctionDescription" required></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -57,7 +57,7 @@
                 		</label>
                 	</div>
                 	<div class="col">
-                		<input type="date" id="date" name="date" />
+                		<input type="date" id="date" name="date" required />
                 	</div>
                 </div>
                 <div class="row">
@@ -67,7 +67,7 @@
                 		</label>
                 	</div>
                 	<div class="col">
-                		<input type="time" id="time" name="time" />
+                		<input type="time" id="time" name="time" required />
                 	</div>
                 </div>
                 <div class="row">
@@ -77,7 +77,7 @@
                 		</label>
                 	</div>
                 	<div class="col">
-                		<input type="number" id="basePrice" name="basePrice" min="1" step="1" />
+                		<input type="number" id="basePrice" name="basePrice" min="1" step="1" required />
                 	</div>
                 </div>
                 <div class="row">
@@ -105,7 +105,7 @@
                 </div>
                 <div class="row">
                     <label for="pic" class="pic-label">Seleziona immagine</label>
-                    <input type="file" id="pic" name="pic" accept="image/*" style="display: none" />
+                    <input type="file" id="pic" name="pic" accept="image/*" style="display: none" required />
                 </div>
                 <div class="btn-container">
                     <input type="submit" value="Registra" />

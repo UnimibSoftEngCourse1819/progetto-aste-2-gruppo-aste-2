@@ -1,6 +1,7 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,10 +43,10 @@ public class IndexServlet extends HttpServlet {
 	 */
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
     	if(!initializedEnderManager) {
     		AuctionReaper.getInstance();
     	}
+    	
 		try {
 			SelectComponent select = new SimpleSelect("auctions");
 			select = new Where(select, "AND Status <> ? ", 
@@ -61,6 +62,7 @@ public class IndexServlet extends HttpServlet {
 					temp.add(Integer.toString((Integer) result.getValue("ID", index)));
 					temp.add((String) result.getValue("Title", index));
 					temp.add((String) result.getValue("Description", index));
+					temp.add((String) result.getValue("Image", index));
 					
 					auctions.add(temp);
 				}
@@ -68,6 +70,20 @@ public class IndexServlet extends HttpServlet {
 				request.setAttribute("auctions", auctions);
 				
 			}
+			
+			LocalDateTime today = LocalDateTime.now();
+			today = today.minusHours(today.getHour());
+			today = today.minusMinutes(today.getMinute());
+			today = today.minusSeconds(today.getSecond());
+			today = today.minusNanos(today.getNano());
+			
+			LocalDateTime tomorrow = today.plusDays(1);
+			
+			SelectComponent selectLast = new SimpleSelect("closingAuction", today);
+			selectLast = new Where(selectLast, "AND Conclusion >= ?", new SQLParameter(SQLParameter.DATE_TIME, tomorrow));
+			
+			ResultDatabase resultLast = DatabaseManager.executeSelect(select);
+			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLiteFailRequestException e) {

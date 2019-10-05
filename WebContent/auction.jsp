@@ -32,7 +32,7 @@
        			<div class="row">
        				<div class="col">
 		        		<div class="pic">
-		            		<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+		            		<img src="pictures/<%= auction.get(7) %>" />
 		        		</div>
 		        	</div>
 		        	<div class="col">

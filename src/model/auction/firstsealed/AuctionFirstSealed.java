@@ -14,16 +14,12 @@ import controller.database.SQLParameter;
 import controller.database.UpdateOperation;
 import controller.database.select.SimpleSelect;
 import controller.database.select.decorator.OrderBy;
-import exception.IncompatibilityClassException;
 import exception.SQLiteFailRequestException;
-import model.Offer;
 import model.Transaction;
 import model.User;
 import model.auction.Auction;
 
 public class AuctionFirstSealed extends Auction {
-	
-	private List<FirstSealedOffer> offers;
 	
 	public AuctionFirstSealed(HttpServletRequest request) {
 		super(request);
@@ -33,6 +29,10 @@ public class AuctionFirstSealed extends Auction {
 		super(rowValues);
 	}
 	
+	public AuctionFirstSealed(HttpServletRequest request, LinkedHashMap<String, String> values) {
+		super(request, values);
+	}
+
 	@Override
 	public  List<SQLOperation> getCloseOperation(){
 		List<SQLOperation> operationToDo = new ArrayList<>();
@@ -78,7 +78,4 @@ public class AuctionFirstSealed extends Auction {
 	public String getType() {
 		return "FirstSealed";
 	}
-
-	
-
 }

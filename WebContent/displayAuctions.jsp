@@ -64,7 +64,7 @@
 							for(int i = 0; i < auctions.size(); ++i) {
 					%>
 				  				<figure>
-				  					<img src="https://steamcdn-a.akamaihd.net/steam/apps/381210/header.jpg?t=1567794495" />
+				  					<img src="pictures/<%= auctions.get(i)[3] %>" />
 									<figcaption><%= auctions.get(i)[1] %></figcaption>
 				    				<div class="price"><%= auctions.get(i)[2] %></div>
 				    				<div class="button">

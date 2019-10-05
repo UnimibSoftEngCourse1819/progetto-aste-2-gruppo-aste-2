@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -17,6 +19,11 @@ public class ImageUploader {
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
+	private static String fileName;
+	
+	public static String getFileName() {
+		return fileName;
+	}
 	
 	private static DiskFileItemFactory configureUpload() {
 		// configures upload settings
@@ -27,8 +34,7 @@ public class ImageUploader {
     	return factory;
 	}
 	
-	public static boolean upload(HttpServletRequest request, ServletContext context) {
-		boolean success = false;
+	public static LinkedHashMap<String, String> upload(HttpServletRequest request, ServletContext context) {
 		DiskFileItemFactory factory = configureUpload();
 		
 		ServletFileUpload upload = new ServletFileUpload(factory);
@@ -36,13 +42,15 @@ public class ImageUploader {
     	upload.setSizeMax(MAX_REQUEST_SIZE);
     	
     	// constructs the directory path to store upload file
-    	String uploadPath = context.getRealPath("") + File.separator + UPLOAD_DIRECTORY;
+    	String uploadPath = System.getProperty("user.dir") + PATH + UPLOAD_DIRECTORY;
     	
     	// creates the directory if it does not exists
     	File uploadDir =  new File(uploadPath);
     	if(!uploadDir.exists()) {
     		uploadDir.mkdir();
     	}
+    	
+    	LinkedHashMap<String, String> formValues = new LinkedHashMap<>();
     	
     	try {
     		// parses the request's content to extract file data
@@ -55,14 +63,15 @@ public class ImageUploader {
             	
             	// processes only fields that are not fields
             	if(!item.isFormField()) {
-            		String fileName = new File(item.getName()).getName();
+            		fileName = new File(item.getName()).getName();
             		String filePath = uploadPath + File.separator + fileName;
             		File storeFile = new File(filePath);
             		
             		// saves the file on disk
             		item.write(storeFile);
-            		
-            		success = true;
+            	}
+            	else {
+            		formValues.put(item.getFieldName(), item.getString());
             	}
             }
             
@@ -71,6 +80,6 @@ public class ImageUploader {
     		e.printStackTrace();
     	}
     	
-		return success;
+		return formValues;
 	}
 }

@@ -34,9 +34,8 @@ public class DutchOffer extends Offer{
 		SelectComponent select = new SimpleSelect("auction", auction);
 		ResultDatabase result = DatabaseManager.executeSelect(select);
 		
-		DucthAution auction = new DucthAution(result);
+		DutchAuction auction = new DutchAuction(result.getRowValues(0));
 		
-		
-		return null;
+		return auction.getCloseOperation();
 	}
 }

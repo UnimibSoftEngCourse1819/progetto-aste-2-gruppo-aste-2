@@ -4,19 +4,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import controller.database.ResultDatabase;
+import controller.ImageUploader;
 import controller.database.SQLOperation;
 import controller.database.SQLParameter;
 import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
-import exception.IncompatibilityClassException;
-import model.Offer;
 import model.User;
 
 /**
@@ -40,6 +39,7 @@ public abstract class Auction implements Storable{
 	protected String status;
 	protected int penalty;
 	protected int basePrice;
+	protected String image;
 	
 	protected Auction(HttpServletRequest request) {
 		seller = new User((int)request.getSession().getAttribute("id")); 
@@ -55,7 +55,32 @@ public abstract class Auction implements Storable{
 		LocalTime tempTime = LocalTime.parse(request.getParameter("time"));
 		ending = LocalDateTime.of(tempDate, tempTime);
 		
+		
 		if(request.getParameter("refund").equals("")) {
+			penalty = 0;
+		}
+		else {
+			penalty = 1;
+		}
+	}
+	
+	protected Auction(HttpServletRequest request, LinkedHashMap<String, String> values) {
+		seller = new User((int) request.getSession().getAttribute("id"));
+		title = values.get("auctionTitle");	
+		description = values.get("auctionDescription");
+		creation = LocalDateTime.now();
+		status = STANDBY;
+		basePrice = Integer.parseInt(values.get("basePrice"));
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		formatter = formatter.withLocale(Locale.getDefault());
+		LocalDate tempDate = LocalDate.parse(values.get("date"), formatter);
+		LocalTime tempTime = LocalTime.parse(values.get("time"));
+		ending = LocalDateTime.of(tempDate, tempTime);
+		
+		image = ImageUploader.getFileName();
+		
+		if(values.get("refund").equals("")) {
 			penalty = 0;
 		}
 		else {
@@ -73,6 +98,7 @@ public abstract class Auction implements Storable{
 		status = (String) rowValues.get("Status");
 		penalty = (Integer) rowValues.get("Penalty");
 		basePrice = (Integer) rowValues.get("BasePrice");
+		image = (String) rowValues.get("Image");
 	}
 
 	public String getTitle() {
@@ -96,6 +122,7 @@ public abstract class Auction implements Storable{
 		sqlData.add("Penalty", SQLParameter.INTEGER, penalty);
 		sqlData.add("Status", SQLParameter.VARCHAR + "(20)", status);
 		sqlData.add("BasePrice", SQLParameter.INTEGER, basePrice);
+		sqlData.add("Image", SQLParameter.VARCHAR, image);
 		
 		return sqlData;
 	}
