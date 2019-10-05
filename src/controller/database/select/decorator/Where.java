@@ -36,7 +36,17 @@ public class Where extends SelectDecorator {
 
 	@Override
 	public String getStatement() {
-		return inner.getStatement() + clauseDecorator + " ";
+		StringBuilder statement = new StringBuilder(inner.getStatement());
+		
+		if(statement.indexOf("WHERE") == -1) {
+			statement.append("WHERE ");
+			statement.append(clauseDecorator.replaceFirst("AND", ""));
+		}else {
+			statement.append(clauseDecorator + " ");
+		}
+		
+		
+		return statement.toString();
 	}
 
 	@Override

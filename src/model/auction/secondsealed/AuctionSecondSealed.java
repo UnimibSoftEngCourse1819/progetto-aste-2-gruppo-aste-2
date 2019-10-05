@@ -17,7 +17,6 @@ import controller.database.select.decorator.OrderBy;
 import exception.IncompatibilityClassException;
 import exception.SQLiteFailRequestException;
 import model.Offer;
-import model.Operation;
 import model.Transaction;
 import model.User;
 import model.auction.Auction;

@@ -38,6 +38,7 @@ public abstract class Auction implements Storable{
 	protected LocalDateTime ending;
 	protected String status;
 	protected int penalty;
+	protected int basePrice;
 	
 	protected Auction(HttpServletRequest request) {
 		seller = new User((int)request.getSession().getAttribute("id")); 
@@ -83,6 +84,7 @@ public abstract class Auction implements Storable{
 		sqlData.add("Type", SQLParameter.VARCHAR + "(30)", getType());
 		sqlData.add("penalty", SQLParameter.INTEGER, penalty);
 		sqlData.add("Status", SQLParameter.VARCHAR + "(20)", status);
+		sqlData.add("BasePrice", SQLParameter.INTEGER, seller.getId());
 		
 		return sqlData;
 	}

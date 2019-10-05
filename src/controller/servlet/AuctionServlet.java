@@ -19,11 +19,15 @@ import javax.servlet.http.HttpServletResponse;
 import controller.AuctionRequestManager;
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
+import controller.database.SQLParameter;
+import controller.database.select.SelectComponent;
 import controller.database.select.SimpleSelect;
+import controller.database.select.decorator.Where;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.InsufficientRequirementsException;
 import exception.SQLiteFailRequestException;
+import model.auction.Auction;
 
 /**
  * Servlet implementation class AuctionServlet
@@ -42,7 +46,7 @@ public class AuctionServlet extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			SimpleSelect select = new SimpleSelect("auction", Integer.parseInt(request.getParameter("id")));
+			SelectComponent select = new SimpleSelect("auction", Integer.parseInt(request.getParameter("id")));
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(request.getSession(false).getAttribute("id") != null) {
@@ -63,7 +67,7 @@ public class AuctionServlet extends HttpServlet {
 				auction.add(getAuctionType((String) result.getValue("Type", 0)));
 				auction.add(Integer.toString((Integer) result.getValue("BasePrice", 0)));
 				
-				request.setAttribute("auction", auction.toArray());
+				request.setAttribute("auction", castToString(auction.toArray()));
 				
 				if(request.getSession(false).getAttribute("id") != null) {
 					int seller = (Integer) result.getValue("Seller", 0);
@@ -79,6 +83,15 @@ public class AuctionServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+    
+    private String[] castToString(Object[] list) {
+    	String[] result = new String [list.length];
+    	
+    	for(int index = 0; index < list.length; index++) {
+    		result[index] = (String) list[index];
+    	} 
+    	return result;
+    }
 	
     private String getAuctionType(String auctionType) {
     	String type = "";

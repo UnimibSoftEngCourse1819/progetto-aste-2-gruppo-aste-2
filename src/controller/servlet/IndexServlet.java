@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import controller.AuctionReaper;
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
+import controller.database.SQLParameter;
+import controller.database.select.SelectComponent;
 import controller.database.select.SimpleSelect;
+import controller.database.select.decorator.Where;
 import exception.SQLiteFailRequestException;
+import model.auction.Auction;
 
 /**
  * Servlet implementation class IndexServlet
@@ -41,25 +45,25 @@ public class IndexServlet extends HttpServlet {
     		AuctionReaper.getInstance();
     	}
 		try {
-			SimpleSelect select = new SimpleSelect("auctions");
+			SelectComponent select = new SimpleSelect("auctions");
+			select = new Where(select, "AND Status <> ? ", 
+					new SQLParameter(SQLParameter.VARCHAR, Auction.ENDED));
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
-				int index = 0;
 				String[][] auctions = new String[MAX_ITEMS_ON_ROW][3];
 				
-				while(index < MAX_ITEMS_ON_ROW && result.getValue("ID", index) != null) {
+				for(int index = 0; index < MAX_ITEMS_ON_ROW && index < result.size(); index++) {
 					auctions[index][0] = Integer.toString((Integer) result.getValue("ID", index));
 					auctions[index][1] = (String) result.getValue("Title", index);
 					auctions[index][2] = (String) result.getValue("Description", index);
-					++index;
 				}
 				
 				request.setAttribute("auctions", auctions);
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-				dispatcher.forward(request, response);
 			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
 		} catch (SQLiteFailRequestException e) {
 			e.printStackTrace();
 		}

@@ -37,29 +37,6 @@ public class SearchServlet extends HttpServlet {
         super();
     }
     
-    private List<String> getCategories() {
-    	List<String> categories = new ArrayList<>();
-    	
-    	try {
-			SelectComponent select = new SimpleSelect("categories");
-			select = new OrderBy(select, "Name");
-			ResultDatabase result = DatabaseManager.executeSelect(select);
-			
-			if(!result.isEmpty()) {			
-				int index = 0;
-				
-				while(result.getValue("ID", index) != null) {
-					categories.add((String) result.getValue("Name", index));
-					++index;
-				}
-			}
-		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
-		}
-    	
-    	return categories;
-    }
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -96,6 +73,29 @@ public class SearchServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("displayAuctions.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	private List<String> getCategories() {
+    	List<String> categories = new ArrayList<>();
+    	
+    	try {
+			SelectComponent select = new SimpleSelect("categories");
+			select = new OrderBy(select, "Name");
+			ResultDatabase result = DatabaseManager.executeSelect(select);
+			
+			if(!result.isEmpty()) {			
+				int index = 0;
+				
+				while(result.getValue("ID", index) != null) {
+					categories.add((String) result.getValue("Name", index));
+					++index;
+				}
+			}
+		} catch (SQLiteFailRequestException e) {
+			e.printStackTrace();
+		}
+    	
+    	return categories;
+    }
 
 	private SelectComponent getSelectWithFilter(HttpServletRequest request) {
 		SelectComponent select = new SimpleSelect("auctionsSearch");
@@ -107,22 +107,22 @@ public class SearchServlet extends HttpServlet {
 		}
 		
 		if(!request.getParameter("auctionType").equals(ALL_TYPE)) {
-			select = new Where(select, "AND aucion.Type = ? ", 
+			select = new Where(select, "AND auction.Type = ? ", 
 					 new SQLParameter(SQLParameter.VARCHAR, request.getParameter("auctionType")));
 		}
 		
 		if(!request.getParameter("category").equals(ALL_TYPE)) {
-			select = new Where(select, "AND aucion.Type = ? ", 
+			select = new Where(select, "AND auction.Type = ? ", 
 					 new SQLParameter(SQLParameter.VARCHAR, request.getParameter("categories")));
 		}
 		
 		if(request.getParameter("notOpened") != null) {
-			select = new Where(select, "AND aucion.Status = ? ", 
+			select = new Where(select, "AND auction.Status = ? ", 
 					new SQLParameter(SQLParameter.VARCHAR, Auction.STANDBY));
 		}
 		
 		if(request.getParameter("opened") != null) {
-			select = new Where(select, "AND aucion.Status = ? ", 
+			select = new Where(select, "AND auction.Status = ? ", 
 					new SQLParameter(SQLParameter.VARCHAR, Auction.ON_GOING));
 		}
 		
