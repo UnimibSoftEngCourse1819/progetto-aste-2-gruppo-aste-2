@@ -27,7 +27,7 @@ img {
 
 .title {
 	padding: 5px;
-	width: 250px%;
+	width: 250px;
 	font-weight: bold;
 }
 
@@ -104,6 +104,15 @@ input[type=submit]:hover {
 
 .data {
 	font-weight: bold;
+}
+
+.price {
+	font-weight: bold;
+}
+
+.info {
+	font-weight: normal;
+	display: inline-block;
 }
 
 .auction-type {

@@ -63,7 +63,7 @@ public class AuctionServlet extends HttpServlet {
 				auction.add(getAuctionType((String) result.getValue("Type", 0)));
 				auction.add(Integer.toString((Integer) result.getValue("BasePrice", 0)));
 				
-				request.setAttribute("auction", auction.toArray());
+				request.setAttribute("auction", auction);
 				
 				if(request.getSession(false).getAttribute("id") != null) {
 					int seller = (Integer) result.getValue("Seller", 0);

@@ -12,7 +12,7 @@
 	<body>
 		<%@include file="templates/navbar.jsp" %>
 		<%
-			String type = (String) request.getAttribute("type");
+			String auctionType = (String) request.getAttribute("type");
 			int percentage = (int) request.getAttribute("penalty");
 			int slot = (int) request.getAttribute("slot");
 			int offers = (int) request.getAttribute("offers");
@@ -31,10 +31,10 @@
                     </div>
                     <div class="col">
                         <select id="type" name="type" onchange="this.form.action='configuration'; this.form.submit()">
-                            <option value="FirstSealed" <% if(type.equals("FirstSealed")){ %> selected <% } %>>Busta chiusa</option>
-                            <option value="SecondSealed" <% if(type.equals("SecondSealed")){ %> selected <% } %>>Busta chiusa al "secondo prezzo"</option>
-                            <option value="English" <% if(type.equals("English")){ %> selected <% } %>>Asta "inglese"</option>
-                            <option value="Dutch" <% if(type.equals("Dutch")){ %> selected <% } %>>Asta "olandese"</option>
+                            <option value="FirstSealed" <% if(auctionType.equals("FirstSealed")){ %> selected <% } %>>Busta chiusa</option>
+                            <option value="SecondSealed" <% if(auctionType.equals("SecondSealed")){ %> selected <% } %>>Busta chiusa al "secondo prezzo"</option>
+                            <option value="English" <% if(auctionType.equals("English")){ %> selected <% } %>>Asta "inglese"</option>
+                            <option value="Dutch" <% if(auctionType.equals("Dutch")){ %> selected <% } %>>Asta "olandese"</option>
                         </select>
                     </div>
                 </div>

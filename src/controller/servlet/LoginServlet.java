@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 				
 				currentSession.setAttribute("id", (int) userValues.get("ID"));
 				currentSession.setAttribute("name", (String) userValues.get("Name"));
+				currentSession.setAttribute("type", (String) userValues.get("Type"));
 				
 				response.sendRedirect("index"); // got to the next page
 			} 

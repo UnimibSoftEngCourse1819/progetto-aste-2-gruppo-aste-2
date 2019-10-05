@@ -3,6 +3,7 @@
 
 <%
 	String name = (String) session.getAttribute("name");
+	String type = (String) session.getAttribute("type");
 %>
 <nav id="slide-menu" class="slide-menu">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -13,6 +14,13 @@
 %>	
 	<a href="auctionCreation.jsp">Apri nuova asta</a>
 	<a href="personalArea">Area personale</a>
+<%
+	if(type != null && type.equals("administrator")) {
+%>
+	<a href="configuration">Configura aste</a>
+<%
+	}
+%>
 	<a href="logout">Logout</a>
 <%
     }

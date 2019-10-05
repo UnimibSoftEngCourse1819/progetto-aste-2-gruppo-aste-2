@@ -8,6 +8,8 @@
 		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 		<link rel="stylesheet" type="text/css" href="css/auctionDisplay.css" />
 		<script type="text/javascript" src="javascript/slideMenu.js"></script>
+		<%@ page import ="java.util.ArrayList"%>
+		<%@ page import ="java.util.List"%>
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
@@ -15,7 +17,7 @@
 			boolean isLogged = false;
 			boolean isOwner = false;
 			int credit = 0;
-			String[] auction = (String[]) request.getAttribute("auction");
+			List<String> auction = (ArrayList<String>) request.getAttribute("auction");
 			
 			if((String) session.getAttribute("name") != null) {
 				isOwner = (Boolean) request.getAttribute("isOwner");
@@ -25,8 +27,8 @@
 		%>
 		<div class="form">
         	<form action="auction" method="post">
-        		<input type="hidden" name="auctionID" value="<%= auction[0] %>" />
-        		<input type="hidden" name="mod" value="<%= auction[3] %>" />
+        		<input type="hidden" name="auctionID" value="<%= auction.get(0) %>" />
+        		<input type="hidden" name="mod" value="<%= auction.get(3) %>" />
        			<div class="row">
        				<div class="col">
 		        		<div class="pic">
@@ -35,25 +37,29 @@
 		        	</div>
 		        	<div class="col">
 		        		<div class="data">
-							Termine: <%= auction[4] %>
+							Termine: <div class="info"><%= auction.get(4) %></div>
         				</div>
         				<div class="auction-type">
-        					Tipo: <%= auction[5] %>
+        					Tipo: <div class="info"><%= auction.get(5) %></div>
         				</div>
 		        	</div>
 	        	</div>
 	        	<div class="row">
 	        		<div class="col">
 		        		<div class="title">
-		        			<%= auction[1] %>
+		        			<%= auction.get(1) %>
 		        		</div>
 		        	</div>
-		        	<div class="col"></div>
+		        	<div class="col">
+		        		<div class="price">
+		        			Prezzo base: <div class="info"><%= auction.get(6) %></div>
+		        		</div>
+		        	</div>
 	        	</div>
 	        	<div class="row">
 	        		<div class="col">
 		        		<div class="description">
-		        			<%= auction[2] %>
+		        			<%= auction.get(2) %>
 		        		</div>
 	        		</div>
 		        	<% 
@@ -67,7 +73,9 @@
 		        		else if(!isOwner) { 
 		        	%>
 		        		<div class="col">
-							<div class="credit">I tuoi crediti: <%= credit %></div>
+							<div class="credit">
+								I tuoi crediti: <div class="info"><%= credit %></div>
+							</div>
 		        		</div>
 		        </div>
 		        <div class="row">

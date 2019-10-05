@@ -38,6 +38,7 @@ public abstract class Auction implements Storable{
 	protected LocalDateTime ending;
 	protected String status;
 	protected int penalty;
+	protected int basePrice;
 	
 	protected Auction(HttpServletRequest request) {
 		seller = new User((int)request.getSession().getAttribute("id")); 
@@ -45,6 +46,7 @@ public abstract class Auction implements Storable{
 		description = request.getParameter("auctionDescription");
 		creation = LocalDateTime.now();
 		status = STANDBY;
+		basePrice = Integer.parseInt(request.getParameter("basePrice"));
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		formatter = formatter.withLocale(Locale.getDefault());
@@ -69,6 +71,7 @@ public abstract class Auction implements Storable{
 		ending = (LocalDateTime) rowValues.get("Conclusion");
 		status = (String) rowValues.get("Status");
 		penalty = (Integer) rowValues.get("Penalty");
+		basePrice = (Integer) rowValues.get("BasePrice");
 	}
 
 	@Override
@@ -81,8 +84,9 @@ public abstract class Auction implements Storable{
 		sqlData.add("Creation", SQLParameter.DATE_TIME, creation);
 		sqlData.add("Conclusion", SQLParameter.DATE_TIME, ending);
 		sqlData.add("Type", SQLParameter.VARCHAR + "(30)", getType());
-		sqlData.add("penalty", SQLParameter.INTEGER, penalty);
+		sqlData.add("Penalty", SQLParameter.INTEGER, penalty);
 		sqlData.add("Status", SQLParameter.VARCHAR + "(20)", status);
+		sqlData.add("BasePrice", SQLParameter.INTEGER, basePrice);
 		
 		return sqlData;
 	}

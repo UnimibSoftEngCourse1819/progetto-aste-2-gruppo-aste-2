@@ -73,12 +73,12 @@
                 </div>
                 <div class="row">
                 	<div class="col">
-                		<label for="price">
+                		<label for="basePrice">
                 			Prezzo base
                 		</label>
                 	</div>
                 	<div class="col">
-                		<input type="number" id="price" name="price" min="1" step="1" />
+                		<input type="number" id="basePrice" name="basePrice" min="1" step="1" />
                 	</div>
                 </div>
                 <div class="row">

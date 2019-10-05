@@ -7,6 +7,7 @@ function send() {
 	var refund = document.querySelector('input[name=refund]:checked').value;
 	var date = document.getElementById("date").value;
 	var time = document.getElementById("time").value;
+	var basePrice = document.getElementById("basePrice").value;
 	
 	for(var i = 0; i < elements.length; ++i) {
 		categories.push(elements[i].innerHTML);
@@ -25,7 +26,8 @@ function send() {
 				"date" : date,
 				"time" : time,
 				"categories" : categories,
-				"refund": refund
+				"refund": refund,
+				"basePrice" : basePrice
 			},
 			success: function() {
 				window.location.href = "index";
