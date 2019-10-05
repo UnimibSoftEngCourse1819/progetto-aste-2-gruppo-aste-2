@@ -9,25 +9,26 @@
 		<link rel="stylesheet" type="text/css" href="css/navBar.css" />
 		<link rel="stylesheet" type="text/css" href="css/carousel.css" />
 		<script type="text/javascript" src="javascript/slideMenu.js"></script>
-		<script type="text/javascript" src="javascript/carousel.js"></script>
+		<%@ page import ="java.util.ArrayList"%>
+		<%@ page import ="java.util.List"%>
 	</head>
 	<body>
 		<%@include file="templates/navbar.jsp" %>
 		<div class="carousel-title">Aste più recenti</div>
 		<div class="carousel-container">
-			<%
-				String[][] auctions = (String[][])request.getAttribute("auctions");
-				for(int i = 0; i < auctions.length; ++i) {
+			<% 
+				List<List<String>> auctions = (ArrayList<List<String>>) request.getAttribute("auctions");
+				for(int i = 0; i < auctions.size(); ++i) {
 			%>
 					<div class="box">
 				      <div class="pic">
 				        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
 				      </div>
-				      <div class="title"><%= auctions[i][1] %></div>
-				      <div class="text"><%= auctions[i][2] %></div>
+				      <div class="title"><%= auctions.get(i).get(1) %></div>
+				      <div class="text"><%= auctions.get(i).get(2) %></div>
 				      <div class="btn">
 				      	<form action="auction" method="get">
-				      		<input type="hidden" name="id" value="<%= auctions[i][0] %>" />
+				      		<input type="hidden" name="id" value="<%= auctions.get(i).get(0) %>" />
 				      		<input type="submit" value="Apri" />
 				      	</form>
 				      </div>

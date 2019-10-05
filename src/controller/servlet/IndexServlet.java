@@ -1,6 +1,8 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,12 +53,16 @@ public class IndexServlet extends HttpServlet {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(!result.isEmpty()) {
-				String[][] auctions = new String[MAX_ITEMS_ON_ROW][3];
+				List<List<String>> auctions = new ArrayList<>();
 				
 				for(int index = 0; index < MAX_ITEMS_ON_ROW && index < result.size(); index++) {
-					auctions[index][0] = Integer.toString((Integer) result.getValue("ID", index));
-					auctions[index][1] = (String) result.getValue("Title", index);
-					auctions[index][2] = (String) result.getValue("Description", index);
+					List<String> temp = new ArrayList<>();
+					
+					temp.add(Integer.toString((Integer) result.getValue("ID", index)));
+					temp.add((String) result.getValue("Title", index));
+					temp.add((String) result.getValue("Description", index));
+					
+					auctions.add(temp);
 				}
 				
 				request.setAttribute("auctions", auctions);
