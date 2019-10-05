@@ -49,7 +49,6 @@ public class LoginServlet extends HttpServlet {
 				
 				currentSession.setAttribute("id", (int) userValues.get("ID"));
 				currentSession.setAttribute("name", (String) userValues.get("Name"));
-				currentSession.setMaxInactiveInterval(5 * 60); // maximum five minutes of inactivity
 				
 				response.sendRedirect("index"); // got to the next page
 			} 

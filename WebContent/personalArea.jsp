@@ -16,6 +16,15 @@
 			String credit = (String) request.getAttribute("userCredit");
 		%>
 		<div class="credit">Il tuo credito disponibile: <%= credit %></div>
+		<form action="addCredit" method="post">
+			<div class="credit-form">
+				<input type="hidden" name="credit" value="<%= credit %>" />
+				<input type="number" name="nCredit" min="1" max="10000" step="1" required />
+			</div>
+			<div class="credit-form">
+				<input type="submit" value="Aggiungi crediti" />
+			</div>
+		</form>
 		<section id="first">
 		  <!--for demo wrap-->
 		  <h1>Le tue aste</h1>
@@ -155,6 +164,7 @@
 		          <th>Data creazione</th>
 		          <th>Data chiusura</th>
 		          <th>Prezzo</th>
+		          <th>Restituzione</th>
 		        </tr>
 		      </thead>
 		    </table>
@@ -176,6 +186,7 @@
 				          <td><%= auctionWon.get(i)[2] %></td>
 				          <td><%= auctionWon.get(i)[3] %></td>
 				          <td><%= auctionWon.get(i)[4] %></td>
+				          <td></td>
 				          <td>
 						  	<form action="auction" method="get">
 				          		<input type="hidden" value="<%= auctionWon.get(i)[0] %>" name="id" />
