@@ -52,6 +52,7 @@
 		        	</div>
 		        	<div class="col">
 		        		<div class="price">
+		        			<input type="hidden" name="basePrice" value="<%=  auction.get(6) %>" />
 		        			Prezzo base: <div class="info"><%= auction.get(6) %></div>
 		        		</div>
 		        	</div>

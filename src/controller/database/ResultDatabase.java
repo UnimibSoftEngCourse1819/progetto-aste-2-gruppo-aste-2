@@ -119,6 +119,7 @@ public class ResultDatabase {
 		public void addValue(ResultSet result) throws SQLException {
 			switch(type) {
 			case Types.INTEGER :
+			case Types.NUMERIC :
 				values.add((Integer) result.getInt(name));
 				break;
 			case Types.VARCHAR :

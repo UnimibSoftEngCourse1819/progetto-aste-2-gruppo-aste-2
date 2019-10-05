@@ -22,7 +22,7 @@ public abstract class Offer implements Storable {
 		bidder = new User((int) request.getSession().getAttribute("id"));
 		auction = Integer.parseInt(request.getParameter("auctionID"));
 		price = Integer.parseInt(request.getParameter("price"));
-		basePrice = Integer.parseInt(request.getParameter("BasePrice"));
+		basePrice = Integer.parseInt(request.getParameter("basePrice"));
 	}
 	
 	public SQLiteData getSQLiteData() {
@@ -37,7 +37,7 @@ public abstract class Offer implements Storable {
 	
 	protected boolean isValidOffer() throws SQLiteFailRequestException{
 
-		return price < bidder.getAviableCredit() && price > basePrice;
+		return price < bidder.getAviableCredit() && price > basePrice ;
 	}
 	
 	public abstract List<SQLOperation> getSQLOperation() throws SQLiteFailRequestException, InsufficientRequirementsException;

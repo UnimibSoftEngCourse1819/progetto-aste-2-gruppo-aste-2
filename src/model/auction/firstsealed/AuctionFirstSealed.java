@@ -32,15 +32,6 @@ public class AuctionFirstSealed extends Auction {
 	public AuctionFirstSealed(Map<String, Object> rowValues) {
 		super(rowValues);
 	}
-
-	@Override
-	public void addOffer(Offer newOffer) throws IncompatibilityClassException {
-		if(!newOffer.getClass().equals(FirstSealedOffer.class)) {
-			throw new IncompatibilityClassException();
-		}
-		
-		offers.add((FirstSealedOffer) newOffer);
-	}
 	
 	@Override
 	public  List<SQLOperation> getCloseOperation(){

@@ -116,18 +116,29 @@ public class SearchServlet extends HttpServlet {
 					 new SQLParameter(SQLParameter.VARCHAR, request.getParameter("categories")));
 		}
 		
-		if(request.getParameter("notOpened") != null) {
-			select = new Where(select, "AND auction.Status = ? ", 
-					new SQLParameter(SQLParameter.VARCHAR, Auction.STANDBY));
-		}
-		
-		if(request.getParameter("opened") != null) {
-			select = new Where(select, "AND auction.Status = ? ", 
-					new SQLParameter(SQLParameter.VARCHAR, Auction.ON_GOING));
+		if(request.getParameter("notOpened") != null || request.getParameter("opened") != null) {
+			select = applyStatusFilter(select, request);
 		}
 		
 		select = new OrderBy(select, "Conclusion");
 		
+		return select;
+	}
+
+	private SelectComponent applyStatusFilter(SelectComponent select, HttpServletRequest request) {
+		if(request.getParameter("notOpened") != null && request.getParameter("opened") != null) {
+			select = new Where(select, "AND (auction.Status = ? OR auction.Status = ?) ", 
+					new SQLParameter(SQLParameter.VARCHAR, Auction.STANDBY),
+					new SQLParameter(SQLParameter.VARCHAR, Auction.ON_GOING));
+		}else {
+			if(request.getParameter("notOpened") != null ){
+				select = new Where(select, "AND auction.Status = ? ", 
+						new SQLParameter(SQLParameter.VARCHAR, Auction.STANDBY));
+			}else {
+				select = new Where(select, "AND auction.Status = ? ", 
+						new SQLParameter(SQLParameter.VARCHAR, Auction.ON_GOING));
+			}
+		}
 		return select;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
 import exception.IncompatibilityClassException;
 import model.Offer;
@@ -29,15 +30,11 @@ public class DutchAuction extends Auction {
 		if(currentPrice > minPrice && (currentPrice - amount) >= currentPrice)
 			currentPrice = currentPrice - amount;
 	}
-	
-	@Override
-	public void addOffer(Offer newOffer) throws IncompatibilityClassException {
-		//TODO caso particolare
-	}
 
 	@Override
 	public List<SQLOperation> getCloseOperation() {
-		//TODO
+		
+		if(!)
 		
 		return null;
 	}

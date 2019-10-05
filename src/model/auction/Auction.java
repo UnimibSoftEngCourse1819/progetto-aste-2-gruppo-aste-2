@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
 import controller.database.SQLParameter;
 import controller.database.utilformodel.SQLiteData;
@@ -74,6 +75,14 @@ public abstract class Auction implements Storable{
 		basePrice = (Integer) rowValues.get("BasePrice");
 	}
 
+	public String getTitle() {
+		return title;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
 	@Override
 	public SQLiteData getSQLiteData() {
 		SQLiteData sqlData = new SQLiteData(SQL_TABLE);
@@ -91,7 +100,6 @@ public abstract class Auction implements Storable{
 		return sqlData;
 	}
 	
-	public abstract void addOffer(Offer newOffer) throws IncompatibilityClassException;
 	public abstract List<SQLOperation> getCloseOperation();
 	public abstract String getType();
 }

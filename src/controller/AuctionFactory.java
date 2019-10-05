@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import exception.InexistentTypeParameterException;
 import model.auction.Auction;
+import model.auction.classic.Classic;
 import model.auction.dutchauction.DutchAuction;
-import model.auction.englishauction.EnglishAuction;
 import model.auction.firstsealed.AuctionFirstSealed;
 import model.auction.secondsealed.AuctionSecondSealed;
 
@@ -30,7 +30,7 @@ public class AuctionFactory {
 		}else if(type.equalsIgnoreCase("secondSealed")) {
 			result =  new AuctionSecondSealed(request);
 		}else if(type.equalsIgnoreCase("englishAuction")) {
-			result =  new EnglishAuction(request);
+			result =  new Classic(request);
 		}else if(type.equalsIgnoreCase("dutchAuction")) {
 			result =  new DutchAuction(request);
 		}else {
@@ -49,7 +49,7 @@ public class AuctionFactory {
 		}else if(type.equalsIgnoreCase("secondSealed")) {
 			result =  new AuctionSecondSealed(rowValues);
 		}else if(type.equalsIgnoreCase("english")) {
-			result =  new EnglishAuction(rowValues);
+			result =  new Classic(rowValues);
 		}else if(type.equalsIgnoreCase("dutch")) {
 			result =  new DutchAuction(rowValues);
 		}else {

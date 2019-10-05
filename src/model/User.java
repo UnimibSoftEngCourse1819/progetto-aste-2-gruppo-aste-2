@@ -53,12 +53,16 @@ public class User implements Storable {
 		return id;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public int getAviableCredit() throws SQLiteFailRequestException {
 		if(portofolio == -1) {
 			loadCredit();
 		}
 		
-		SelectComponent select = new SimpleSelect("UsedCredit", id);
+		SelectComponent select = new SimpleSelect("creditUsed", id);
 		ResultDatabase result = DatabaseManager.executeSelect(select);
 		
 		return  portofolio - (int) result.getValue("UsedCredit", 0);
@@ -102,4 +106,5 @@ public class User implements Storable {
 		portofolio += amount;
 		return portofolio;
 	}
+
 }

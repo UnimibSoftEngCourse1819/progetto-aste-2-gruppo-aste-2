@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import exception.InexistentTypeParameterException;
 import model.Offer;
+import model.auction.classic.ClassicOffer;
 import model.auction.dutchauction.DutchOffer;
-import model.auction.englishauction.EnglishOffer;
 import model.auction.firstsealed.FirstSealedOffer;
 import model.auction.secondsealed.SecondSealedOffer;
 
@@ -29,7 +29,7 @@ public class OfferFactory {
 		}else if(parameter.equalsIgnoreCase("secondSealed")) {
 			result =  new SecondSealedOffer(request);
 		}else if(parameter.equalsIgnoreCase("englishAuction")) {
-			result =  new EnglishOffer(request);
+			result =  new ClassicOffer(request);
 		}else if(parameter.equalsIgnoreCase("dutchAuction")) {
 			result =  new DutchOffer(request);
 		}else {

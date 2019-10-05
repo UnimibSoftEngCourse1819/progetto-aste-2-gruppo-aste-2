@@ -26,8 +26,10 @@ public class FirstSealedOffer extends Offer {
 	@Override
 	public List<SQLOperation> getSQLOperation() throws SQLiteFailRequestException, InsufficientRequirementsException {
 		List<SQLOperation> operations = new ArrayList<>();
-		
-		isValidOffer();
+		bidder.loadCredit();
+		if(!isValidOffer()) {
+			throw new InsufficientRequirementsException();
+		}
 		
 		operations.add(getSQLiteData());
 		return operations;
