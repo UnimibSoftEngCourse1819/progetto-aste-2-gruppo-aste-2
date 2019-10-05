@@ -31,6 +31,10 @@ public class AuctionSecondSealed extends Auction {
 		super(rowValues);
 	}
 
+	public AuctionSecondSealed(HttpServletRequest request, LinkedHashMap<String, String> values) {
+		super(request, values);
+	}
+
 	private List<SecondSealedOffer> offers;
 
 	@Override

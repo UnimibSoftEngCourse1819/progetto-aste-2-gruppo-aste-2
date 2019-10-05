@@ -33,6 +33,10 @@ public class AuctionFirstSealed extends Auction {
 		super(rowValues);
 	}
 
+	public AuctionFirstSealed(HttpServletRequest request, LinkedHashMap<String, String> values) {
+		super(request, values);
+	}
+
 	@Override
 	public void addOffer(Offer newOffer) throws IncompatibilityClassException {
 		if(!newOffer.getClass().equals(FirstSealedOffer.class)) {

@@ -1,6 +1,7 @@
 package model.auction.englishauction;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,10 @@ public class EnglishAuction extends Auction {
 
 	public EnglishAuction(Map<String, Object> rowValues) {
 		super(rowValues);
+	}
+
+	public EnglishAuction(HttpServletRequest request, LinkedHashMap<String, String> values) {
+		super(request, values);
 	}
 
 	private List<EnglishOffer> offers;

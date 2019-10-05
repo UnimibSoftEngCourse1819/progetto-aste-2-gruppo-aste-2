@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,11 +31,11 @@ public class AuctionRequestManager {
 		//This class has only static method
 	}
 
-	public static void createAuction(HttpServletRequest request) throws SQLiteFailRequestException, InexistentTypeParameterException, IOException, FailRollBackException {
-		Auction newAuction = AuctionFactory.createAuction(request.getParameter("mod"), request);
+	public static void createAuction(HttpServletRequest request, LinkedHashMap<String, String> values) throws SQLiteFailRequestException, InexistentTypeParameterException, IOException, FailRollBackException {
+		Auction newAuction = AuctionFactory.createAuction(values.get("mod"), request, values);
 		CategoryAuction categories = CategoryAuction.getInstance();
 		
-		List<String> auctionCategory = Arrays.asList(request.getParameterValues("categories"));
+		List<String> auctionCategory = Arrays.asList(values.get("categories"));
 		
 		categories.addMissing(auctionCategory);
 		

@@ -20,7 +20,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="text" id="name" name="name"/>
+                        <input type="text" id="name" name="name" required />
                     </div>
                 </div>
                 <div class="row">
@@ -30,7 +30,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="text" id="surname" name="surname"/>
+                        <input type="text" id="surname" name="surname" required />
                     </div>
                 </div>
                 <div class="row">
@@ -40,7 +40,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="date" id="date" name="date"/>
+                        <input type="date" id="date" name="date" required />
                     </div>
                 </div>
                 <div class="row">
@@ -50,7 +50,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="text" id="city" name="city"/>
+                        <input type="text" id="city" name="city" required />
                     </div>
                 </div>
                 <div class="row">
@@ -59,8 +59,8 @@
                         	Via
                        	</label>
                     </div>
-                    <div class="col">
-                        <input type="text" id="street" name="street"/>
+                    <div class="col"> 
+                        <input type="text" id="street" name="street" required />
                     </div>
                 </div>
                 <div class="row">
@@ -70,7 +70,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="email" id="email" name="email"/>
+                        <input type="email" id="email" name="email" required />
                     </div>
                 </div>
                 <div class="row">
@@ -80,7 +80,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="text" id="phone" name="phone"/>
+                        <input type="text" id="phone" name="phone" required />
                     </div>
                 </div>
                 <div class="row">
@@ -89,8 +89,8 @@
                         	Password
                        	</label>
                     </div>
-                    <div class="col">
-                        <input type="password" id="password" name="password"/>
+                    <div class="col"> 
+                        <input type="password" id="password" name="password" required />
                     </div>
                 </div>
                 <div class="row">
@@ -100,7 +100,7 @@
                        	</label>
                     </div>
                     <div class="col">
-                        <input type="password" id="passwordRep" name="passwordRep"/>
+                        <input type="password" id="passwordRep" name="passwordRep" required />
                     </div>
                 </div>
                 <div class="btn-container">

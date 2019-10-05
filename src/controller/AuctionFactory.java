@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,17 +23,17 @@ public class AuctionFactory {
 		throw new IllegalStateException("Utility class");
 	}
 
-	public static Auction createAuction(String type, HttpServletRequest request) throws InexistentTypeParameterException {
+	public static Auction createAuction(String type, HttpServletRequest request, LinkedHashMap<String, String> values) throws InexistentTypeParameterException {
 		Auction result = null;
 		
 		if(type.equalsIgnoreCase("FirstSealed")) {
-			result =  new AuctionFirstSealed(request);
+			result =  new AuctionFirstSealed(request, values);
 		}else if(type.equalsIgnoreCase("secondSealed")) {
-			result =  new AuctionSecondSealed(request);
+			result =  new AuctionSecondSealed(request, values);
 		}else if(type.equalsIgnoreCase("englishAuction")) {
-			result =  new EnglishAuction(request);
+			result =  new EnglishAuction(request, values);
 		}else if(type.equalsIgnoreCase("dutchAuction")) {
-			result =  new DutchAuction(request);
+			result =  new DutchAuction(request, values);
 		}else {
 			throw new InexistentTypeParameterException();
 		}

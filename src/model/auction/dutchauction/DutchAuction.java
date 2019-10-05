@@ -1,5 +1,6 @@
 package model.auction.dutchauction;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,10 @@ public class DutchAuction extends Auction {
 
 	public DutchAuction(Map<String, Object> rowValues) {
 		super(rowValues);
+	}
+
+	public DutchAuction(HttpServletRequest request, LinkedHashMap<String, String> values) {
+		super(request, values);
 	}
 
 	private long minPrice;

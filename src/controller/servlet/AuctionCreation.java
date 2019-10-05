@@ -1,7 +1,7 @@
 package controller.servlet;
 
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.LinkedHashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -36,8 +36,8 @@ public class AuctionCreation extends HttpServlet {
     	boolean successfulOperation = false;
     	
 		try {						
-			ImageUploader.upload(request, getServletContext());
-			AuctionRequestManager.createAuction(request);
+			LinkedHashMap<String, String> values = ImageUploader.upload(request, getServletContext());
+			AuctionRequestManager.createAuction(request, values);
 			successfulOperation = true;
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
 			e.printStackTrace();

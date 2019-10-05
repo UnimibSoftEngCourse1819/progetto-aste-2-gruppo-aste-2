@@ -61,6 +61,7 @@ public class IndexServlet extends HttpServlet {
 					temp.add(Integer.toString((Integer) result.getValue("ID", index)));
 					temp.add((String) result.getValue("Title", index));
 					temp.add((String) result.getValue("Description", index));
+					temp.add((String) result.getValue("Image", index));
 					
 					auctions.add(temp);
 				}

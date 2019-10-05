@@ -63,6 +63,7 @@ public class AuctionServlet extends HttpServlet {
 				auction.add(formatData(result.getValue("Conclusion", 0).toString()));
 				auction.add(getAuctionType((String) result.getValue("Type", 0)));
 				auction.add(Integer.toString((Integer) result.getValue("BasePrice", 0)));
+				auction.add((String) result.getValue("Image", 0));
 				
 				request.setAttribute("auction", auction);
 				

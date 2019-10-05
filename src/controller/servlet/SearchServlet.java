@@ -54,10 +54,11 @@ public class SearchServlet extends HttpServlet {
 					List<String[]> auctions = new ArrayList<>();
 					
 					while(index < MAX_ITEMS_ON_PAGE && result.getValue("ID", index) != null) {
-						String[] temporaryArray = new String[3];
+						String[] temporaryArray = new String[4];
 						temporaryArray[0] = Integer.toString((Integer) result.getValue("ID", index));
 						temporaryArray[1] = (String) result.getValue("Title", index);
 						temporaryArray[2] = (String) result.getValue("Description", index);
+						temporaryArray[3] = (String) result.getValue("Image", index);
 						
 						auctions.add(temporaryArray);
 						index++;

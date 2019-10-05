@@ -18,11 +18,14 @@
 		<div class="carousel-container">
 			<% 
 				List<List<String>> auctions = (ArrayList<List<String>>) request.getAttribute("auctions");
+				String image = "";
+				
 				for(int i = 0; i < auctions.size(); ++i) {
+					image = auctions.get(i).get(3);
 			%>
 					<div class="box">
 				      <div class="pic">
-				        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
+				        <img src="pictures/<%= image %>" />
 				      </div>
 				      <div class="title"><%= auctions.get(i).get(1) %></div>
 				      <div class="text"><%= auctions.get(i).get(2) %></div>
