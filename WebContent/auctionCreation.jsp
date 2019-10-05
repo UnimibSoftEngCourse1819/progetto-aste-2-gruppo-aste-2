@@ -8,14 +8,13 @@
         <link rel="stylesheet" type="text/css" href="css/navBar.css" />
         <script type="text/javascript" src="javascript/slideMenu.js"></script>
         <script type="text/javascript" src="javascript/append.js"></script>
-        <script type="text/javascript" src="javascript/sendData.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <title>Auction Online</title>
     </head>
     <body>
 		<%@include file="templates/navbar.jsp" %>
         <div class="item-form">
-            <form action="auctionCreation" method="post">
+            <form action="auctionCreation" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col">
                     	<label for="titolo">
@@ -109,7 +108,7 @@
                     <input type="file" id="pic" name="pic" accept="image/*" style="display: none" />
                 </div>
                 <div class="btn-container">
-                    <button type="button" onclick="send()" id="register-button">Registra</button>
+                    <input type="submit" value="Registra" />
                 </div>
             </form>
         </div>

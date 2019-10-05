@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.AuctionRequestManager;
+import controller.ImageUploader;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
@@ -35,6 +36,7 @@ public class AuctionCreation extends HttpServlet {
     	boolean successfulOperation = false;
     	
 		try {						
+			ImageUploader.upload(request, getServletContext());
 			AuctionRequestManager.createAuction(request);
 			successfulOperation = true;
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
