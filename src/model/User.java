@@ -6,9 +6,14 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import controller.DatabaseManager;
+import controller.database.ResultDatabase;
 import controller.database.SQLParameter;
+import controller.database.select.SelectComponent;
+import controller.database.select.SimpleSelect;
 import controller.database.utilformodel.SQLiteData;
 import controller.database.utilformodel.Storable;
+import exception.SQLiteFailRequestException;
 
 public class User implements Storable {
 	private String name;
@@ -19,8 +24,9 @@ public class User implements Storable {
 	private String email;
 	private String phone;
 	private String password;
+	private String type;
 	private int id;
-	private int portofolio;
+	private int portofolio = -1;
 	
 	/**
 	 * use this Constructor carefully since set only the id
@@ -40,10 +46,30 @@ public class User implements Storable {
 		email = request.getParameter("email");
 		phone = request.getParameter("phone");
 		password = request.getParameter("password");
+		type = request.getParameter("Type");
 	}
 	
 	public int getId() {
 		return id;
+	}
+	
+	public int getAviableCredit() throws SQLiteFailRequestException {
+		if(portofolio == -1) {
+			loadCredit();
+		}
+		
+		SelectComponent select = new SimpleSelect("UsedCredit", id);
+		ResultDatabase result = DatabaseManager.executeSelect(select);
+		
+		return  portofolio - (int) result.getValue("UsedCredit", 0);
+	}
+
+	public void loadCredit() throws SQLiteFailRequestException {
+		SelectComponent select = new SimpleSelect("userCredit", id);
+		ResultDatabase result = DatabaseManager.executeSelect(select);
+		
+		portofolio = (int) result.getValue("Credit", 0);
+		
 	}
 
 	@Override
@@ -69,8 +95,10 @@ public class User implements Storable {
 	 * </p>
 	 * s
 	 * @param amount , to detract just pass a negative value
+	 * @throws SQLiteFailRequestException 
 	 */
 	public int addAmount(int amount) {
+		
 		portofolio += amount;
 		return portofolio;
 	}

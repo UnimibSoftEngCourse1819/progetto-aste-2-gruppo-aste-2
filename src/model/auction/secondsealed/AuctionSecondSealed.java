@@ -54,6 +54,12 @@ public class AuctionSecondSealed extends Auction {
 		try {
 			ResultDatabase result = DatabaseManager.executeSelect(orderedSelect);
 			
+			User buyer = new User((Integer) result.getValue("IDBuyer", 0));
+			buyer.loadCredit();
+
+			User seller = new User((Integer) result.getValue("IDSeller", 0));
+			buyer.loadCredit();
+			
 			LinkedHashMap<String, SQLParameter> valueToChange = new LinkedHashMap<>();
 			valueToChange.put("Status", new SQLParameter(SQLParameter.VARCHAR, ENDED));
 			
@@ -64,14 +70,11 @@ public class AuctionSecondSealed extends Auction {
 				
 				Integer price = result.size() >= 2 ? (Integer) result.getValue("Price", 1) : (Integer) result.getValue("Price", 0);
 				
-				Transaction transaction = new Transaction(
-						new User((Integer) result.getValue("IDBuyer", 0)),
-						new User((Integer) result.getValue("IDSeller", 0)),
-						price);
+				Transaction transaction = new Transaction(buyer, seller, price);
 				
 				operationToDo.addAll(transaction.getSQLOperations());
 				
-				valueToChange.put("Winner", new SQLParameter(SQLParameter.INTEGER, result.getValue("IDBuyer", 0)));
+				valueToChange.put("Winner", new SQLParameter(SQLParameter.INTEGER, buyer));
 			}
 			
 			operationToDo.add(new UpdateOperation("auction", clauses, valueToChange));

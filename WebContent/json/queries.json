@@ -79,7 +79,7 @@
   {
   	"sqlStatement" : {
   		"name" : "creditUsed",
-  		"statement" : "SELECT Sum(Price) FROM offer, auction WHERE auction.ID = offer.Auction AND auction.Status = 'ON_GOING' AND Offerer = ? ",
+  		"statement" : "SELECT Sum(Price) as UsedCredit FROM offer, auction WHERE auction.ID = offer.Auction AND auction.Status = 'ON_GOING' AND Offerer = ? ",
   		"values" : "INTEGER"
   	}
   },

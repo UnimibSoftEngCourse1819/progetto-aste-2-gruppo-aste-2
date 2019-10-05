@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +20,9 @@ import controller.AuctionRequestManager;
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
+import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
+import exception.InsufficientRequirementsException;
 import exception.SQLiteFailRequestException;
 
 /**
@@ -49,23 +53,23 @@ public class AuctionServlet extends HttpServlet {
 			}
 			
 			if(!result.isEmpty()) {
-				String[] auction = new String[6];
+				List<String> auction = new ArrayList<>();
 				
-				auction[0] = Integer.toString((Integer) result.getValue("ID", 0));
-				auction[1] = (String) result.getValue("Title", 0);
-				auction[2] = (String) result.getValue("Description", 0);
-				auction[3] = (String) result.getValue("Type", 0);
-				auction[4] = formatData(result.getValue("Conclusion", 0).toString());
-				auction[5] = getAuctionType((String) result.getValue("Type", 0));
+				auction.add(Integer.toString((Integer) result.getValue("ID", 0)));
+				auction.add((String) result.getValue("Title", 0));
+				auction.add((String) result.getValue("Description", 0));
+				auction.add((String) result.getValue("Type", 0));
+				auction.add(formatData(result.getValue("Conclusion", 0).toString()));
+				auction.add(getAuctionType((String) result.getValue("Type", 0)));
+				auction.add(Integer.toString((Integer) result.getValue("BasePrice", 0)));
 				
-				request.setAttribute("auction", auction);
+				request.setAttribute("auction", auction.toArray());
 				
 				if(request.getSession(false).getAttribute("id") != null) {
 					int seller = (Integer) result.getValue("Seller", 0);
 					int id = (Integer) request.getSession().getAttribute("id");
-					boolean isOwner = seller == id ? true : false;
 					
-					request.setAttribute("isOwner", isOwner);
+					request.setAttribute("isOwner", seller == id);
 				}
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher("auction.jsp");
@@ -112,8 +116,11 @@ public class AuctionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		try {
 			AuctionRequestManager.makeOffer(request);
-		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
+			
+		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
 			e.printStackTrace();
+		} catch (InsufficientRequirementsException e) {
+			//TODO deve mandare un messaggio di errore !!
 		}
 	}
 }

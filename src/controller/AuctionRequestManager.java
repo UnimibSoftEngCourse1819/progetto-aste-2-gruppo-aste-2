@@ -7,10 +7,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import controller.database.ResultDatabase;
+import controller.database.SQLOperation;
 import controller.database.select.SimpleSelect;
 import controller.database.select.decorator.OrderBy;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
+import exception.InsufficientRequirementsException;
 import exception.SQLiteFailRequestException;
 import model.Offer;
 import model.auction.Auction;
@@ -43,16 +45,15 @@ public class AuctionRequestManager {
 		orderedSelect.setDesc(true);
 		
 		ResultDatabase result = DatabaseManager.executeSelect(orderedSelect);
-		Integer idAuction = (int)result.getValue("ID", 0);
+		Integer idAuction = (int) result.getValue("ID", 0);
 		
 		DatabaseManager.execute(CategoryAuction.getSQLInsert(auctionCategory, idAuction));
 	}
 	
-	public static void makeOffer(HttpServletRequest request) throws SQLiteFailRequestException, InexistentTypeParameterException, IOException {
+	public static void makeOffer(HttpServletRequest request) throws SQLiteFailRequestException, InexistentTypeParameterException, InsufficientRequirementsException, FailRollBackException {
 		Offer newOffer = OfferFactory.createOffer(request.getParameter("mod"), request);	
 		
-		
-		
-		DatabaseManager.create(newOffer);
+		List<SQLOperation> operations = newOffer.getSQLOperation();
+		DatabaseManager.execute(operations);
 	}
 }
