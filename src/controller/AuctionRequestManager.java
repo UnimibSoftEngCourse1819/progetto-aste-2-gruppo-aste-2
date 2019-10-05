@@ -34,7 +34,7 @@ public class AuctionRequestManager {
 		Auction newAuction = AuctionFactory.createAuction(request.getParameter("mod"), request);
 		CategoryAuction categories = CategoryAuction.getInstance();
 		
-		List<String> auctionCategory = Arrays.asList(request.getParameterValues("categories[]"));
+		List<String> auctionCategory = Arrays.asList(request.getParameterValues("categories"));
 		
 		categories.addMissing(auctionCategory);
 		

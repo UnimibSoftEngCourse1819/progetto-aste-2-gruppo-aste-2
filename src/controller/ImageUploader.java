@@ -12,7 +12,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class ImageUploader {
-	private static final String UPLOAD_DIRECTORY = "upload";
+	private static final String UPLOAD_DIRECTORY = "pictures";
+	private static final String PATH = File.separator + "WebContent" + File.separator;
 	private static final int THRESHOLD_SIZE = 1024 * 1024 * 3; // 3MB
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
@@ -45,8 +46,8 @@ public class ImageUploader {
     	
     	try {
     		// parses the request's content to extract file data
-            List formItems = upload.parseRequest(request);
-            Iterator iter = formItems.iterator();
+            List<FileItem> formItems = upload.parseRequest(request);
+            Iterator<FileItem> iter = formItems.iterator();
             
             // iterates over form's fields
             while(iter.hasNext()) {
