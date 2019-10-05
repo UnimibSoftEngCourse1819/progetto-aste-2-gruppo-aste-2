@@ -20,7 +20,7 @@ public abstract class Offer implements Storable {
 	
 	protected Offer(HttpServletRequest request) {
 		bidder = new User((int) request.getSession().getAttribute("id"));
-		auction = Integer.parseInt(request.getParameter("auctionID"));
+		auction = Integer.parseInt(request.getParameter("id"));
 		price = Integer.parseInt(request.getParameter("price"));
 		basePrice = Integer.parseInt(request.getParameter("basePrice"));
 	}

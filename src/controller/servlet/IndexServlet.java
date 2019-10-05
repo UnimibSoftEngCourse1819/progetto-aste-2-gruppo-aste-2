@@ -79,10 +79,28 @@ public class IndexServlet extends HttpServlet {
 			
 			LocalDateTime tomorrow = today.plusDays(1);
 			
-			SelectComponent selectLast = new SimpleSelect("closingAuction", today);
-			selectLast = new Where(selectLast, "AND Conclusion >= ?", new SQLParameter(SQLParameter.DATE_TIME, tomorrow));
+			SelectComponent selectLast = new SimpleSelect("closingAuction", tomorrow);
+			selectLast = new Where(selectLast, "AND Conclusion >= ? ", new SQLParameter(SQLParameter.DATE_TIME, today));
 			
-			ResultDatabase resultLast = DatabaseManager.executeSelect(select);
+			ResultDatabase resultLast = DatabaseManager.executeSelect(selectLast);
+			
+			if(!resultLast.isEmpty()) {
+				List<List<String>> expiringAuctions = new ArrayList<>();
+				
+				for(int index = 0; index < MAX_ITEMS_ON_ROW && index < resultLast.size(); index++) {
+					List<String> temp = new ArrayList<>();
+					
+					temp.add(Integer.toString((Integer) resultLast.getValue("ID", index)));
+					temp.add((String) resultLast.getValue("Title", index));
+					temp.add((String) resultLast.getValue("Description", index));
+					temp.add((String) resultLast.getValue("Image", index));
+					
+					expiringAuctions.add(temp);
+				}
+				
+				request.setAttribute("expiringAuctions", expiringAuctions);
+				
+			}
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);

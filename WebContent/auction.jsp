@@ -26,8 +26,8 @@
 			}
 		%>
 		<div class="form">
-        	<form action="auction" method="post">
-        		<input type="hidden" name="auctionID" value="<%= auction.get(0) %>" />
+        	<form action="offer" method="get">
+        		<input type="hidden" name="id" value="<%= auction.get(0) %>" />
         		<input type="hidden" name="mod" value="<%= auction.get(3) %>" />
        			<div class="row">
        				<div class="col">
@@ -77,12 +77,16 @@
 							<div class="credit">
 								I tuoi crediti: <div class="info"><%= credit %></div>
 							</div>
+							<%
+								if(request.getAttribute("errorMessage") != null)
+									out.println(request.getAttribute("errorMessage"));
+							%>
 		        		</div>
 		        </div>
 		        <div class="row">
 		        	<div class="col" id="last-col"></div>
 		        	<div class="col">
-		        		<input type="number" min="0.00" max="10000.00" step="0.01" name="price" />
+		        		<input type="number" min="1" max="10000" step="1" name="price" />
 		        		<input type="submit" value="Invia" />
 		        	</div>
 		        </div>

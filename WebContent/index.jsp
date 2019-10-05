@@ -42,46 +42,28 @@
 	  	</div>
 	  	<div class="carousel-title">Aste che scadono oggi</div>
 	  	<div class="carousel-container">
-			<div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-		    </div>
-		    <div class="box">
-		      <div class="pic">
-		        <img src="https://i.pinimg.com/originals/e6/a4/c5/e6a4c5c0315cd4ac330f11c86eca2a41.gif" />
-		      </div>
-		      <div class="title">Titolo</div>
-		      <div class="text">Descrizione</div>
-		      <div class="btn">Prezzo</div>
-			</div>
+	  		<% 
+				List<List<String>> expiringAuctions = (ArrayList<List<String>>) request.getAttribute("expiringAuctions");
+				
+				for(int i = 0; i < expiringAuctions.size(); ++i) {
+					image = expiringAuctions.get(i).get(3);
+			%>
+					<div class="box">
+				      <div class="pic">
+				        <img src="pictures/<%= image %>" />
+				      </div>
+				      <div class="title"><%= expiringAuctions.get(i).get(1) %></div>
+				      <div class="text"><%= expiringAuctions.get(i).get(2) %></div>
+				      <div class="btn">
+				      	<form action="auction" method="get">
+				      		<input type="hidden" name="id" value="<%= expiringAuctions.get(i).get(0) %>" />
+				      		<input type="submit" value="Apri" />
+				      	</form>
+				      </div>
+					</div>
+		    <%
+				}
+		    %>
 	  	</div>
 	</body>
 </html>

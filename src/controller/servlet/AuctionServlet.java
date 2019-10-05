@@ -119,10 +119,12 @@ public class AuctionServlet extends HttpServlet {
 		try {
 			AuctionRequestManager.makeOffer(request);
 			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("auction");
+			dispatcher.forward(request, response);
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
 			e.printStackTrace();
 		} catch (InsufficientRequirementsException e) {
-			//TODO deve mandare un messaggio di errore !!
+			
 		}
 	}
 }
