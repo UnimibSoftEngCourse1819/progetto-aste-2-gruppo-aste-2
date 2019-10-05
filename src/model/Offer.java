@@ -37,7 +37,7 @@ public abstract class Offer implements Storable {
 	
 	protected boolean isValidOffer() throws SQLiteFailRequestException{
 
-		return price > bidder.getAviableCredit() || price < basePrice;
+		return price < bidder.getAviableCredit() && price > basePrice;
 	}
 	
 	public abstract List<SQLOperation> getSQLOperation() throws SQLiteFailRequestException, InsufficientRequirementsException;

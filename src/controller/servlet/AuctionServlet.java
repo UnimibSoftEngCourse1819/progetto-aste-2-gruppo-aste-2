@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.AuctionRequestManager;
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
+import controller.database.select.SelectComponent;
 import controller.database.select.SimpleSelect;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
@@ -42,7 +43,7 @@ public class AuctionServlet extends HttpServlet {
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			SimpleSelect select = new SimpleSelect("auction", Integer.parseInt(request.getParameter("id")));
+			SelectComponent select = new SimpleSelect("auction", Integer.parseInt(request.getParameter("id")));
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(request.getSession(false).getAttribute("id") != null) {

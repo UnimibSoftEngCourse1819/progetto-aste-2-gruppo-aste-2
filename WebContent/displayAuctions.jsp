@@ -17,7 +17,7 @@
 		<div class="main">
 			<div id="filter">
 				<form action="search" method="get">
-					<input type="text" id="myInput" name="search" placeholder="Cerca.." title="Type in a name">
+					<input type="text" id="myInput" name="search" placeholder=" " title="Type in a name">
 					<b>Tipologia asta</b>
 					<div class="auction-type">
 						<input type="radio" name="auctionType" value="tutte" checked="checked">Tutte le tipologie di aste<br />
