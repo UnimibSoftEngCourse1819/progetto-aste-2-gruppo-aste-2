@@ -24,10 +24,12 @@ public class SecondSealedOffer extends Offer{
 	public List<SQLOperation> getSQLOperation() throws SQLiteFailRequestException, InsufficientRequirementsException {
 		List<SQLOperation> operations = new ArrayList<>();
 		
-		isValidOffer();
+		if(!isValidOffer()) {
+			throw new InsufficientRequirementsException("Il prezzo inserito non soddisfa i requisiti");
+		}
 		
 		operations.add(getSQLiteData());
-		
+		operations.add(getOngoingUpdate());
 		return operations;
 	}
 }

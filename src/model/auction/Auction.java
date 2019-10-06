@@ -101,6 +101,10 @@ public abstract class Auction implements Storable{
 		image = (String) rowValues.get("Image");
 	}
 
+	public Auction(int auction) {
+		id = auction;
+	}
+
 	public String getTitle() {
 		return title;
 	}

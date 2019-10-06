@@ -32,6 +32,7 @@ public class FirstSealedOffer extends Offer {
 		}
 		
 		operations.add(getSQLiteData());
+		operations.add(getOngoingUpdate());
 		return operations;
 	}
 }

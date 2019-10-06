@@ -36,6 +36,7 @@ public class ClassicOffer extends Offer{
 		
 		List<SQLOperation> operations = new ArrayList<>();
 		operations.add(getSQLiteData());
+		operations.add(getOngoingUpdate()); 
 		return operations;
 	}	
 }
