@@ -24,14 +24,14 @@ import exception.SQLiteFailRequestException;
  */
 @WebServlet("/auctionCreation")
 @MultipartConfig
-public class AuctionCreation extends HttpServlet {
+public class AuctionCreationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOGGER = MyLogger.getLoggerInstance(AuctionCreation.class.getName());
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(AuctionCreationServlet.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AuctionCreation() {
+    public AuctionCreationServlet() {
         super();
     }
     
