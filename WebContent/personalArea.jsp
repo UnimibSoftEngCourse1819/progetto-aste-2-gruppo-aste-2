@@ -14,8 +14,12 @@
 		<%@include file="templates/navbar.jsp" %>
 		<%
 			String credit = (String) request.getAttribute("userCredit");
+			String totalCredit = (String) request.getAttribute("totalCredit");
+			String occupiedCredit = (String) request.getAttribute("occupiedCredit");
 		%>
-		<div class="credit">Il tuo credito disponibile: <%= credit %></div>
+		<div class="total-credit">Credito totale: <%= totalCredit %></div>
+		<div class="credit">Credito utilizzabile: <%= credit %></div>
+		<div class="credit">Credito impegnato: <%= occupiedCredit %></div>
 		<form action="addCredit" method="post">
 			<div class="credit-form">
 				<input type="hidden" name="credit" value="<%= credit %>" />
@@ -123,37 +127,6 @@
 		
 		<section>
 		  <!--for demo wrap-->
-		  <h1>Aste in cui sei il massimo offerente</h1>
-		  <div class="tbl-header">
-		    <table cellpadding="0" cellspacing="0" border="0">
-		      <thead>
-		        <tr>
-		          <th>Titolo</th>
-		          <th>Descrizione</th>
-		          <th>Data creazione</th>
-		          <th>Data chiusura</th>
-		          <th>Gestione</th>
-		        </tr>
-		      </thead>
-		    </table>
-		  </div>
-		  <div class="tbl-content">
-		    <table cellpadding="0" cellspacing="0" border="0">
-		      <tbody>
-		        <tr>
-		          <td>AAC</td>
-		          <td>AUSTRALIAN COMPANY </td>
-		          <td>$1.38</td>
-		          <td>+2.01</td>
-		          <td>-0.36%</td>
-		        </tr>   
-		      </tbody>
-		    </table>
-		  </div>
-		</section>
-		
-		<section>
-		  <!--for demo wrap-->
 		  <h1>Aste vinte</h1>
 		  <div class="tbl-header">
 		    <table cellpadding="0" cellspacing="0" border="0">
@@ -188,11 +161,26 @@
 				          <td><%= auctionWon.get(i)[4] %></td>
 				          <td><%= auctionWon.get(i)[5] %></td>
 				          <td>
-						  	<form action="returnObject" method="get">
-				          		<input type="hidden" value="<%= auctionWon.get(i)[0] %>" name="id" />
-				          		<input type="hidden" value="<%= auctionWon.get(i)[5] %>" name="price" />
-				          		<input type="submit" class="manage-button" value="Rinuncia" />
-				          	</form>
+					          <%
+					          	String waiver = auctionWon.get(i)[6];
+					          	if(waiver != null && waiver.equals("Rinunciato")) {
+					          %>
+					          		<div><%= waiver %></div>
+					          <%
+					          	}
+					          	else {
+					          		if(request.getAttribute("errorMessage") != null) {
+					          			out.println(request.getAttribute("errorMessage"));
+					          		}
+					          %>
+								  	<form action="returnObject" method="get">
+						          		<input type="hidden" value="<%= auctionWon.get(i)[0] %>" name="id" />
+						          		<input type="hidden" value="<%= auctionWon.get(i)[5] %>" name="price" />
+						          		<input type="submit" class="manage-button" value="Rinuncia" />
+						          	</form>
+						      <%
+						      	}
+						      %>
 						  </td>
 				        </tr> 
 		        <%

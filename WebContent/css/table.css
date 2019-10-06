@@ -98,8 +98,12 @@ section{
 	padding: 5px;
 }
 
-.credit {
+.total-credit {
 	margin-top: 100px;
+	margin-left: 60px;
+}
+
+.credit {
 	margin-left: 60px;
 }
 

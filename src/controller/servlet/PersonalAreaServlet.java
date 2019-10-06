@@ -21,6 +21,7 @@ import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
 import controller.database.select.decorator.OrderBy;
 import exception.SQLiteFailRequestException;
+import model.User;
 
 /**
  * Servlet implementation class personalAreaServlet
@@ -75,7 +76,7 @@ public class PersonalAreaServlet extends HttpServlet {
 				int index = 0;
 				
 				while(result.getValue("ID", index) != null) {
-					String[] data = new String[6];
+					String[] data = new String[7];
 					
 					data[0] = Integer.toString((Integer) result.getValue("ID", index));
 					data[1] = (String) result.getValue("Title", index);
@@ -83,6 +84,7 @@ public class PersonalAreaServlet extends HttpServlet {
 					data[3] = formatData(result.getValue("Creation", index).toString());
 					data[4] = formatData(result.getValue("Conclusion", index).toString());
 					data[5] = String.valueOf(result.getValue("Price", index));
+					data[6] = (String) result.getValue("Waiver", index);
 					
 					auctions.add(data);
 					index++;
@@ -131,12 +133,26 @@ public class PersonalAreaServlet extends HttpServlet {
 		List<String[]> userAuctions = getAuctions(new SimpleSelect("userAuctions", userID));
 		List<String[]> auctionOffered = getAuctions(new SimpleSelect("auctionOffered", userID));
 		List<String[]> auctionWon = getAuctionsWon(new SimpleSelect("auctionWon", userID));
-		String userCredit = getUserCredit(new SimpleSelect("userCredit", userID));
+		
+		User user = new User((Integer) request.getSession().getAttribute("id"));
+		String userCredit = "";
+		String totalCredit = "";
+		String occupiedCredit = "";
+		
+		try {
+			userCredit = String.valueOf(user.getAviableCredit());
+			totalCredit = String.valueOf(user.getPortfolio());
+			occupiedCredit = String.valueOf(user.getPortfolio() - user.getAviableCredit());
+		} catch (SQLiteFailRequestException e) {
+			e.printStackTrace();
+		}
 		
 		request.setAttribute("userAuctions", userAuctions);
 		request.setAttribute("auctionOffered", auctionOffered);
 		request.setAttribute("auctionWon", auctionWon);
 		request.setAttribute("userCredit", userCredit);
+		request.setAttribute("totalCredit", totalCredit);
+		request.setAttribute("occupiedCredit", occupiedCredit);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("personalArea.jsp");
 		dispatcher.forward(request, response);

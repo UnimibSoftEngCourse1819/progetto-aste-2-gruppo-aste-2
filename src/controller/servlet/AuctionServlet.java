@@ -25,6 +25,7 @@ import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.InsufficientRequirementsException;
 import exception.SQLiteFailRequestException;
+import model.User;
 
 /**
  * Servlet implementation class AuctionServlet
@@ -47,10 +48,9 @@ public class AuctionServlet extends HttpServlet {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(request.getSession(false).getAttribute("id") != null) {
-				SimpleSelect selectCredit = new SimpleSelect("creditUsed", (Integer) request.getSession(false).getAttribute("id"));
-				ResultDatabase resultCredit = DatabaseManager.executeSelect(selectCredit);
+				User user = new User((Integer) request.getSession().getAttribute("id"));
 				
-				request.setAttribute("credit", resultCredit.getValue("UsedCredit", 0));
+				request.setAttribute("credit", user.getAviableCredit());
 			}
 			
 			if(!result.isEmpty()) {

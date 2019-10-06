@@ -57,6 +57,10 @@ public class User implements Storable {
 		return name;
 	}
 	
+	public int getPortfolio() {
+		return portofolio;
+	}
+	
 	public int getAviableCredit() throws SQLiteFailRequestException {
 		if(portofolio == -1) {
 			loadCredit();

@@ -17,6 +17,7 @@ import controller.database.SQLParameter;
 import controller.database.UpdateOperation;
 import exception.FailRollBackException;
 import exception.SQLiteFailRequestException;
+import model.User;
 
 /**
  * Servlet implementation class CreditServlet
@@ -36,14 +37,21 @@ public class CreditServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentCredit = Integer.parseInt(request.getParameter("credit"));
+		User user = new User((Integer) request.getSession().getAttribute("id"));
+		try {
+			user.loadCredit();
+		} catch (SQLiteFailRequestException e1) {
+			e1.printStackTrace();
+		}
+		
+		int currentCredit = user.getPortfolio();
 		int creditToAdd = Integer.parseInt(request.getParameter("nCredit"));
 		
 		LinkedHashMap<String, SQLParameter> valueToChange = new LinkedHashMap<>();
 		valueToChange.put("Credit", new SQLParameter(SQLParameter.INTEGER, currentCredit + creditToAdd));
 		
 		LinkedHashMap<String, SQLParameter> clauses = new LinkedHashMap<>();
-		clauses.put("ID", new SQLParameter(SQLParameter.INTEGER, request.getSession().getAttribute("id")));
+		clauses.put("ID", new SQLParameter(SQLParameter.INTEGER, user.getId()));
 		
 		UpdateOperation update = new UpdateOperation("user", clauses, valueToChange);
 		List<SQLOperation> operations = new ArrayList<>();

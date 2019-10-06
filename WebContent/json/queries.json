@@ -93,14 +93,14 @@
   {
   	"sqlStatement" : {
   		"name" : "auctionWon",
-  		"statement" : "SELECT auction.ID, auction.Title, auction.Description, auction.Creation, auction.Conclusion, MAX(offer.Price) AS Price FROM auction, offer WHERE offer.Auction = auction.ID AND auction.Status = 'END' AND auction.Winner = ? GROUP BY auction.ID ",
+  		"statement" : "SELECT auction.ID, auction.Title, auction.Description, auction.Creation, auction.Conclusion, auction.Waiver, MAX(offer.Price) AS Price FROM auction, offer WHERE offer.Auction = auction.ID AND auction.Status = 'END' AND auction.Winner = ? GROUP BY auction.ID ",
   		"values" : "INTEGER"
   	}
   },
   {
   	"sqlStatement" : {
   		"name" : "returnObject",
-  		"statement" : "SELECT * FROM auction, auctionConfiguration WHERE auction.Type = auctionConfiguration.Name AND auction.ID = ? ",
+  		"statement" : "SELECT * FROM auction, auctionConfiguration, user WHERE user.ID = auction.Winner AND auction.Type = auctionConfiguration.Name AND auction.ID = ? ",
   		"values" : "INTEGER"
   	}
   }
