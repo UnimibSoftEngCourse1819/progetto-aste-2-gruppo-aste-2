@@ -29,7 +29,10 @@ public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_ITEMS_ON_PAGE = 50;
 	private static final String ALL_TYPE = "tutte";
-       
+    private static final String CATEGORIES = "categories";
+	private static final String SEARCH = "search";
+	private static final String NOT_OPENED = "notOpened";
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -41,9 +44,9 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("categories", getCategories());
+		request.setAttribute(CATEGORIES, getCategories());
 		
-		if(request.getParameter("search") != null) {
+		if(request.getParameter(SEARCH) != null) {
 			try {
 				SelectComponent select = getSelectWithFilter(request);
 				
@@ -79,7 +82,7 @@ public class SearchServlet extends HttpServlet {
     	List<String> categories = new ArrayList<>();
     	
     	try {
-			SelectComponent select = new SimpleSelect("categories");
+			SelectComponent select = new SimpleSelect(CATEGORIES);
 			select = new OrderBy(select, "Name");
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
@@ -101,10 +104,10 @@ public class SearchServlet extends HttpServlet {
 	private SelectComponent getSelectWithFilter(HttpServletRequest request) {
 		SelectComponent select = new SimpleSelect("auctionsSearch");
 		
-		if(!request.getParameter("search").isBlank()) {
+		if(!request.getParameter(SEARCH).isEmpty()) {
 			select = new Where(select, "AND (auction.title Like (?) OR auction.description Like (?)) ",
-					new SQLParameter(SQLParameter.VARCHAR, request.getParameter("search")),
-					new SQLParameter(SQLParameter.VARCHAR, request.getParameter("search")));
+					new SQLParameter(SQLParameter.VARCHAR, request.getParameter(SEARCH)),
+					new SQLParameter(SQLParameter.VARCHAR, request.getParameter(SEARCH)));
 		}
 		
 		if(!request.getParameter("auctionType").equals(ALL_TYPE)) {
@@ -114,10 +117,10 @@ public class SearchServlet extends HttpServlet {
 		
 		if(!request.getParameter("category").equals(ALL_TYPE)) {
 			select = new Where(select, "AND auction.Type = ? ", 
-					 new SQLParameter(SQLParameter.VARCHAR, request.getParameter("categories")));
+					 new SQLParameter(SQLParameter.VARCHAR, request.getParameter(CATEGORIES)));
 		}
 		
-		if(request.getParameter("notOpened") != null || request.getParameter("opened") != null) {
+		if(request.getParameter(NOT_OPENED) != null || request.getParameter("opened") != null) {
 			select = applyStatusFilter(select, request);
 		}
 		
@@ -127,12 +130,12 @@ public class SearchServlet extends HttpServlet {
 	}
 
 	private SelectComponent applyStatusFilter(SelectComponent select, HttpServletRequest request) {
-		if(request.getParameter("notOpened") != null && request.getParameter("opened") != null) {
+		if(request.getParameter(NOT_OPENED) != null && request.getParameter("opened") != null) {
 			select = new Where(select, "AND (auction.Status = ? OR auction.Status = ?) ", 
 					new SQLParameter(SQLParameter.VARCHAR, Auction.STANDBY),
 					new SQLParameter(SQLParameter.VARCHAR, Auction.ON_GOING));
 		}else {
-			if(request.getParameter("notOpened") != null ){
+			if(request.getParameter(NOT_OPENED) != null ){
 				select = new Where(select, "AND auction.Status = ? ", 
 						new SQLParameter(SQLParameter.VARCHAR, Auction.STANDBY));
 			}else {

@@ -26,3 +26,4 @@ someOtherfoler/
 *.tar
 *.zip
 /build/
+/target/

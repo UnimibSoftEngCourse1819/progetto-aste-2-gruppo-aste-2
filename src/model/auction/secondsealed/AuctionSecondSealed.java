@@ -22,7 +22,8 @@ import model.User;
 import model.auction.Auction;
 
 public class AuctionSecondSealed extends Auction {
-
+	private final String PRICE = "Price";
+	
 	public AuctionSecondSealed(HttpServletRequest request) {
 		super(request);
 	}
@@ -42,7 +43,7 @@ public class AuctionSecondSealed extends Auction {
 		List<SQLOperation> operationToDo = new ArrayList<>();
 		
 		SimpleSelect select = new SimpleSelect("auctionOffers", id);
-		OrderBy orderedSelect = new OrderBy(select, "Price");
+		OrderBy orderedSelect = new OrderBy(select, PRICE);
 		orderedSelect.setDesc(true);
 		
 		try {
@@ -62,7 +63,7 @@ public class AuctionSecondSealed extends Auction {
 			
 			if(!result.isEmpty()) {
 				
-				Integer price = result.size() >= 2 ? (Integer) result.getValue("Price", 1) : (Integer) result.getValue("Price", 0);
+				Integer price = result.size() >= 2 ? (Integer) result.getValue(PRICE, 1) : (Integer) result.getValue(PRICE, 0);
 				
 				Transaction transaction = new Transaction(buyer, seller, price);
 				
