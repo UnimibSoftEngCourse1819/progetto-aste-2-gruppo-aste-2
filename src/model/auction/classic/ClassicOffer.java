@@ -31,7 +31,7 @@ public class ClassicOffer extends Offer{
 		
 		ResultDatabase result = DatabaseManager.executeSelect(select);
 		if((Integer) result.getValue("Price", 0) > price || !isValidOffer()) {
-			throw new InsufficientRequirementsException();
+			throw new InsufficientRequirementsException("Il prezzo inserito non soddisfa i requisiti");
 		}
 		
 		List<SQLOperation> operations = new ArrayList<>();

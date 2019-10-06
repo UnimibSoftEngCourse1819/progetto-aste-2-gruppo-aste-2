@@ -47,7 +47,7 @@ public class DatabaseManager {
 			sqlData.configure(statement);
 			statement.execute();
 		} catch (SQLException | MyConnectionException e) {
-			throw new SQLiteFailRequestException();
+			throw new SQLiteFailRequestException("Non e' stato possibile eseguire il comando : " + e.getMessage());
 		}
 	}
 	
@@ -80,11 +80,11 @@ public class DatabaseManager {
 				try {
 					connection.rollback();
 				} catch (SQLException e1) {
-					throw new FailRollBackException();
+					throw new FailRollBackException("Non e' stato possibile ripristinare i dati : " + e1.getMessage() + "\n errore di esecuzione : " + e.getMessage());
 				}				
 			}
 			
-			throw new SQLiteFailRequestException();
+			throw new SQLiteFailRequestException("Non e' stato possibile eseguire il comando sul database : " + e.getMessage());
 		} finally {
 			if(connection != null) {
 				try {
@@ -110,7 +110,7 @@ public class DatabaseManager {
 			select.configure(statement);
 			result = new ResultDatabase(statement.executeQuery());
 		} catch (MyConnectionException | SQLException e) {
-			throw new SQLiteFailRequestException();
+			throw new SQLiteFailRequestException("Non e' stato possibile eseguire il comando sul database : " + e.getMessage());
 		}
 		return result;
 	}

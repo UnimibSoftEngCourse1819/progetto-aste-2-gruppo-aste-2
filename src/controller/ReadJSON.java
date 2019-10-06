@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -26,6 +28,7 @@ public class ReadJSON {
 	private static JSONParser jsonParser = new JSONParser();
 	private static final String PATH = File.separator + "WebContent" + File.separator + "json" + File.separator;
 	private static final String FILE_NAME = "queries.json";
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(ReadJSON.class.getName());
 	
 	private ReadJSON() {
 		throw new IllegalStateException("Utility class");
@@ -48,7 +51,7 @@ public class ReadJSON {
             }
  
         } catch (IOException  | ParseException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Non è stato possibile leggere il file json", e);
         }
 		
 		return map;

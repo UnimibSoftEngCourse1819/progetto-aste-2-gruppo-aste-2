@@ -28,7 +28,7 @@ public class DutchOffer extends Offer{
 	@Override
 	public List<SQLOperation> getSQLOperation() throws SQLiteFailRequestException, InsufficientRequirementsException {
 		if(!isValidOffer()) {
-			throw new InsufficientRequirementsException();
+			throw new InsufficientRequirementsException("Il prezzo inserito non soddisfa i requisiti");
 		}
 		
 		SelectComponent select = new SimpleSelect("auction", auction);

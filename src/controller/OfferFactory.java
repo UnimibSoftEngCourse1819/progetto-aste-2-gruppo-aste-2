@@ -33,7 +33,7 @@ public class OfferFactory {
 		}else if(parameter.equalsIgnoreCase("dutchAuction")) {
 			result =  new DutchOffer(request);
 		}else {
-			throw new InexistentTypeParameterException();
+			throw new InexistentTypeParameterException("Tipologia asta non esistente");
 		}
 		
 		return result;

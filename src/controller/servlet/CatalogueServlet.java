@@ -3,6 +3,8 @@ package controller.servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.DatabaseManager;
+import controller.MyLogger;
 import controller.database.ResultDatabase;
 import controller.database.select.SelectComponent;
 import controller.database.select.SimpleSelect;
@@ -24,7 +27,7 @@ import exception.SQLiteFailRequestException;
 @WebServlet("/catalogue")
 public class CatalogueServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final int MAX_ITEMS_ON_ROW = 10;
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(CatalogueServlet.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -57,7 +60,7 @@ public class CatalogueServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 	}
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
@@ -31,6 +33,7 @@ public class CategoryAuction {
 	private static CategoryAuction instance = null;
 	private static Map<String,Integer> categoryList;
 	private static final String QUERY_NAME = "categories";
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(CategoryAuction.class.getName());
 	
 	private CategoryAuction(){
 		loadData();
@@ -52,7 +55,7 @@ public class CategoryAuction {
 			}
 			
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile caricare il valore ", e);
 		}
 		
 	}
@@ -82,7 +85,7 @@ public class CategoryAuction {
 				DatabaseManager.create(categoriesToAdd);
 			} catch (SQLiteFailRequestException | FailRollBackException e) {
 				// This shouldn't happen
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Non è stato possibile aggiungere le nuove categorie", e);
 			}
 			
 			loadData();
@@ -101,6 +104,10 @@ public class CategoryAuction {
 			relations.add(temporarySQLData);
 		}
 		return relations;
+	}
+
+	public List<String> getCategoryList() {
+		return new ArrayList<>(categoryList.keySet());
 	}
 	
 	

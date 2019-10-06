@@ -28,7 +28,7 @@ public class Connector {
 
 			return DriverManager.getConnection(Connector.DATABASE_DRIVER + sqlScriptUrl + PATH + Connector.DATABASE_NAME);
 		} catch (SQLException | ClassNotFoundException e) {
-			throw new MyConnectionException();
+			throw new MyConnectionException("Non e' stato possibile collegarsi al database" + e.getMessage());
 		}
 	}
 }

@@ -2,6 +2,8 @@ package controller.servlet;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.AuctionRequestManager;
 import controller.ImageUploader;
+import controller.MyLogger;
 import exception.FailRollBackException;
 import exception.InexistentTypeParameterException;
 import exception.SQLiteFailRequestException;
@@ -23,6 +26,7 @@ import exception.SQLiteFailRequestException;
 @MultipartConfig
 public class AuctionCreation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(AuctionCreation.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,15 +44,14 @@ public class AuctionCreation extends HttpServlet {
 			AuctionRequestManager.createAuction(request, values);
 			successfulOperation = true;
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 		
 		if(successfulOperation) {
 			try {
 				response.sendRedirect("index");		
-			}catch(Exception e) {
+			}catch(IOException e) {
 				//This shouldn't happen
-				e.printStackTrace();
 			}
 		}
     }

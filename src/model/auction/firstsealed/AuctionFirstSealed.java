@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 import controller.DatabaseManager;
+import controller.MyLogger;
 import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
 import controller.database.SQLParameter;
@@ -20,7 +23,7 @@ import model.User;
 import model.auction.Auction;
 
 public class AuctionFirstSealed extends Auction {
-	
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(AuctionFirstSealed.class.getName());
 	public AuctionFirstSealed(HttpServletRequest request) {
 		super(request);
 	}
@@ -70,7 +73,7 @@ public class AuctionFirstSealed extends Auction {
 				operationToDo.add(new UpdateOperation("auction", clauses, valueToChange));
 			}
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile generare le operazioni da eseguire sul database", e);
 		}
 
 		return operationToDo;

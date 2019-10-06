@@ -3,6 +3,8 @@ package controller.servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.CategoryAuction;
 import controller.DatabaseManager;
+import controller.MyLogger;
 import controller.database.ResultDatabase;
 import controller.database.SQLParameter;
 import controller.database.select.SelectComponent;
@@ -32,6 +36,7 @@ public class SearchServlet extends HttpServlet {
     private static final String CATEGORIES = "categories";
 	private static final String SEARCH = "search";
 	private static final String NOT_OPENED = "notOpened";
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(SearchServlet.class.getName());
     
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,7 +49,7 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute(CATEGORIES, getCategories());
+		request.setAttribute(CATEGORIES, CategoryAuction.getInstance().getCategoryList());
 		
 		if(request.getParameter(SEARCH) != null) {
 			try {
@@ -70,36 +75,13 @@ public class SearchServlet extends HttpServlet {
 					request.setAttribute("auctions", auctions);
 				}
 			} catch (SQLiteFailRequestException e) {
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 			}
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("displayAuctions.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-	private List<String> getCategories() {
-    	List<String> categories = new ArrayList<>();
-    	
-    	try {
-			SelectComponent select = new SimpleSelect(CATEGORIES);
-			select = new OrderBy(select, "Name");
-			ResultDatabase result = DatabaseManager.executeSelect(select);
-			
-			if(!result.isEmpty()) {			
-				int index = 0;
-				
-				while(result.getValue("ID", index) != null) {
-					categories.add((String) result.getValue("Name", index));
-					++index;
-				}
-			}
-		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
-		}
-    	
-    	return categories;
-    }
 
 	private SelectComponent getSelectWithFilter(HttpServletRequest request) {
 		SelectComponent select = new SimpleSelect("auctionsSearch");

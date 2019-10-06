@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import controller.database.ResultDatabase;
 import controller.database.SQLOperation;
@@ -24,6 +26,7 @@ import model.auction.Auction;
  */
 public class AuctionReaper {
 
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(AuctionReaper.class.getName());
 	private static AuctionReaper instance = null;
 	private static final int REFRESH_TIME_LAPSE = 1; //this is in hour
 	private LocalDateTime launchedRefresherTime;
@@ -66,8 +69,7 @@ public class AuctionReaper {
 				timer.schedule(endTask, Date.from(timeEnd.atZone(ZoneId.systemDefault()).toInstant()));
 			}
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile creare i timer", e);
 		}	
 	}
 	
@@ -84,7 +86,7 @@ public class AuctionReaper {
 			}
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire chiusura dell'asta ", e);
 		}
 	}
 
@@ -128,7 +130,7 @@ public class AuctionReaper {
 				DatabaseManager.execute(operation);
 			} catch (SQLiteFailRequestException | FailRollBackException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 			}
 		}
 		

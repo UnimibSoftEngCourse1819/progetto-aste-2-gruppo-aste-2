@@ -35,7 +35,7 @@ public class AuctionFactory {
 		}else if(type.equalsIgnoreCase("dutchAuction")) {
 			result =  new DutchAuction(request, values);
 		}else {
-			throw new InexistentTypeParameterException();
+			throw new InexistentTypeParameterException("Tipo di asta non esistente");
 		}
 		
 		return result;
@@ -54,7 +54,7 @@ public class AuctionFactory {
 		}else if(type.equalsIgnoreCase("dutch")) {
 			result =  new DutchAuction(rowValues);
 		}else {
-			throw new InexistentTypeParameterException();
+			throw new InexistentTypeParameterException("Tipo di asta non esistente");
 		}
 		
 		return result;

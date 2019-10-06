@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.DatabaseManager;
+import controller.MyLogger;
 import controller.database.SQLOperation;
 import controller.database.SQLParameter;
 import controller.database.UpdateOperation;
@@ -24,6 +27,7 @@ import exception.SQLiteFailRequestException;
 @WebServlet("/update")
 public class UpdateConfigurationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(UpdateConfigurationServlet.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -53,7 +57,7 @@ public class UpdateConfigurationServlet extends HttpServlet {
 			DatabaseManager.execute(operations);
 			response.sendRedirect("configuration");
 		} catch (SQLiteFailRequestException | FailRollBackException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 	}
 

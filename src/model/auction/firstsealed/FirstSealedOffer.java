@@ -28,7 +28,7 @@ public class FirstSealedOffer extends Offer {
 		List<SQLOperation> operations = new ArrayList<>();
 		bidder.loadCredit();
 		if(!isValidOffer()) {
-			throw new InsufficientRequirementsException();
+			throw new InsufficientRequirementsException("Il prezzo inserito non soddisfa i requisiti");
 		}
 		
 		operations.add(getSQLiteData());

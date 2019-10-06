@@ -2,6 +2,8 @@ package controller.servlet;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 
 import controller.AuthenticationService;
+import controller.MyLogger;
 
 /**
  * Servlet implementation class LoginServlet
@@ -21,6 +24,7 @@ import controller.AuthenticationService;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final AuthenticationService authenticationService;
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(LoginServlet.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -60,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 				requestDispatcher.forward(request, response);
 			}
 		} catch (IOException | ServletException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 	}
 

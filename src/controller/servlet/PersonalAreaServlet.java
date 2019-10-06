@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.DatabaseManager;
+import controller.MyLogger;
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
-import controller.database.select.decorator.OrderBy;
 import exception.SQLiteFailRequestException;
 import model.User;
 
@@ -29,6 +31,7 @@ import model.User;
 @WebServlet("/personalArea")
 public class PersonalAreaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(PersonalAreaServlet.class.getName());
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -60,7 +63,7 @@ public class PersonalAreaServlet extends HttpServlet {
 				}
 			}
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
     	
     	return auctions;
@@ -91,27 +94,10 @@ public class PersonalAreaServlet extends HttpServlet {
 				}
 			}
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
     	
     	return auctions;
-    }
-    
-    private String getUserCredit(SimpleSelect select) {
-    	String userCredit = "";
-    	
-    	try {
-    		ResultDatabase result = DatabaseManager.executeSelect(select);
-    		
-    		if(!result.isEmpty()) {
-    			userCredit = Integer.toString((Integer) result.getValue("Credit", 0));
-    		}
-    	}
-    	catch (SQLiteFailRequestException e) {
-    		e.printStackTrace();
-    	}
-    	
-    	return userCredit;
     }
     
     private String formatData(String dateTime) {
@@ -144,7 +130,7 @@ public class PersonalAreaServlet extends HttpServlet {
 			totalCredit = String.valueOf(user.getPortfolio());
 			occupiedCredit = String.valueOf(user.getPortfolio() - user.getAviableCredit());
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 		
 		request.setAttribute("userAuctions", userAuctions);

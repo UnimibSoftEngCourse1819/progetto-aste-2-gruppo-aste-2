@@ -1,10 +1,11 @@
 package controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import controller.servlet.AuctionServlet;
+
 public class ImageUploader {
 	private static final String UPLOAD_DIRECTORY = "pictures";
 	private static final String PATH = File.separator + "WebContent" + File.separator;
@@ -20,6 +23,7 @@ public class ImageUploader {
 	private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
 	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 	private static String fileName;
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(AuctionServlet.class.getName());
 	
 	public static String getFileName() {
 		return fileName;
@@ -77,7 +81,7 @@ public class ImageUploader {
             
     	} 
     	catch(Exception e) {
-    		e.printStackTrace();
+    		LOGGER.log(Level.SEVERE, "Non è stato possibile caricare l'immagine ", e);
     	}
     	
 		return formValues;

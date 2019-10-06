@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +18,8 @@ import model.User;
  */
 
 public class AuthenticationService {	
+	
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(AuthenticationService.class.getName());
 	
 	public AuthenticationService() {
 		super();
@@ -37,7 +41,7 @@ public class AuthenticationService {
 				values = (HashMap<String, Object>) result.getRowValues(0);
 			}
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile eseguire la verifica dell'utente ", e);
 		}
 		
 		return values;

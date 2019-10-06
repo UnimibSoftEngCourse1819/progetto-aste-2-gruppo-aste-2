@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.AuctionReaper;
 import controller.DatabaseManager;
+import controller.MyLogger;
 import controller.database.ResultDatabase;
 import controller.database.SQLParameter;
 import controller.database.select.SelectComponent;
@@ -30,7 +33,8 @@ public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_ITEMS_ON_ROW = 10;
 	private boolean initializedEnderManager = false;
-       
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(IndexServlet.class.getName());   
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -105,7 +109,7 @@ public class IndexServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 			dispatcher.forward(request, response);
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 	}
 }

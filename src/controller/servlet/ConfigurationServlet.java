@@ -1,6 +1,8 @@
 package controller.servlet;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.DatabaseManager;
+import controller.MyLogger;
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
 import exception.SQLiteFailRequestException;
@@ -20,7 +23,7 @@ import exception.SQLiteFailRequestException;
 @WebServlet("/configuration")
 public class ConfigurationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final Logger LOGGER = MyLogger.getLoggerInstance(ConfigurationServlet.class.getName());
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,7 +49,7 @@ public class ConfigurationServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 		} catch (SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 	}
 	
@@ -63,7 +66,7 @@ public class ConfigurationServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("auctionManager.jsp");
 			dispatcher.forward(request, response);
 		} catch(SQLiteFailRequestException e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 		}
 	}
 }
