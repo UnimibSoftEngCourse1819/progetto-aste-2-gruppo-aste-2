@@ -75,7 +75,7 @@
 		        	%>
 		        		<div class="col">
 							<div class="credit">
-								I tuoi crediti: <div class="info"><%= credit %></div>
+								Credito correntemente disponibile: <div class="info"><%= credit %></div>
 							</div>
 							<%
 								if(request.getAttribute("errorMessage") != null)

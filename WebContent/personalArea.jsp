@@ -186,11 +186,12 @@
 				          <td><%= auctionWon.get(i)[2] %></td>
 				          <td><%= auctionWon.get(i)[3] %></td>
 				          <td><%= auctionWon.get(i)[4] %></td>
-				          <td></td>
+				          <td><%= auctionWon.get(i)[5] %></td>
 				          <td>
-						  	<form action="auction" method="get">
+						  	<form action="returnObject" method="get">
 				          		<input type="hidden" value="<%= auctionWon.get(i)[0] %>" name="id" />
-				          		<input type="submit" class="manage-button" value="Apri" />
+				          		<input type="hidden" value="<%= auctionWon.get(i)[5] %>" name="price" />
+				          		<input type="submit" class="manage-button" value="Rinuncia" />
 				          	</form>
 						  </td>
 				        </tr> 

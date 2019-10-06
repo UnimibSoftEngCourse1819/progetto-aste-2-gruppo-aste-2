@@ -79,7 +79,7 @@
   {
   	"sqlStatement" : {
   		"name" : "creditUsed",
-  		"statement" : "SELECT Sum(Price) as UsedCredit FROM offer, auction WHERE auction.ID = offer.Auction AND auction.Status = 'ON_GOING' AND Offerer = ? ",
+  		"statement" : "SELECT Sum(Price) as UsedCredit FROM offer, auction WHERE auction.ID = offer.Auction AND (auction.Status = 'ON_GOING' OR auction.Status = 'STANDBY') AND Offerer = ? ",
   		"values" : "INTEGER"
   	}
   },
@@ -93,8 +93,15 @@
   {
   	"sqlStatement" : {
   		"name" : "auctionWon",
-  		"statement" : "SELECT * FROM auction WHERE auction.Winner = ? AND auction.Status = ? ",
-  		"values" : "INTEGER-VARCHAR"
+  		"statement" : "SELECT auction.ID, auction.Title, auction.Description, auction.Creation, auction.Conclusion, MAX(offer.Price) AS Price FROM auction, offer WHERE offer.Auction = auction.ID AND auction.Status = 'END' AND auction.Winner = ? GROUP BY auction.ID ",
+  		"values" : "INTEGER"
+  	}
+  },
+  {
+  	"sqlStatement" : {
+  		"name" : "returnObject",
+  		"statement" : "SELECT * FROM auction, auctionConfiguration WHERE auction.Type = auctionConfiguration.Name AND auction.ID = ? ",
+  		"values" : "INTEGER"
   	}
   }
 ]

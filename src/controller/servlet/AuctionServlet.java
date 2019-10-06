@@ -47,10 +47,10 @@ public class AuctionServlet extends HttpServlet {
 			ResultDatabase result = DatabaseManager.executeSelect(select);
 			
 			if(request.getSession(false).getAttribute("id") != null) {
-				SimpleSelect selectCredit = new SimpleSelect("userCredit", (Integer) request.getSession(false).getAttribute("id"));
+				SimpleSelect selectCredit = new SimpleSelect("creditUsed", (Integer) request.getSession(false).getAttribute("id"));
 				ResultDatabase resultCredit = DatabaseManager.executeSelect(selectCredit);
 				
-				request.setAttribute("credit", resultCredit.getValue("Credit", 0));
+				request.setAttribute("credit", resultCredit.getValue("UsedCredit", 0));
 			}
 			
 			if(!result.isEmpty()) {
@@ -113,18 +113,4 @@ public class AuctionServlet extends HttpServlet {
     	
     	return formatter.format(date) + " " + time.toString();
     }
-    
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		try {
-			AuctionRequestManager.makeOffer(request);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("auction");
-			dispatcher.forward(request, response);
-		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
-			e.printStackTrace();
-		} catch (InsufficientRequirementsException e) {
-			
-		}
-	}
 }

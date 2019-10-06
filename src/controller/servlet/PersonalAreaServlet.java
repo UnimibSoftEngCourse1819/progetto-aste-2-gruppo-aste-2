@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.DatabaseManager;
 import controller.database.ResultDatabase;
 import controller.database.select.SimpleSelect;
+import controller.database.select.decorator.OrderBy;
 import exception.SQLiteFailRequestException;
 
 /**
@@ -52,6 +53,36 @@ public class PersonalAreaServlet extends HttpServlet {
 					data[2] = (String) result.getValue("Description", index);
 					data[3] = formatData(result.getValue("Creation", index).toString());
 					data[4] = formatData(result.getValue("Conclusion", index).toString());
+					
+					auctions.add(data);
+					index++;
+				}
+			}
+		} catch (SQLiteFailRequestException e) {
+			e.printStackTrace();
+		}
+    	
+    	return auctions;
+    }
+    
+    private List<String[]> getAuctionsWon(SimpleSelect select) {
+    	List<String[]> auctions = new ArrayList<>();
+    	
+    	try {
+			ResultDatabase result = DatabaseManager.executeSelect(select);
+			
+			if(!result.isEmpty()) {
+				int index = 0;
+				
+				while(result.getValue("ID", index) != null) {
+					String[] data = new String[6];
+					
+					data[0] = Integer.toString((Integer) result.getValue("ID", index));
+					data[1] = (String) result.getValue("Title", index);
+					data[2] = (String) result.getValue("Description", index);
+					data[3] = formatData(result.getValue("Creation", index).toString());
+					data[4] = formatData(result.getValue("Conclusion", index).toString());
+					data[5] = String.valueOf(result.getValue("Price", index));
 					
 					auctions.add(data);
 					index++;
@@ -99,7 +130,7 @@ public class PersonalAreaServlet extends HttpServlet {
 		Object userID = request.getSession(false).getAttribute("id");
 		List<String[]> userAuctions = getAuctions(new SimpleSelect("userAuctions", userID));
 		List<String[]> auctionOffered = getAuctions(new SimpleSelect("auctionOffered", userID));
-		List<String[]> auctionWon = getAuctions(new SimpleSelect("auctionWon", userID, "END"));
+		List<String[]> auctionWon = getAuctionsWon(new SimpleSelect("auctionWon", userID));
 		String userCredit = getUserCredit(new SimpleSelect("userCredit", userID));
 		
 		request.setAttribute("userAuctions", userAuctions);
