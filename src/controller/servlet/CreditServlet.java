@@ -44,7 +44,7 @@ public class CreditServlet extends HttpServlet {
 		try {
 			user.loadCredit();
 		} catch (SQLiteFailRequestException e1) {
-			e1.printStackTrace();
+			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e1);
 		}
 		
 		int currentCredit = user.getPortfolio();

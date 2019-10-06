@@ -32,7 +32,8 @@ import model.User;
 public class PersonalAreaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOGGER = MyLogger.getLoggerInstance(PersonalAreaServlet.class.getName());
-       
+    private static final String MESSAGE_ERROR = "Non è stato possibile gestire la richiesta";
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -63,7 +64,7 @@ public class PersonalAreaServlet extends HttpServlet {
 				}
 			}
 		} catch (SQLiteFailRequestException e) {
-			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
+			LOGGER.log(Level.SEVERE, MESSAGE_ERROR, e);
 		}
     	
     	return auctions;
@@ -94,7 +95,7 @@ public class PersonalAreaServlet extends HttpServlet {
 				}
 			}
 		} catch (SQLiteFailRequestException e) {
-			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
+			LOGGER.log(Level.SEVERE, MESSAGE_ERROR, e);
 		}
     	
     	return auctions;
@@ -130,7 +131,7 @@ public class PersonalAreaServlet extends HttpServlet {
 			totalCredit = String.valueOf(user.getPortfolio());
 			occupiedCredit = String.valueOf(user.getPortfolio() - user.getAviableCredit());
 		} catch (SQLiteFailRequestException e) {
-			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
+			LOGGER.log(Level.SEVERE, MESSAGE_ERROR, e);
 		}
 		
 		request.setAttribute("userAuctions", userAuctions);

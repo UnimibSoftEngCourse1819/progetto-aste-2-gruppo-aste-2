@@ -14,7 +14,7 @@ import model.Offer;
 
 public class DutchOffer extends Offer{
 	
-	public static String nameType = "DutchOffer";
+	public static final String nameType = "DutchOffer";
 	
 	public DutchOffer(HttpServletRequest request) {
 		super(request);
