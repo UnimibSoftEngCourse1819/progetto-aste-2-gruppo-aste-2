@@ -45,7 +45,7 @@
                         <select id="mod" name="mod">
                             <option value="firstSealed">Busta chiusa</option>
                             <option value="secondSealed">Busta chiusa al "secondo prezzo"</option>
-                            <option value="englishAuction">Asta "inglese"</option>
+                            <option value="classic">Asta classica</option>
                             <option value="dutchAuction">Asta "olandese"</option>
                         </select>
                     </div>

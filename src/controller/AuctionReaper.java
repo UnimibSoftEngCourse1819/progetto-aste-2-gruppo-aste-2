@@ -85,7 +85,6 @@ public class AuctionReaper {
 				
 			}
 		} catch (SQLiteFailRequestException | InexistentTypeParameterException | FailRollBackException e) {
-			// TODO Auto-generated catch block
 			LOGGER.log(Level.SEVERE, "Non è stato possibile gestire chiusura dell'asta ", e);
 		}
 	}
@@ -129,7 +128,6 @@ public class AuctionReaper {
 			try {
 				DatabaseManager.execute(operation);
 			} catch (SQLiteFailRequestException | FailRollBackException e) {
-				// TODO Auto-generated catch block
 				LOGGER.log(Level.SEVERE, "Non è stato possibile gestire la richiesta", e);
 			}
 		}
